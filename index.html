@@ -1,57 +1,466 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Elton Liu's Personal Homepage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body { font-family: "Segoe UI", Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
-        .container { max-width: 820px; margin: 50px auto; background: #fff; box-shadow: 0 0 16px #ccc; border-radius: 10px; padding: 44px; }
-        h1 { color: #1976d2; font-size: 2.4em; margin-bottom: 8px; }
-        h2 { margin-top: 32px; color: #444; }
-        .intro { font-size: 20px; color: #222; line-height: 1.8; margin-bottom: 18px; }
-        .tags { margin: 16px 0; }
-        .tag { display: inline-block; background: #e3f2fd; color: #1976d2; border-radius: 14px; padding: 6px 18px; margin: 0 8px 8px 0; font-size: 15px; }
-        .links a { display: inline-block; margin-right: 18px; color: #1976d2; text-decoration: none; font-weight: bold; }
-        .links a:hover { text-decoration: underline; }
-        .projects { margin-top: 20px; }
-        .project { padding: 14px 0; border-bottom: 1px solid #eee; }
-        .project:last-child { border-bottom: none; }
-        .footer { margin-top: 40px; text-align: center; color: #aaa; font-size: 14px; }
+    <title>中国传统文房四宝与琴棋书画 | Chinese Traditional Culture</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- 谷歌字体（中文字体+英文书法字体） -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            .bg-texture {
+                background-image: url('https://picsum.photos/id/106/2000/1000');
+                background-size: cover;
+                background-position: center;
+                background-blend-mode: overlay;
+            }
+            .chinese-font {
+                font-family: 'Noto Serif SC', serif;
+            }
+            .chinese-calligraphy {
+                font-family: 'Ma Shan Zheng', cursive;
+            }
+            .english-font {
+                font-family: 'Playfair Display', serif;
+            }
+        }
     </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'chinese-red': '#9E2A2B',
+                        'ink-black': '#212529',
+                        'rice-paper': '#F8F4E9',
+                        'ink-stone': '#5C6E70',
+                    },
+                    screens: {
+                        'xs': '360px',
+                    }
+                },
+            }
+        }
+    </script>
 </head>
-<body>
-    <div class="container">
-        <h1>Elton Liu</h1>
-        <div class="intro">
-            Welcome to my GitHub personal homepage!<br>
-            I'm passionate about programming, technology, and exploring new fields. Currently, I focus on mathematical modeling, physics, game design, and quantum computing.<br>
-            Feel free to connect or reach out!
+<body class="bg-rice-paper chinese-font text-ink-black">
+    <!-- 导航栏 -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 bg-rice-paper/90 backdrop-blur-sm shadow-md transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-2">
+                <i class="fa-solid fa-brush text-chinese-red text-2xl"></i>
+                <span class="chinese-calligraphy text-xl md:text-2xl text-chinese-red hidden xs:inline">文墨风雅</span>
+                <span class="english-font italic text-sm md:text-base text-ink-stone hidden md:inline">Elegance of Culture</span>
+            </a>
+
+            <!-- 语言切换 -->
+            <div class="flex items-center space-x-3">
+                <button id="btn-zh" class="px-3 py-1 rounded bg-chinese-red text-white font-medium">中文</button>
+                <button id="btn-en" class="px-3 py-1 rounded bg-white text-ink-black border border-ink-stone/20 font-medium">English</button>
+            </div>
+
+            <!-- 移动端菜单按钮 -->
+            <button id="menu-toggle" class="md:hidden text-ink-black text-xl">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- 导航菜单 -->
+            <div id="nav-menu" class="w-full md:w-auto hidden md:flex flex-col md:flex-row md:items-center space-y-3 md:space-y-0 md:space-x-6 mt-3 md:mt-0">
+                <a href="#home" class="nav-link text-ink-black hover:text-chinese-red transition-colors">首页 / Home</a>
+                <a href="#four-treasures" class="nav-link text-ink-black hover:text-chinese-red transition-colors">文房四宝 / Four Treasures</a>
+                <a href="#four-arts" class="nav-link text-ink-black hover:text-chinese-red transition-colors">琴棋书画 / Four Arts</a>
+                <a href="#culture" class="nav-link text-ink-black hover:text-chinese-red transition-colors">文化价值 / Cultural Value</a>
+                <a href="#contact" class="nav-link text-ink-black hover:text-chinese-red transition-colors">联系我们 / Contact</a>
+            </div>
         </div>
-        <div class="tags">
-            <span class="tag">Mathematical Modeling</span>
-            <span class="tag">Physics</span>
-            <span class="tag">Game Design</span>
-            <span class="tag">Quantum Computing</span>
+    </nav>
+
+    <!-- 首页Hero区域 -->
+    <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-texture bg-ink-black/80 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="chinese-calligraphy text-4xl md:text-6xl lg:text-7xl mb-4 text-shadow zh-content">
+                文房四宝 琴棋书画
+            </h1>
+            <h1 class="english-font text-2xl md:text-4xl lg:text-5xl mb-4 text-shadow en-content hidden">
+                Four Treasures & Four Arts of China
+            </h1>
+            <p class="chinese-font text-lg md:text-xl max-w-3xl mx-auto mb-8 zh-content">
+                承载千年文脉，彰显东方美学
+            </p>
+            <p class="english-font text-base md:text-lg max-w-3xl mx-auto mb-8 en-content hidden">
+                Carrying thousands of years of cultural heritage, revealing oriental aesthetics
+            </p>
+            <a href="#four-treasures" class="inline-block bg-chinese-red hover:bg-chinese-red/90 text-white px-6 py-3 rounded-lg transition-all hover:shadow-lg zh-content">
+                探索文化之美
+            </a>
+            <a href="#four-treasures" class="inline-block bg-chinese-red hover:bg-chinese-red/90 text-white px-6 py-3 rounded-lg transition-all hover:shadow-lg en-content hidden">
+                Explore Cultural Beauty
+            </a>
         </div>
-        <h2>Social Links</h2>
-        <div class="links">
-            <a href="https://github.com/evret12" target="_blank">GitHub</a>
-            <a href="mailto:eltonlds@163.com">Email</a>
-            <a href="https://www.instagram.com/evret12" target="_blank">Instagram</a>
-            <a href="https://x.com/et12evr" target="_blank">Twitter</a>
+    </section>
+
+    <!-- 文房四宝板块 -->
+    <section id="four-treasures" class="py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="chinese-calligraphy text-3xl md:text-4xl text-chinese-red mb-3 zh-content">文房四宝</h2>
+                <h2 class="english-font text-2xl md:text-3xl text-chinese-red mb-3 en-content hidden">The Four Treasures of the Study</h2>
+                <p class="max-w-2xl mx-auto zh-content">
+                    笔、墨、纸、砚，是中国传统书写绘画的核心工具，承载着中华文化的精髓
+                </p>
+                <p class="max-w-2xl mx-auto en-content hidden">
+                    Brush, Ink, Paper, and Inkstone are the core tools of traditional Chinese writing and painting, carrying the essence of Chinese culture
+                </p>
+                <div class="w-24 h-1 bg-chinese-red mx-auto mt-4"></div>
+            </div>
+
+            <!-- 四宝卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <!-- 笔 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <img src="https://picsum.photos/id/20/600/400" alt="毛笔 / Writing Brush" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">笔</h3>
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Writing Brush</h3>
+                        <p class="text-ink-black/80 zh-content">
+                            毛笔是文房四宝之首，以兽毛为毫，竹木为杆，书写出飘逸灵动的中华文字。
+                        </p>
+                        <p class="text-ink-black/80 en-content hidden">
+                            As the first of the Four Treasures, the writing brush uses animal hair as the tip and bamboo/wood as the handle, creating elegant and vivid Chinese characters.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 墨 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <img src="https://picsum.photos/id/46/600/400" alt="墨 / Ink Stick" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">墨</h3>
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Ink Stick</h3>
+                        <p class="text-ink-black/80 zh-content">
+                            墨色浓淡相宜，以松烟、油烟制成，研墨挥毫，尽显东方韵味。
+                        </p>
+                        <p class="text-ink-black/80 en-content hidden">
+                            With varying shades of black, ink sticks are made from pine soot or lampblack. Grinding ink and wielding the brush reveals oriental charm.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 纸 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <img src="https://picsum.photos/id/91/600/400" alt="纸 / Rice Paper" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">纸</h3>
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Rice Paper</h3>
+                        <p class="text-ink-black/80 zh-content">
+                            宣纸质地绵密，吸墨性佳，历经千年而不腐，是书画创作的理想载体。
+                        </p>
+                        <p class="text-ink-black/80 en-content hidden">
+                            Rice paper has a dense texture and excellent ink absorption, remaining intact for thousands of years, making it ideal for calligraphy and painting.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 砚 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <img src="https://picsum.photos/id/175/600/400" alt="砚 / Inkstone" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">砚</h3>
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Inkstone</h3>
+                        <p class="text-ink-black/80 zh-content">
+                            砚台因材施艺，质地温润，研墨细腻，既是实用器具，亦是艺术珍品。
+                        </p>
+                        <p class="text-ink-black/80 en-content hidden">
+                            Inkstones are crafted according to the material, with a warm texture and fine ink grinding. They are both practical tools and artistic treasures.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h2>Featured Projects</h2>
-        <div class="projects">
-            <!-- Projects will be displayed here -->
+    </section>
+
+    <!-- 琴棋书画板块 -->
+    <section id="four-arts" class="py-16 md:py-24 bg-ink-black/5">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="chinese-calligraphy text-3xl md:text-4xl text-chinese-red mb-3 zh-content">琴棋书画</h2>
+                <h2 class="english-font text-2xl md:text-3xl text-chinese-red mb-3 en-content hidden">The Four Arts of the Scholar</h2>
+                <p class="max-w-2xl mx-auto zh-content">
+                    琴、棋、书、画，是古代文人雅士必备的四种技艺，体现了中国人的精神追求
+                </p>
+                <p class="max-w-2xl mx-auto en-content hidden">
+                    Qin (zither), Qi (chess), Shu (calligraphy), Hua (painting) are four essential arts for ancient Chinese scholars, reflecting the spiritual pursuit of the Chinese people
+                </p>
+                <div class="w-24 h-1 bg-chinese-red mx-auto mt-4"></div>
+            </div>
+
+            <!-- 四艺卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <!-- 琴 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <img src="https://picsum.photos/id/129/600/400" alt="琴 / Guqin" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">琴</h3>
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Guqin</h3>
+                        <p class="text-ink-black/80 zh-content">
+                            古琴音域宽广，音色深沉，余音悠远，是中国最古老的弹拨乐器之一。
+                        </p>
+                        <p class="text-ink-black/80 en-content hidden">
+                            The guqin has a wide range, deep tone, and lingering sound, being one of the oldest plucked instruments in China.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 棋 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <img src="https://picsum.photos/id/132/600/400" alt="棋 / Go" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">棋</h3>
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Go (Weiqi)</h3>
+                        <p class="text-ink-black/80 zh-content">
+                            围棋博大精深，蕴含着东方哲学智慧，是策略与思维的完美结合。
+                        </p>
+                        <p class="text-ink-black/80 en-content hidden">
+                            Go is extensive and profound, containing oriental philosophical wisdom, and is a perfect combination of strategy and thinking.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 书 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <img src="https://picsum.photos/id/180/600/400" alt="书 / Calligraphy" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">书</h3>
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Calligraphy</h3>
+                        <p class="text-ink-black/80 zh-content">
+                            书法是线条的艺术，通过笔墨的运用，展现书写者的心境与修养。
+                        </p>
+                        <p class="text-ink-black/80 en-content hidden">
+                            Calligraphy is the art of lines, showing the writer's mood and accomplishment through the use of brush and ink.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 画 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <img src="https://picsum.photos/id/192/600/400" alt="画 / Painting" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">画</h3>
+                        <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Painting</h3>
+                        <p class="text-ink-black/80 zh-content">
+                            中国画讲求意境，以水墨为主要表现形式，追求神形兼备的艺术境界。
+                        </p>
+                        <p class="text-ink-black/80 en-content hidden">
+                            Chinese painting emphasizes artistic conception, uses ink wash as the main expression form, and pursues the artistic state of combining spirit and form.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h2>About This Site</h2>
-        <div class="intro">
-            This website is hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>. Welcome to visit and communicate!
+    </section>
+
+    <!-- 文化价值板块 -->
+    <section id="culture" class="py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="chinese-calligraphy text-3xl md:text-4xl text-chinese-red mb-3 zh-content">文化价值</h2>
+                <h2 class="english-font text-2xl md:text-3xl text-chinese-red mb-3 en-content hidden">Cultural Value</h2>
+                <div class="w-24 h-1 bg-chinese-red mx-auto mt-4"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <p class="text-lg leading-relaxed mb-6 zh-content">
+                    文房四宝与琴棋书画不仅是技艺的体现，更是中国传统文化的重要载体。它们承载着中国人的审美情趣、哲学思想和人文精神，是中华民族智慧的结晶。在现代社会，这些传统文化不仅没有过时，反而成为了连接古今、沟通中外的文化桥梁，让更多人了解中国文化的博大精深。
+                </p>
+                <p class="text-lg leading-relaxed mb-6 en-content hidden">
+                    The Four Treasures of the Study and the Four Arts are not only the embodiment of skills but also important carriers of traditional Chinese culture. They carry the Chinese people's aesthetic taste, philosophical thoughts, and humanistic spirit, being the crystallization of the wisdom of the Chinese nation. In modern society, these traditional cultures are not outdated, but have become a cultural bridge connecting ancient and modern times, and communicating China with the world, allowing more people to understand the extensive and profound Chinese culture.
+                </p>
+                <div class="flex justify-center">
+                    <div class="inline-flex items-center space-x-2 text-chinese-red">
+                        <i class="fa-solid fa-quote-left"></i>
+                        <p class="chinese-font italic zh-content">笔墨纸砚书天地，琴棋书画养性灵</p>
+                        <p class="english-font italic en-content hidden">Brush, ink, paper, inkstone write the world; Qin, qi, shu, hua nurture the soul</p>
+                        <i class="fa-solid fa-quote-right"></i>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="footer">
-        © 2025 by Elton Liu | Powered by GitHub Pages
-    </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="py-16 md:py-24 bg-ink-black/5">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="chinese-calligraphy text-3xl md:text-4xl text-chinese-red mb-3 zh-content">联系我们</h2>
+                <h2 class="english-font text-2xl md:text-3xl text-chinese-red mb-3 en-content hidden">Contact Us</h2>
+                <p class="max-w-2xl mx-auto zh-content">
+                    如果你想了解更多关于中国传统文化的信息，欢迎联系我们
+                </p>
+                <p class="max-w-2xl mx-auto en-content hidden">
+                    If you want to know more about traditional Chinese culture, please feel free to contact us
+                </p>
+                <div class="w-24 h-1 bg-chinese-red mx-auto mt-4"></div>
+            </div>
+
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <form class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-sm font-medium mb-1 zh-content">姓名 / Name</label>
+                        <label for="name" class="block text-sm font-medium mb-1 en-content hidden">Name</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 border border-ink-stone/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-chinese-red/50" placeholder="请输入姓名 / Please enter your name">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium mb-1 zh-content">邮箱 / Email</label>
+                        <label for="email" class="block text-sm font-medium mb-1 en-content hidden">Email</label>
+                        <input type="email" id="email" class="w-full px-4 py-2 border border-ink-stone/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-chinese-red/50" placeholder="请输入邮箱 / Please enter your email">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium mb-1 zh-content">留言 / Message</label>
+                        <label for="message" class="block text-sm font-medium mb-1 en-content hidden">Message</label>
+                        <textarea id="message" rows="4" class="w-full px-4 py-2 border border-ink-stone/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-chinese-red/50" placeholder="请输入您想了解的内容 / Please enter what you want to know"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-chinese-red hover:bg-chinese-red/90 text-white py-3 rounded-lg transition-all hover:shadow-lg zh-content">
+                        提交留言
+                    </button>
+                    <button type="submit" class="w-full bg-chinese-red hover:bg-chinese-red/90 text-white py-3 rounded-lg transition-all hover:shadow-lg en-content hidden">
+                        Submit Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-ink-black text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2 justify-center md:justify-start">
+                        <i class="fa-solid fa-brush text-chinese-red text-xl"></i>
+                        <span class="chinese-calligraphy text-xl text-rice-paper">文墨风雅</span>
+                    </div>
+                    <p class="text-white/70 text-sm mt-2 text-center md:text-left zh-content">
+                        传承中华文脉，传播东方美学
+                    </p>
+                    <p class="text-white/70 text-sm mt-2 text-center md:text-left en-content hidden">
+                        Inherit Chinese cultural context, spread oriental aesthetics
+                    </p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white hover:text-chinese-red transition-colors"><i class="fa-brands fa-weixin text-xl"></i></a>
+                    <a href="#" class="text-white hover:text-chinese-red transition-colors"><i class="fa-brands fa-weibo text-xl"></i></a>
+                    <a href="#" class="text-white hover:text-chinese-red transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
+                    <a href="#" class="text-white hover:text-chinese-red transition-colors"><i class="fa-brands fa-twitter text-xl"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-white/20 mt-6 pt-6 text-center text-white/50 text-sm">
+                <p class="zh-content">© 2025 文墨风雅 版权所有</p>
+                <p class="en-content hidden">© 2025 Elegance of Culture. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow-lg');
+                navbar.classList.remove('py-3', 'shadow-md');
+            } else {
+                navbar.classList.add('py-3', 'shadow-md');
+                navbar.classList.remove('py-2', 'shadow-lg');
+            }
+        });
+
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        menuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('hidden');
+            // 切换图标
+            const icon = menuToggle.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // 语言切换功能
+        const btnZh = document.getElementById('btn-zh');
+        const btnEn = document.getElementById('btn-en');
+        const zhContents = document.querySelectorAll('.zh-content');
+        const enContents = document.querySelectorAll('.en-content');
+
+        // 默认显示中文
+        function showChinese() {
+            zhContents.forEach(el => el.classList.remove('hidden'));
+            enContents.forEach(el => el.classList.add('hidden'));
+            btnZh.classList.add('bg-chinese-red', 'text-white');
+            btnZh.classList.remove('bg-white', 'text-ink-black', 'border', 'border-ink-stone/20');
+            btnEn.classList.add('bg-white', 'text-ink-black', 'border', 'border-ink-stone/20');
+            btnEn.classList.remove('bg-chinese-red', 'text-white');
+            document.documentElement.lang = 'zh-CN';
+        }
+
+        function showEnglish() {
+            zhContents.forEach(el => el.classList.add('hidden'));
+            enContents.forEach(el => el.classList.remove('hidden'));
+            btnEn.classList.add('bg-chinese-red', 'text-white');
+            btnEn.classList.remove('bg-white', 'text-ink-black', 'border', 'border-ink-stone/20');
+            btnZh.classList.add('bg-white', 'text-ink-black', 'border', 'border-ink-stone/20');
+            btnZh.classList.remove('bg-chinese-red', 'text-white');
+            document.documentElement.lang = 'en';
+        }
+
+        btnZh.addEventListener('click', showChinese);
+        btnEn.addEventListener('click', showEnglish);
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    // 移动端点击后关闭菜单
+                    if (!navMenu.classList.contains('hidden')) {
+                        navMenu.classList.add('hidden');
+                        const icon = menuToggle.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                }
+            });
+        });
+
+        // 表单提交
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert(document.documentElement.lang === 'zh-CN' ? '留言提交成功！我们会尽快回复您。' : 'Message submitted successfully! We will reply to you as soon as possible.');
+            this.reset();
+        });
+    </script>
 </body>
 </html>
