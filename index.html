@@ -19,7 +19,7 @@
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             }
             .bg-texture {
-                background-image: url('https://picsum.photos/id/106/2000/1000');
+                background-image: url('https://p26-doubao-search-sign.byteimg.com/labis/5c137e1e01e4b2ec66ab40e9fb5b0667~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793534280&x-signature=O1iIm1IimqAq5nEmCa%2BfC11NGZw%3D');
                 background-size: cover;
                 background-position: center;
                 background-blend-mode: overlay;
@@ -32,6 +32,42 @@
             }
             .english-font {
                 font-family: 'Playfair Display', serif;
+            }
+            .scroll-reveal {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+            .scroll-reveal.active {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .ink-splash {
+                position: relative;
+                overflow: hidden;
+            }
+            .ink-splash::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                border-radius: 50%;
+                background-color: rgba(158, 42, 43, 0.1);
+                transform: translate(-50%, -50%);
+                transition: width 0.6s, height 0.6s;
+            }
+            .ink-splash:hover::before {
+                width: 300px;
+                height: 300px;
             }
         }
     </style>
@@ -90,22 +126,22 @@
     <!-- 首页Hero区域 -->
     <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-texture bg-ink-black/80 text-white">
         <div class="container mx-auto px-4 text-center">
-            <h1 class="chinese-calligraphy text-4xl md:text-6xl lg:text-7xl mb-4 text-shadow zh-content">
+            <h1 class="chinese-calligraphy text-4xl md:text-6xl lg:text-7xl mb-4 text-shadow zh-content scroll-reveal">
                 文房四宝 琴棋书画
             </h1>
-            <h1 class="english-font text-2xl md:text-4xl lg:text-5xl mb-4 text-shadow en-content hidden">
+            <h1 class="english-font text-2xl md:text-4xl lg:text-5xl mb-4 text-shadow en-content hidden scroll-reveal">
                 Four Treasures & Four Arts of China
             </h1>
-            <p class="chinese-font text-lg md:text-xl max-w-3xl mx-auto mb-8 zh-content">
+            <p class="chinese-font text-lg md:text-xl max-w-3xl mx-auto mb-8 zh-content scroll-reveal" style="transition-delay: 0.2s;">
                 承载千年文脉，彰显东方美学
             </p>
-            <p class="english-font text-base md:text-lg max-w-3xl mx-auto mb-8 en-content hidden">
+            <p class="english-font text-base md:text-lg max-w-3xl mx-auto mb-8 en-content hidden scroll-reveal" style="transition-delay: 0.2s;">
                 Carrying thousands of years of cultural heritage, revealing oriental aesthetics
             </p>
-            <a href="#four-treasures" class="inline-block bg-chinese-red hover:bg-chinese-red/90 text-white px-6 py-3 rounded-lg transition-all hover:shadow-lg zh-content">
+            <a href="#four-treasures" class="inline-block bg-chinese-red hover:bg-chinese-red/90 text-white px-6 py-3 rounded-lg transition-all hover:shadow-lg zh-content scroll-reveal ink-splash" style="transition-delay: 0.4s;">
                 探索文化之美
             </a>
-            <a href="#four-treasures" class="inline-block bg-chinese-red hover:bg-chinese-red/90 text-white px-6 py-3 rounded-lg transition-all hover:shadow-lg en-content hidden">
+            <a href="#four-treasures" class="inline-block bg-chinese-red hover:bg-chinese-red/90 text-white px-6 py-3 rounded-lg transition-all hover:shadow-lg en-content hidden scroll-reveal ink-splash" style="transition-delay: 0.4s;">
                 Explore Cultural Beauty
             </a>
         </div>
@@ -114,7 +150,7 @@
     <!-- 文房四宝板块 -->
     <section id="four-treasures" class="py-16 md:py-24">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12 md:mb-16">
+            <div class="text-center mb-12 md:mb-16 scroll-reveal">
                 <h2 class="chinese-calligraphy text-3xl md:text-4xl text-chinese-red mb-3 zh-content">文房四宝</h2>
                 <h2 class="english-font text-2xl md:text-3xl text-chinese-red mb-3 en-content hidden">The Four Treasures of the Study</h2>
                 <p class="max-w-2xl mx-auto zh-content">
@@ -129,8 +165,10 @@
             <!-- 四宝卡片 -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 <!-- 笔 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                    <img src="https://picsum.photos/id/20/600/400" alt="毛笔 / Writing Brush" class="w-full h-48 object-cover">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover scroll-reveal" style="transition-delay: 0.1s;">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://p11-doubao-search-sign.byteimg.com/labis/bbef879c9970c95d98922fb0fadca0e9~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793534280&x-signature=wttHXQSzoHLTSQwCD7BPG8CEr%2Bc%3D" alt="毛笔 / Writing Brush" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">笔</h3>
                         <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Writing Brush</h3>
@@ -144,8 +182,10 @@
                 </div>
 
                 <!-- 墨 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                    <img src="https://picsum.photos/id/46/600/400" alt="墨 / Ink Stick" class="w-full h-48 object-cover">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover scroll-reveal" style="transition-delay: 0.2s;">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://p26-doubao-search-sign.byteimg.com/pgc-image/0d324edf132b4432a12adaca871007d9~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793534280&x-signature=41pZI1dZ0CRz6%2BvrVwik9g34nnU%3D" alt="墨 / Ink Stick" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">墨</h3>
                         <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Ink Stick</h3>
@@ -159,8 +199,10 @@
                 </div>
 
                 <!-- 纸 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                    <img src="https://picsum.photos/id/91/600/400" alt="纸 / Rice Paper" class="w-full h-48 object-cover">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover scroll-reveal" style="transition-delay: 0.3s;">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://p26-doubao-search-sign.byteimg.com/labis/5c137e1e01e4b2ec66ab40e9fb5b0667~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793534280&x-signature=O1iIm1IimqAq5nEmCa%2BfC11NGZw%3D" alt="纸 / Rice Paper" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">纸</h3>
                         <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Rice Paper</h3>
@@ -174,8 +216,10 @@
                 </div>
 
                 <!-- 砚 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                    <img src="https://picsum.photos/id/175/600/400" alt="砚 / Inkstone" class="w-full h-48 object-cover">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover scroll-reveal" style="transition-delay: 0.4s;">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://p3-doubao-search-sign.byteimg.com/labis/0e48d5e1c9faf4379da542bb1b098821~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793534280&x-signature=ro1pJAto7rKfUVDxqMDchyLGDgQ%3D" alt="砚 / Inkstone" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">砚</h3>
                         <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Inkstone</h3>
@@ -194,7 +238,7 @@
     <!-- 琴棋书画板块 -->
     <section id="four-arts" class="py-16 md:py-24 bg-ink-black/5">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12 md:mb-16">
+            <div class="text-center mb-12 md:mb-16 scroll-reveal">
                 <h2 class="chinese-calligraphy text-3xl md:text-4xl text-chinese-red mb-3 zh-content">琴棋书画</h2>
                 <h2 class="english-font text-2xl md:text-3xl text-chinese-red mb-3 en-content hidden">The Four Arts of the Scholar</h2>
                 <p class="max-w-2xl mx-auto zh-content">
@@ -209,8 +253,10 @@
             <!-- 四艺卡片 -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 <!-- 琴 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                    <img src="https://picsum.photos/id/129/600/400" alt="琴 / Guqin" class="w-full h-48 object-cover">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover scroll-reveal" style="transition-delay: 0.1s;">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/870092170151854122~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793534302&x-signature=cazXw35Ol808HLfsSuF1XpDd%2BzU%3D" alt="琴 / Guqin" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">琴</h3>
                         <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Guqin</h3>
@@ -224,8 +270,10 @@
                 </div>
 
                 <!-- 棋 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                    <img src="https://picsum.photos/id/132/600/400" alt="棋 / Go" class="w-full h-48 object-cover">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover scroll-reveal" style="transition-delay: 0.2s;">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/934820531344375985~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793534302&x-signature=LkH6t%2B3MF3Frq3g3Y4JGqNK9q9w%3D" alt="棋 / Go" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">棋</h3>
                         <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Go (Weiqi)</h3>
@@ -239,8 +287,10 @@
                 </div>
 
                 <!-- 书 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                    <img src="https://picsum.photos/id/180/600/400" alt="书 / Calligraphy" class="w-full h-48 object-cover">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover scroll-reveal" style="transition-delay: 0.3s;">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://p3-doubao-search-sign.byteimg.com/labis/b04578c242e8c298a3b3a91a6be71c44~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793534302&x-signature=0QOvQNacECuMQio7KN7rA%2F%2F1nN8%3D" alt="书 / Calligraphy" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">书</h3>
                         <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Calligraphy</h3>
@@ -254,8 +304,10 @@
                 </div>
 
                 <!-- 画 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                    <img src="https://picsum.photos/id/192/600/400" alt="画 / Painting" class="w-full h-48 object-cover">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover scroll-reveal" style="transition-delay: 0.4s;">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://p3-doubao-search-sign.byteimg.com/mosaic-legacy/61690000b0c646414fd2~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1793534302&x-signature=U1n5jBVPi8Ty%2FCX6lzIjBhDXMVc%3D" alt="画 / Painting" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-chinese-red mb-2 zh-content">画</h3>
                         <h3 class="text-xl font-bold text-chinese-red mb-2 en-content hidden">Painting</h3>
@@ -274,13 +326,13 @@
     <!-- 文化价值板块 -->
     <section id="culture" class="py-16 md:py-24">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12 md:mb-16">
+            <div class="text-center mb-12 md:mb-16 scroll-reveal">
                 <h2 class="chinese-calligraphy text-3xl md:text-4xl text-chinese-red mb-3 zh-content">文化价值</h2>
                 <h2 class="english-font text-2xl md:text-3xl text-chinese-red mb-3 en-content hidden">Cultural Value</h2>
                 <div class="w-24 h-1 bg-chinese-red mx-auto mt-4"></div>
             </div>
 
-            <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+            <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg scroll-reveal">
                 <p class="text-lg leading-relaxed mb-6 zh-content">
                     文房四宝与琴棋书画不仅是技艺的体现，更是中国传统文化的重要载体。它们承载着中国人的审美情趣、哲学思想和人文精神，是中华民族智慧的结晶。在现代社会，这些传统文化不仅没有过时，反而成为了连接古今、沟通中外的文化桥梁，让更多人了解中国文化的博大精深。
                 </p>
@@ -296,13 +348,56 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 文化影响展示 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 scroll-reveal">
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="w-16 h-16 bg-chinese-red/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-globe text-chinese-red text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 zh-content">国际影响</h3>
+                    <h3 class="text-xl font-bold mb-3 en-content hidden">International Influence</h3>
+                    <p class="text-ink-black/80 zh-content">
+                        中国传统文房四宝与琴棋书画已成为世界文化遗产，影响了东亚乃至全球的艺术发展。
+                    </p>
+                    <p class="text-ink-black/80 en-content hidden">
+                        Traditional Chinese Four Treasures and Four Arts have become world cultural heritage, influencing art development in East Asia and globally.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="w-16 h-16 bg-chinese-red/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-book-open text-chinese-red text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 zh-content">教育传承</h3>
+                    <h3 class="text-xl font-bold mb-3 en-content hidden">Educational Heritage</h3>
+                    <p class="text-ink-black/80 zh-content">
+                        这些传统艺术形式已成为学校教育和文化传承的重要内容，培养了一代又一代的文化爱好者。
+                    </p>
+                    <p class="text-ink-black/80 en-content hidden">
+                        These traditional art forms have become important content in school education and cultural heritage, cultivating generations of cultural enthusiasts.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="w-16 h-16 bg-chinese-red/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-lightbulb text-chinese-red text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 zh-content">现代创新</h3>
+                    <h3 class="text-xl font-bold mb-3 en-content hidden">Modern Innovation</h3>
+                    <p class="text-ink-black/80 zh-content">
+                        传统与现代的融合，让这些古老的艺术形式在当代焕发新的生命力，适应现代生活的需求。
+                    </p>
+                    <p class="text-ink-black/80 en-content hidden">
+                        The integration of tradition and modernity gives these ancient art forms new vitality in contemporary times, adapting to the needs of modern life.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- 联系我们 -->
     <section id="contact" class="py-16 md:py-24 bg-ink-black/5">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12 md:mb-16">
+            <div class="text-center mb-12 md:mb-16 scroll-reveal">
                 <h2 class="chinese-calligraphy text-3xl md:text-4xl text-chinese-red mb-3 zh-content">联系我们</h2>
                 <h2 class="english-font text-2xl md:text-3xl text-chinese-red mb-3 en-content hidden">Contact Us</h2>
                 <p class="max-w-2xl mx-auto zh-content">
@@ -314,8 +409,8 @@
                 <div class="w-24 h-1 bg-chinese-red mx-auto mt-4"></div>
             </div>
 
-            <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
-                <form class="space-y-4">
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg scroll-reveal">
+                <form id="contact-form" class="space-y-4">
                     <div>
                         <label for="name" class="block text-sm font-medium mb-1 zh-content">姓名 / Name</label>
                         <label for="name" class="block text-sm font-medium mb-1 en-content hidden">Name</label>
@@ -331,10 +426,10 @@
                         <label for="message" class="block text-sm font-medium mb-1 en-content hidden">Message</label>
                         <textarea id="message" rows="4" class="w-full px-4 py-2 border border-ink-stone/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-chinese-red/50" placeholder="请输入您想了解的内容 / Please enter what you want to know"></textarea>
                     </div>
-                    <button type="submit" class="w-full bg-chinese-red hover:bg-chinese-red/90 text-white py-3 rounded-lg transition-all hover:shadow-lg zh-content">
+                    <button type="submit" class="w-full bg-chinese-red hover:bg-chinese-red/90 text-white py-3 rounded-lg transition-all hover:shadow-lg zh-content ink-splash">
                         提交留言
                     </button>
-                    <button type="submit" class="w-full bg-chinese-red hover:bg-chinese-red/90 text-white py-3 rounded-lg transition-all hover:shadow-lg en-content hidden">
+                    <button type="submit" class="w-full bg-chinese-red hover:bg-chinese-red/90 text-white py-3 rounded-lg transition-all hover:shadow-lg en-content hidden ink-splash">
                         Submit Message
                     </button>
                 </form>
@@ -418,6 +513,8 @@
             btnEn.classList.add('bg-white', 'text-ink-black', 'border', 'border-ink-stone/20');
             btnEn.classList.remove('bg-chinese-red', 'text-white');
             document.documentElement.lang = 'zh-CN';
+            // 保存语言偏好
+            localStorage.setItem('language', 'zh');
         }
 
         function showEnglish() {
@@ -428,10 +525,22 @@
             btnZh.classList.add('bg-white', 'text-ink-black', 'border', 'border-ink-stone/20');
             btnZh.classList.remove('bg-chinese-red', 'text-white');
             document.documentElement.lang = 'en';
+            // 保存语言偏好
+            localStorage.setItem('language', 'en');
         }
 
         btnZh.addEventListener('click', showChinese);
         btnEn.addEventListener('click', showEnglish);
+
+        // 加载用户语言偏好
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLanguage = localStorage.getItem('language');
+            if (savedLanguage === 'en') {
+                showEnglish();
+            } else {
+                showChinese();
+            }
+        });
 
         // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -456,10 +565,90 @@
         });
 
         // 表单提交
-        document.querySelector('form').addEventListener('submit', function(e) {
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert(document.documentElement.lang === 'zh-CN' ? '留言提交成功！我们会尽快回复您。' : 'Message submitted successfully! We will reply to you as soon as possible.');
-            this.reset();
+            
+            // 表单验证
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !email || !message) {
+                alert(document.documentElement.lang === 'zh-CN' ? '请填写所有必填字段' : 'Please fill in all required fields');
+                return;
+            }
+            
+            // 模拟表单提交
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            
+            submitButton.disabled = true;
+            submitButton.innerHTML = document.documentElement.lang === 'zh-CN' ? '提交中...' : 'Submitting...';
+            
+            setTimeout(() => {
+                alert(document.documentElement.lang === 'zh-CN' ? '留言提交成功！我们会尽快回复您。' : 'Message submitted successfully! We will reply to you as soon as possible.');
+                this.reset();
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalText;
+            }, 1500);
+        });
+
+        // 滚动显示动画
+        function handleScrollAnimation() {
+            const elements = document.querySelectorAll('.scroll-reveal');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        // 初始检查
+        window.addEventListener('load', handleScrollAnimation);
+        // 滚动时检查
+        window.addEventListener('scroll', handleScrollAnimation);
+
+        // 图片懒加载
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyImages = document.querySelectorAll('img');
+            
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.classList.add('loaded');
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(img => {
+                    imageObserver.observe(img);
+                });
+            } else {
+                // 回退方案
+                lazyImages.forEach(img => {
+                    img.classList.add('loaded');
+                });
+            }
+        });
+
+        // 添加键盘导航支持
+        document.addEventListener('keydown', function(e) {
+            // Tab键导航
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
+
+        document.addEventListener('mousedown', function() {
+            document.body.classList.remove('keyboard-navigation');
         });
     </script>
 </body>
