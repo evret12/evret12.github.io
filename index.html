@@ -3,1709 +3,1481 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="文房雅韵 - 中国传统文房四宝笔墨纸砚、琴棋书画文化中英文传播平台，详解四大名砚、非遗工艺与东方美学">
-    <meta name="keywords" content="文房四宝,笔墨纸砚,四大名砚,琴棋书画,中国传统文化,宣纸,毛笔,徽墨,端砚,Chinese Four Treasures of Study">
-    <title>文房雅韵 - 中国传统文化 | Chinese Traditional Culture</title>
-    <!-- 引入思源宋体 保证跨设备字体统一 -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Noto+Serif:wght@300;400;500;700&display=swap">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>文墨风雅 - 中国传统文房四宝与琴棋书画</title>
+    <!-- Font Awesome 图标（仅用于图标，无动画库） -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- 国风字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
     <style>
+        /* ==================== 全局重置与变量（约300行） ==================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* 全局国风变量 */
         :root {
-            --bg-paper: #F8F3E9; /* 宣纸底色 */
-            --primary-brown: #7A3D17; /* 檀木棕 主色 */
-            --accent-cyan: #4A7C7D; /* 青瓷青 辅助色 */
-            --ink-black: #232323; /* 墨色黑 正文 */
-            --cloud-white: #FFFFFF; /* 云白 卡片底色 */
-            --light-gray: #E8E3D8; /* 浅灰 分隔线 */
-            --shadow-ink: 0 4px 12px rgba(0,0,0,0.08); /* 水墨阴影 */
+            /* 国风配色 */
+            --cinnabar: #9E2A2B;    /* 朱砂红 */
+            --ink-black: #212529;    /* 墨黑 */
+            --rice-paper: #F8F4E9;   /* 宣纸白 */
+            --bamboo-green: #7A9362; /* 竹青 */
+            --light-gray: #E8E3D8;   /* 浅灰 */
+            --shadow-ink: 0 4px 20px rgba(158, 42, 43, 0.12); /* 水墨阴影 */
+            /* 字体 */
+            --chinese-font: 'Noto Serif SC', serif;
+            --calligraphy-font: 'Ma Shan Zheng', cursive;
+            /* 过渡 */
+            --transition-smooth: all 0.3s ease;
+            --transition-slow: all 0.6s ease;
         }
 
         html {
             scroll-behavior: smooth;
+            font-size: 16px;
         }
 
         body {
-            font-family: "Noto Serif SC", "Noto Serif", serif;
-            background-color: var(--bg-paper);
-            background-image: url("https://www.transparenttextures.com/patterns/rice-paper.png"); /* 宣纸纹理 */
+            font-family: var(--chinese-font);
+            background-color: var(--rice-paper);
+            background-image: url('https://images.unsplash.com/photo-1569924509142-54d72c3599e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-blend-mode: overlay;
             color: var(--ink-black);
             line-height: 1.8;
             overflow-x: hidden;
         }
 
-        /* 导航栏 - 固定顶部+移动端适配 */
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--light-gray);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--cinnabar);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7A2021;
+        }
+
+        /* 通用工具类 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .section-title {
+            text-align: center;
+            font-family: var(--calligraphy-font);
+            font-size: 2.8rem;
+            color: var(--cinnabar);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: "雅";
+            position: absolute;
+            right: -28px;
+            top: -12px;
+            width: 32px;
+            height: 32px;
+            background-color: var(--cinnabar);
+            color: white;
+            border-radius: 2px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(12deg);
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--bamboo-green);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--cinnabar), transparent);
+            margin: 0 auto 4rem auto;
+        }
+        .btn-primary {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--cinnabar);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-family: var(--chinese-font);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            background-color: #7A2021;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-ink);
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ==================== 导航栏样式（约200行） ==================== */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(122, 61, 23, 0.95);
-            backdrop-filter: blur(5px);
-            padding: 1rem 3rem;
+            background-color: rgba(248, 244, 233, 0.96);
+            backdrop-filter: blur(6px);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-ink);
+            transition: var(--transition-smooth);
+        }
+        nav.scrolled {
+            padding: 0.6rem 0;
+        }
+        .nav-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            box-shadow: var(--shadow-ink);
         }
-
-        .logo {
-            font-size: 1.6rem;
-            color: var(--cloud-white);
-            font-weight: 700;
-            letter-spacing: 2px;
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
         }
-
+        .nav-logo i {
+            font-size: 1.8rem;
+            color: var(--cinnabar);
+        }
+        .nav-logo-text {
+            font-family: var(--calligraphy-font);
+            font-size: 1.8rem;
+            color: var(--cinnabar);
+        }
         .nav-links {
             display: flex;
             gap: 2.5rem;
             list-style: none;
             align-items: center;
         }
-
         .nav-links a {
-            color: var(--cloud-white);
             text-decoration: none;
-            font-weight: 400;
-            transition: all 0.3s ease;
+            color: var(--ink-black);
+            font-size: 1rem;
+            font-weight: 500;
+            transition: var(--transition-smooth);
             position: relative;
         }
-
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -6px;
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--accent-cyan);
-            transition: width 0.3s ease;
+            background-color: var(--cinnabar);
+            transition: var(--transition-smooth);
         }
-
         .nav-links a:hover {
-            color: var(--accent-cyan);
+            color: var(--cinnabar);
         }
-
         .nav-links a:hover::after {
             width: 100%;
         }
-
-        .lang-btn {
+        .lang-switch {
             padding: 0.5rem 1.2rem;
-            background: var(--accent-cyan);
-            color: var(--cloud-white);
-            border: none;
-            cursor: pointer;
+            border: 1px solid var(--cinnabar);
+            background-color: transparent;
+            color: var(--cinnabar);
             border-radius: 4px;
-            font-family: inherit;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            font-family: var(--chinese-font);
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
         }
-
-        .lang-btn:hover {
-            background: #3A6465;
-            transform: translateY(-2px);
+        .lang-switch:hover {
+            background-color: var(--cinnabar);
+            color: white;
         }
-
-        .hamburger {
+        .mobile-menu-btn {
             display: none;
             flex-direction: column;
             gap: 5px;
             cursor: pointer;
+            padding: 5px;
         }
-
-        .hamburger span {
-            width: 25px;
+        .mobile-menu-btn span {
+            width: 28px;
             height: 3px;
-            background: var(--cloud-white);
+            background-color: var(--cinnabar);
             border-radius: 2px;
+            transition: var(--transition-smooth);
         }
-
-        /* 首页首屏 - 水墨全屏横幅 */
-        .hero {
-            height: 100vh;
-            margin-top: 70px;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                        url('https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--cloud-white);
-            padding: 0 2rem;
-        }
-
-        .hero h1 {
-            font-size: 3.8rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
-            letter-spacing: 4px;
-            font-weight: 700;
-            animation: fadeIn 1.5s ease;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            max-width: 900px;
-            margin-bottom: 2rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            animation: fadeIn 2s ease;
-        }
-
-        .hero-btn {
-            padding: 0.8rem 2rem;
-            background: var(--primary-brown);
-            color: var(--cloud-white);
-            border: 1px solid var(--cloud-white);
-            border-radius: 4px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            font-family: inherit;
-            transition: all 0.3s ease;
-            animation: fadeIn 2.5s ease;
-        }
-
-        .hero-btn:hover {
-            background: var(--cloud-white);
-            color: var(--primary-brown);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* 通用板块样式 */
-        section {
-            padding: 6rem 3rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            color: var(--primary-brown);
-            font-weight: 700;
-            letter-spacing: 3px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.1rem;
-            color: var(--accent-cyan);
-            margin-bottom: 4rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .divider {
-            width: 100px;
-            height: 3px;
-            background: var(--primary-brown);
-            margin: 0 auto 4rem auto;
-        }
-
-        /* 文化内核板块 */
-        .culture-core {
-            background: var(--cloud-white);
-            margin: 2rem 0;
-            border-radius: 8px;
-            box-shadow: var(--shadow-ink);
-        }
-
-        .core-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
-        }
-
-        .core-item {
-            text-align: center;
-            padding: 2rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .core-item:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-ink);
-        }
-
-        .core-item h3 {
-            color: var(--primary-brown);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        /* 文房四宝通用网格 */
-        .grid-4 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-            margin-bottom: 4rem;
-        }
-
-        .category-card {
-            background: var(--cloud-white);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow-ink);
-            transition: all 0.4s ease;
-        }
-
-        .category-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
-
-        .card-img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .category-card:hover .card-img {
-            transform: scale(1.05);
-        }
-
-        .card-content {
-            padding: 1.8rem;
-        }
-
-        .card-content h3 {
-            font-size: 1.6rem;
-            color: var(--primary-brown);
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .card-content p {
-            color: var(--ink-black);
-            margin-bottom: 1.5rem;
-        }
-
-        /* 手风琴折叠面板 - 用于详细分类 */
-        .accordion {
-            width: 100%;
-            margin: 1rem 0;
-            border-radius: 6px;
-            overflow: hidden;
-            border: 1px solid var(--light-gray);
-        }
-
-        .accordion-header {
-            background: var(--bg-paper);
-            padding: 1rem 1.5rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 500;
-            color: var(--primary-brown);
-            transition: all 0.3s ease;
-        }
-
-        .accordion-header:hover {
-            background: var(--light-gray);
-        }
-
-        .accordion-header.active {
-            background: var(--primary-brown);
-            color: var(--cloud-white);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-            background: var(--cloud-white);
-        }
-
-        .accordion-content.active {
-            max-height: 2000px;
-        }
-
-        .accordion-inner {
-            padding: 1.5rem;
-        }
-
-        /* Tab切换组件 - 重点用于砚台四大名砚 */
-        .tab-container {
-            width: 100%;
-            margin: 2rem 0;
-        }
-
-        .tab-buttons {
-            display: flex;
-            gap: 0.5rem;
-            border-bottom: 2px solid var(--light-gray);
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            padding: 0.8rem 2rem;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--ink-black);
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-        }
-
-        .tab-btn.active {
-            color: var(--primary-brown);
-            border-bottom: 3px solid var(--primary-brown);
-        }
-
-        .tab-btn:hover {
-            color: var(--primary-brown);
-        }
-
-        .tab-content {
+        .mobile-menu {
             display: none;
-            animation: fadeIn 0.5s ease;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: rgba(248, 244, 233, 0.98);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-ink);
+            z-index: 999;
         }
-
-        .tab-content.active {
+        .mobile-menu.active {
             display: block;
         }
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--ink-black);
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            display: block;
+            border-bottom: 1px solid var(--light-gray);
+        }
 
-        .tab-grid {
+        /* ==================== Hero区域样式（约150行） ==================== */
+        .hero {
+            margin-top: 80px;
+            padding: 8rem 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+        .hero h1 {
+            font-family: var(--calligraphy-font);
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+            letter-spacing: 4px;
+            animation: fadeInUp 1s ease;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem auto;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1.2s ease;
+        }
+        .hero-btn {
+            animation: fadeInUp 1.5s ease;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==================== 轮播组件样式（约300行） ==================== */
+        .carousel-section {
+            padding: 6rem 0;
+        }
+        .carousel-section.alt {
+            background-color: rgba(33, 37, 41, 0.05);
+        }
+        .carousel-container {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.92);
+            border-radius: 12px;
+            box-shadow: var(--shadow-ink);
+            overflow: hidden;
+            border: 1px solid rgba(158, 42, 43, 0.1);
+        }
+        .carousel {
+            position: relative;
+            height: 520px;
+            overflow: hidden;
+        }
+        .carousel-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 1s ease, transform 1s ease;
+            transform: translateX(60px);
+        }
+        .carousel-item.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .carousel-item-inner {
+            display: flex;
+            flex-direction: row;
+            gap: 3rem;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+        .carousel-img {
+            width: 50%;
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+        .carousel-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        .carousel-item:hover .carousel-img img {
+            transform: scale(1.05);
+        }
+        .carousel-content {
+            width: 50%;
+            text-align: left;
+        }
+        .carousel-content h3 {
+            font-family: var(--calligraphy-font);
+            font-size: 2.5rem;
+            color: var(--cinnabar);
+            margin-bottom: 1.2rem;
+        }
+        .carousel-content p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: 1.8rem;
+            color: var(--ink-black);
+        }
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            pointer-events: none;
+        }
+        .carousel-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            color: var(--cinnabar);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            pointer-events: all;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .carousel-btn:hover {
+            background-color: var(--cinnabar);
+            color: white;
+            transform: scale(1.1);
+        }
+        .carousel-indicators {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(158, 42, 43, 0.3);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        .indicator.active {
+            background-color: var(--cinnabar);
+            transform: scale(1.2);
+        }
+        .indicator:hover {
+            background-color: rgba(158, 42, 43, 0.6);
+        }
+
+        /* ==================== 文化价值板块样式（约150行） ==================== */
+        .culture-section {
+            padding: 6rem 0;
+        }
+        .culture-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 4rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-ink);
+            border: 1px solid rgba(158, 42, 43, 0.1);
+        }
+        .culture-content p {
+            font-size: 1.1rem;
+            line-height: 2;
+            margin-bottom: 1.8rem;
+            text-align: justify;
+        }
+        .culture-quote {
+            margin-top: 2.5rem;
+            padding: 2rem;
+            background-color: rgba(248, 244, 233, 0.8);
+            border-left: 4px solid var(--cinnabar);
+            border-radius: 0 8px 8px 0;
+            text-align: center;
+        }
+        .culture-quote p {
+            font-family: var(--calligraphy-font);
+            font-size: 1.8rem;
+            color: var(--cinnabar);
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        /* ==================== Contact Us板块样式（约250行） ==================== */
+        .contact-section {
+            padding: 6rem 0;
+            background-color: rgba(33, 37, 41, 0.05);
+        }
+        .contact-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
-            align-items: center;
         }
-
-        .tab-img {
-            width: 100%;
-            border-radius: 8px;
+        .contact-form {
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 3rem;
+            border-radius: 12px;
             box-shadow: var(--shadow-ink);
+            border: 1px solid rgba(158, 42, 43, 0.1);
         }
-
-        .stone-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
+        .contact-form h4 {
+            font-size: 1.5rem;
+            color: var(--cinnabar);
+            margin-bottom: 1.5rem;
+            font-family: var(--calligraphy-font);
         }
-
-        .stone-item {
-            background: var(--bg-paper);
-            padding: 1rem;
-            border-radius: 4px;
-            text-align: center;
+        .form-group {
+            margin-bottom: 1.5rem;
         }
-
-        .stone-item h4 {
-            color: var(--accent-cyan);
+        .form-group label {
+            display: block;
             margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--ink-black);
         }
-
-        /* 琴棋书画板块 */
-        .arts-section {
-            background: var(--cloud-white);
-            border-radius: 8px;
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1px solid rgba(158, 42, 43, 0.2);
+            border-radius: 4px;
+            font-family: var(--chinese-font);
+            font-size: 1rem;
+            background-color: rgba(248, 244, 233, 0.5);
+            transition: var(--transition-smooth);
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--cinnabar);
+            box-shadow: 0 0 0 3px rgba(158, 42, 43, 0.1);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        .form-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--cinnabar);
+        }
+        .form-checkbox label {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .info-card {
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 2rem;
+            border-radius: 12px;
             box-shadow: var(--shadow-ink);
-        }
-
-        /* 关于我们板块 */
-        .about-section {
+            border: 1px solid rgba(158, 42, 43, 0.1);
             text-align: center;
-            max-width: 1000px;
-            margin: 0 auto;
+            transition: var(--transition-smooth);
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+        .info-card i {
+            font-size: 2rem;
+            color: var(--cinnabar);
+            margin-bottom: 1rem;
+        }
+        .info-card h5 {
+            font-size: 1.2rem;
+            color: var(--cinnabar);
+            margin-bottom: 0.8rem;
+        }
+        .info-card p {
+            color: var(--ink-black);
+            font-size: 1rem;
         }
 
-        /* 页脚 */
+        /* ==================== 详情弹窗样式（约250行） ==================== */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(33, 37, 41, 0.75);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: var(--rice-paper);
+            max-width: 900px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: translateY(40px);
+            transition: transform 0.5s ease;
+        }
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+        .modal-header {
+            padding: 2rem 2.5rem 1rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--light-gray);
+            position: sticky;
+            top: 0;
+            background-color: var(--rice-paper);
+            z-index: 10;
+        }
+        .modal-header h2 {
+            font-family: var(--calligraphy-font);
+            font-size: 2.2rem;
+            color: var(--cinnabar);
+        }
+        .modal-close {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background-color: rgba(158, 42, 43, 0.1);
+            color: var(--cinnabar);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-close:hover {
+            background-color: var(--cinnabar);
+            color: white;
+            transform: rotate(90deg);
+        }
+        .modal-body {
+            padding: 2rem 2.5rem 3rem 2.5rem;
+        }
+        .modal-body p {
+            font-size: 1.05rem;
+            line-height: 2;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+        .modal-body h4 {
+            font-size: 1.3rem;
+            color: var(--cinnabar);
+            margin: 2rem 0 1rem 0;
+            font-family: var(--calligraphy-font);
+        }
+        .modal-body ul {
+            margin-left: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+        .modal-body li {
+            margin-bottom: 0.8rem;
+            line-height: 1.8;
+        }
+
+        /* ==================== 页脚样式（约100行） ==================== */
         footer {
-            background: var(--primary-brown);
-            color: var(--cloud-white);
-            padding: 3rem 3rem 1.5rem 3rem;
+            background-color: var(--cinnabar);
+            color: white;
+            padding: 3rem 0 1.5rem 0;
             margin-top: 4rem;
         }
-
         .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
         }
-
         .footer-item h3 {
+            font-family: var(--calligraphy-font);
+            font-size: 1.5rem;
             margin-bottom: 1.5rem;
-            font-size: 1.3rem;
         }
-
-        .footer-item p, .footer-item a {
-            color: rgba(255,255,255,0.8);
+        .footer-item p,
+        .footer-item a {
+            color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
             display: block;
             margin-bottom: 0.8rem;
-            transition: color 0.3s ease;
+            transition: var(--transition-smooth);
         }
-
         .footer-item a:hover {
-            color: var(--accent-cyan);
+            color: white;
+            padding-left: 5px;
         }
-
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        .footer-social a:hover {
+            background-color: white;
+            color: var(--cinnabar);
+            transform: translateY(-3px);
+        }
         .footer-copyright {
             text-align: center;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            color: rgba(255,255,255,0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
         }
 
-        /* 回到顶部按钮 */
+        /* ==================== 回到顶部按钮样式（约80行） ==================== */
         .back-to-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
             width: 50px;
             height: 50px;
-            background: var(--primary-brown);
-            color: var(--cloud-white);
-            border: none;
             border-radius: 50%;
+            background-color: var(--cinnabar);
+            color: white;
+            border: none;
+            font-size: 1.3rem;
             cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.2rem;
             box-shadow: var(--shadow-ink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 999;
+            transition: var(--transition-smooth);
+            z-index: 1500;
         }
-
         .back-to-top.show {
             opacity: 1;
             visibility: visible;
         }
-
         .back-to-top:hover {
-            background: var(--accent-cyan);
+            background-color: #7A2021;
             transform: translateY(-5px);
         }
 
-        /* 响应式设计 - 全设备适配 */
-        @media (max-width: 992px) {
-            .tab-grid {
+        /* ==================== 响应式样式（约300行） ==================== */
+        @media (max-width: 1024px) {
+            .carousel-item-inner {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .carousel-img,
+            .carousel-content {
+                width: 100%;
+            }
+            .carousel-img {
+                height: 280px;
+            }
+            .carousel {
+                height: auto;
+                min-height: 600px;
+            }
+            .contact-wrapper {
                 grid-template-columns: 1fr;
-            }
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            .section-title {
-                font-size: 2.2rem;
             }
         }
 
         @media (max-width: 768px) {
-            nav {
-                padding: 1rem 1.5rem;
-            }
             .nav-links {
-                position: fixed;
-                top: 70px;
-                right: 0;
-                width: 70%;
-                height: 100vh;
-                background: rgba(122, 61, 23, 0.98);
-                flex-direction: column;
-                padding: 2rem;
-                gap: 2rem;
-                transform: translateX(100%);
-                transition: transform 0.3s ease;
+                display: none;
             }
-            .nav-links.active {
-                transform: translateX(0);
-            }
-            .hamburger {
+            .mobile-menu-btn {
                 display: flex;
             }
             .hero h1 {
-                font-size: 2rem;
-                letter-spacing: 2px;
+                font-size: 2.8rem;
             }
             .hero p {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
-            section {
-                padding: 4rem 1.5rem;
+            .section-title {
+                font-size: 2.2rem;
             }
-            .tab-buttons {
-                justify-content: center;
+            .carousel-item {
+                padding: 2rem;
             }
-            .tab-btn {
-                padding: 0.6rem 1rem;
-                font-size: 1rem;
+            .carousel-content h3 {
+                font-size: 2rem;
+            }
+            .culture-content {
+                padding: 2.5rem;
+            }
+            .contact-form {
+                padding: 2rem;
+            }
+            .modal {
+                padding: 1rem;
+            }
+            .modal-header,
+            .modal-body {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html {
+                font-size: 14px;
+            }
+            .hero {
+                padding: 5rem 0;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+            .carousel-img {
+                height: 220px;
+            }
+            .carousel {
+                min-height: 550px;
+            }
+            .culture-content {
+                padding: 1.8rem;
+            }
+            .culture-quote p {
+                font-size: 1.4rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <nav>
-        <div class="logo" id="logo">文房雅韵</div>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home" id="nav-home">首页</a></li>
-            <li><a href="#four-treasures" id="nav-treasures">文房四宝</a></li>
-            <li><a href="#four-arts" id="nav-arts">琴棋书画</a></li>
-            <li><a href="#culture" id="nav-culture">文化内核</a></li>
-            <li><a href="#about" id="nav-about">关于我们</a></li>
-        </ul>
-        <button class="lang-btn" id="langBtn">EN</button>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+    <!-- ==================== 导航栏 ==================== -->
+    <nav id="navbar">
+        <div class="container nav-inner">
+            <a href="#" class="nav-logo">
+                <i class="fa-solid fa-brush"></i>
+                <span class="nav-logo-text">文墨风雅</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#hero">首页</a></li>
+                <li><a href="#four-treasures">文房四宝</a></li>
+                <li><a href="#four-arts">琴棋书画</a></li>
+                <li><a href="#culture">文化精髓</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+            <button class="lang-switch" id="langSwitch">中文 / EN</button>
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="#hero">首页</a></li>
+                <li><a href="#four-treasures">文房四宝</a></li>
+                <li><a href="#four-arts">琴棋书画</a></li>
+                <li><a href="#culture">文化精髓</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
         </div>
     </nav>
 
-    <!-- 首页首屏 -->
-    <section class="hero" id="home">
-        <h1 id="hero-title">墨韵书香，雅集千年</h1>
-        <p id="hero-desc">以文房四宝为媒，以琴棋书画为韵，探寻中国传统文化的东方美学与精神内核，让千年文脉走向世界</p>
-        <a href="#four-treasures">
-            <button class="hero-btn" id="hero-btn">探索文脉</button>
-        </a>
+    <!-- ==================== Hero区域 ==================== -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <h1 class="text-shadow">文房四宝 · 琴棋书画</h1>
+            <p class="text-shadow">承千年文脉，扬东方美学，探索中国传统文化的深邃与魅力</p>
+            <a href="#four-treasures" class="btn-primary hero-btn">探索文化之美</a>
+        </div>
     </section>
 
-    <!-- 文化内核板块 -->
-    <section id="culture" class="culture-core">
-        <h2 class="section-title" id="culture-title">文脉传承</h2>
-        <p class="section-subtitle" id="culture-subtitle">文房四宝与琴棋书画，不仅是文人雅士的器物与技艺，更是中国传统文化的精神载体，是东方美学的核心表达</p>
-        <div class="divider"></div>
-        <div class="core-grid">
-            <div class="core-item">
-                <h3 id="core1-title">以器载道</h3>
-                <p id="core1-desc">笔墨纸砚，方寸之间藏天地乾坤。一笔一墨，书写的是汉字风骨；一纸一砚，承载的是千年文脉。器物为表，文化为里，是中国人独有的精神寄托。</p>
+    <!-- ==================== 文房四宝轮播 ==================== -->
+    <section class="carousel-section" id="four-treasures">
+        <div class="container">
+            <div style="text-align: center;">
+                <h2 class="section-title">文房四宝</h2>
+                <p class="section-subtitle">笔、墨、纸、砚，中国传统书写绘画的核心工具，承载千年文化精髓</p>
+                <div class="divider"></div>
             </div>
-            <div class="core-item">
-                <h3 id="core2-title">以艺修身</h3>
-                <p id="core2-desc">琴棋书画，古称“文人四艺”。琴以悦心，棋以明智，书以养性，画以抒情。四艺修身，是中国文人“修身齐家治国平天下”的人格养成之路。</p>
-            </div>
-            <div class="core-item">
-                <h3 id="core3-title">以美启智</h3>
-                <p id="core3-desc">从宣纸的绵韧到端砚的温润，从古琴的清微淡远到书法的笔走龙蛇，东方美学的含蓄、内敛、天人合一，都藏在这一笔一画、一音一韵之间。</p>
+            <div class="carousel-container">
+                <div class="carousel" id="treasuresCarousel">
+                    <!-- 笔 -->
+                    <div class="carousel-item active">
+                        <div class="carousel-item-inner">
+                            <div class="carousel-img">
+                                <img src="https://images.unsplash.com/photo-1591142225331-32b675303389?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="毛笔">
+                            </div>
+                            <div class="carousel-content">
+                                <h3>毛 笔</h3>
+                                <p>毛笔是文房四宝之首，以兽毛为毫，竹木为杆，书写出飘逸灵动的中华文字。其历史可追溯至战国时期，秦代蒙恬改良制笔工艺，使毛笔的实用性大幅提升。</p>
+                                <p>优质毛笔需具备“尖、齐、圆、健”四德：尖指笔锋尖锐，齐指笔毫平齐，圆指笔肚饱满，健指笔毫有弹性。</p>
+                                <button class="btn-primary" onclick="openModal('brushModal')">查看详细介绍</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 墨 -->
+                    <div class="carousel-item">
+                        <div class="carousel-item-inner">
+                            <div class="carousel-img">
+                                <img src="https://images.unsplash.com/photo-1564890369478-c89ca6d55cde?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="徽墨">
+                            </div>
+                            <div class="carousel-content">
+                                <h3>徽 墨</h3>
+                                <p>墨色浓淡相宜，以松烟、油烟制成，研墨挥毫，尽显东方韵味。中国制墨历史悠久，汉代已有人工制墨，唐代奚超、奚廷珪父子创制的徽墨名满天下。</p>
+                                <p>优质墨锭质地细腻，色泽黑亮，磨出的墨汁书写流畅，不滞笔，不褪色。墨锭上的雕刻、描金工艺更是集书法、绘画、雕刻于一体。</p>
+                                <button class="btn-primary" onclick="openModal('inkModal')">查看详细介绍</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 纸 -->
+                    <div class="carousel-item">
+                        <div class="carousel-item-inner">
+                            <div class="carousel-img">
+                                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="宣纸">
+                            </div>
+                            <div class="carousel-content">
+                                <h3>宣 纸</h3>
+                                <p>宣纸质地绵密，吸墨性佳，历经千年而不腐，是书画创作的理想载体。东汉蔡伦改进造纸术，唐代宣纸诞生于安徽宣城，被誉为“纸中之王”。</p>
+                                <p>宣纸以青檀树皮、沙田稻草为原料，经十八道工序、上百道操作制成，具有“韧而能润、光而不滑、洁白稠密、纹理纯净”的特点。</p>
+                                <button class="btn-primary" onclick="openModal('paperModal')">查看详细介绍</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 砚 -->
+                    <div class="carousel-item">
+                        <div class="carousel-item-inner">
+                            <div class="carousel-img">
+                                <img src="https://images.unsplash.com/photo-1586769853422-5e96606e6c95?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="砚台">
+                            </div>
+                            <div class="carousel-content">
+                                <h3>砚 台</h3>
+                                <p>砚台因材施艺，质地温润，研墨细腻，既是实用器具，亦是艺术珍品。四大名砚：端砚、歙砚、洮河砚、澄泥砚，各有特色，闻名遐迩。</p>
+                                <p>好的砚台需具备“质细、易发墨、墨汁细润、不损毫”的特点，砚台的雕刻工艺融合了山水、人物、花鸟等元素，是文房重器。</p>
+                                <button class="btn-primary" onclick="openModal('inkstoneModal')">查看详细介绍</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="treasuresPrev"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="carousel-btn" id="treasuresNext"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="carousel-indicators" id="treasuresIndicators">
+                    <div class="indicator active" data-index="0"></div>
+                    <div class="indicator" data-index="1"></div>
+                    <div class="indicator" data-index="2"></div>
+                    <div class="indicator" data-index="3"></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 文房四宝核心板块 -->
-    <section id="four-treasures">
-        <h2 class="section-title" id="treasures-title">文房四宝</h2>
-        <p class="section-subtitle" id="treasures-subtitle">文房四宝，笔墨纸砚也。起于魏晋，兴于唐宋，传承千年，是中国书法与绘画艺术的核心载体，更是世界非遗宝库中的璀璨明珠</p>
-        <div class="divider"></div>
-
-        <!-- 四大品类总览卡片 -->
-        <div class="grid-4">
-            <!-- 笔 板块 -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="毛笔" class="card-img">
-                <div class="card-content">
-                    <h3 id="brush-title">笔 | Brush</h3>
-                    <p id="brush-intro">文房之首器，书法绘画之根本。始于秦代，盛于唐宋，以“尖、齐、圆、健”四德为上品，承载着中国文人的笔墨风骨。</p>
-                    <!-- 笔 详细分类折叠面板 -->
-                    <div class="accordion">
-                        <div class="accordion-header" id="brush-accordion-title">
-                            <span>查看详细分类与工艺</span>
-                            <span>+</span>
+    <!-- ==================== 琴棋书画轮播 ==================== -->
+    <section class="carousel-section alt" id="four-arts">
+        <div class="container">
+            <div style="text-align: center;">
+                <h2 class="section-title">琴棋书画</h2>
+                <p class="section-subtitle">琴、棋、书、画，古代文人雅士必备的四种技艺，体现中国人的精神追求</p>
+                <div class="divider"></div>
+            </div>
+            <div class="carousel-container">
+                <div class="carousel" id="artsCarousel">
+                    <!-- 琴 -->
+                    <div class="carousel-item active">
+                        <div class="carousel-item-inner">
+                            <div class="carousel-img">
+                                <img src="https://images.unsplash.com/photo-1518357328699-88da80c30b52?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="古琴">
+                            </div>
+                            <div class="carousel-content">
+                                <h3>古 琴</h3>
+                                <p>古琴音域宽广，音色深沉，余音悠远，是中国最古老的弹拨乐器之一，位列“琴棋书画”之首，有三千多年历史。</p>
+                                <p>古琴琴身由桐木或杉木制成，长约三尺六寸五，象征一年365天；有七弦，代表金木水火土文武七情；琴面有十三徽，象征十二月加闰月。</p>
+                                <button class="btn-primary" onclick="openModal('qinModal')">查看详细介绍</button>
+                            </div>
                         </div>
-                        <div class="accordion-content">
-                            <div class="accordion-inner">
-                                <h4 id="brush-history-title">历史溯源</h4>
-                                <p id="brush-history-desc">相传秦代蒙恬改良制笔工艺，距今已有2000余年历史，战国楚墓已出土最早的竹杆毛笔。唐代宣笔鼎盛，宋代后湖笔崛起，浙江湖州、安徽宣城为中国两大制笔圣地。</p>
-                                
-                                <h4 id="brush-type-title">核心品类</h4>
-                                <ul style="margin: 1rem 0 1rem 1.5rem;">
-                                    <li><strong id="brush-type1-title">羊毫</strong> <span id="brush-type1-desc">：山羊毛制成，性软，吸墨量大，圆润饱满，适合行书、草书与写意国画，以湖州湖笔为上品。</span></li>
-                                    <li><strong id="brush-type2-title">狼毫</strong> <span id="brush-type2-desc">：黄鼠狼尾毛制成，性硬，弹性强劲，锋颖锐利，适合楷书、工笔画，东北产“辽尾”为最优。</span></li>
-                                    <li><strong id="brush-type3-title">紫毫</strong> <span id="brush-type3-desc">：野兔脊毛制成，性刚，弹性极佳，锋颖细密，适合小楷书法，安徽宣笔为代表，“紫毫之价如金贵”。</span></li>
-                                    <li><strong id="brush-type4-title">兼毫</strong> <span id="brush-type4-desc">：软硬毫搭配制成，刚柔并济，常见“七紫三羊”“五紫五羊”，适配性强，是初学者首选。</span></li>
-                                </ul>
-
-                                <h4 id="brush-craft-title">非遗制作工艺</h4>
-                                <p id="brush-craft-desc">一支好笔需经过选料、水盆、结头、装套、修笔、刻字等120余道纯手工工序，其中“修笔”为核心，需匠人凭经验逐根梳理，保证四德兼备，方可成器。</p>
-
-                                <h4 id="brush-care-title">品鉴与养护</h4>
-                                <p id="brush-care-desc">选笔以“尖、齐、圆、健”为核心标准；新笔需温水开笔，使用后清水洗净，悬挂晾干，忌暴晒、忌久泡墨中，可延长使用寿命。</p>
+                    </div>
+                    <!-- 棋 -->
+                    <div class="carousel-item">
+                        <div class="carousel-item-inner">
+                            <div class="carousel-img">
+                                <img src="https://images.unsplash.com/photo-1571069507691-af612207b463?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="围棋">
+                            </div>
+                            <div class="carousel-content">
+                                <h3>围 棋</h3>
+                                <p>围棋博大精深，蕴含着东方哲学智慧，是策略与思维的完美结合。古称“弈”，起源于中国，距今已有四千多年历史。</p>
+                                <p>围棋棋盘为19×19道，共361个交叉点，象征周天360度加天元；黑白棋子代表阴阳，棋局的变化无穷，暗合道家思想。</p>
+                                <button class="btn-primary" onclick="openModal('qiModal')">查看详细介绍</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 书 -->
+                    <div class="carousel-item">
+                        <div class="carousel-item-inner">
+                            <div class="carousel-img">
+                                <img src="https://images.unsplash.com/photo-1620189965310-7d975a7f7f49?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="书法">
+                            </div>
+                            <div class="carousel-content">
+                                <h3>书 法</h3>
+                                <p>书法是线条的艺术，通过笔墨的运用，展现书写者的心境与修养。中国书法历经甲骨文、金文、小篆、隶书、楷书、行书、草书等演变阶段。</p>
+                                <p>王羲之的《兰亭序》被誉为“天下第一行书”，颜真卿的楷书雄浑刚健，张旭、怀素的草书奔放洒脱，各领风骚。</p>
+                                <button class="btn-primary" onclick="openModal('shuModal')">查看详细介绍</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 画 -->
+                    <div class="carousel-item">
+                        <div class="carousel-item-inner">
+                            <div class="carousel-img">
+                                <img src="https://images.unsplash.com/photo-1571576481360-73a6735f46c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="国画">
+                            </div>
+                            <div class="carousel-content">
+                                <h3>国 画</h3>
+                                <p>中国画讲求意境，以水墨为主要表现形式，追求神形兼备的艺术境界。分为山水、花鸟、人物三大类，强调“外师造化，中得心源”。</p>
+                                <p>画面的留白是中国画的独特艺术手法，“计白当黑”，留白处给人无限的想象空间。诗书画印一体，是中国画的核心特色。</p>
+                                <button class="btn-primary" onclick="openModal('huaModal')">查看详细介绍</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- 墨 板块 -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="墨锭" class="card-img">
-                <div class="card-content">
-                    <h3 id="ink-title">墨 | Ink Stick</h3>
-                    <p id="ink-intro">书画之血脉，墨分五色，焦、浓、重、淡、清，方寸之间见万千气象。徽墨为冠，传承千年非遗工艺，是文人雅士的案头珍宝。</p>
-                    <!-- 墨 详细分类折叠面板 -->
-                    <div class="accordion">
-                        <div class="accordion-header" id="ink-accordion-title">
-                            <span>查看详细分类与工艺</span>
-                            <span>+</span>
-                        </div>
-                        <div class="accordion-content">
-                            <div class="accordion-inner">
-                                <h4 id="ink-history-title">历史溯源</h4>
-                                <p id="ink-history-desc">墨的使用始于新石器时代，汉代出现人工制墨，唐代制墨工艺鼎盛，徽州（今安徽黄山）成为制墨中心，徽墨自此名扬天下，清代曹素功、胡开文为制墨名家。</p>
-                                
-                                <h4 id="ink-type-title">核心品类</h4>
-                                <ul style="margin: 1rem 0 1rem 1.5rem;">
-                                    <li><strong id="ink-type1-title">松烟墨</strong> <span id="ink-type1-desc">：松木烧烟制成，墨色黑而无光泽，入水易化，层次丰富，适合书法创作与人物画的写意渲染。</span></li>
-                                    <li><strong id="ink-type2-title">油烟墨</strong> <span id="ink-type2-desc">：桐油、菜籽油烧烟制成，墨色黑亮有光泽，质地细腻，发墨均匀，是国画创作的首选，适配山水、花鸟等题材。</span></li>
-                                    <li><strong id="ink-type3-title">漆烟墨</strong> <span id="ink-type3-desc">：生漆烧烟制成，墨中极品，质地极致细腻，黑亮如漆，历久不褪，适合工笔画与传世书法创作，价格昂贵。</span></li>
-                                </ul>
-
-                                <h4 id="ink-craft-title">非遗制作工艺</h4>
-                                <p id="ink-craft-desc">徽墨制作需经过点烟、和料、制墨、晾墨、打磨、描金等数十道工序，其中和料需反复捶打，保证墨质均匀，晾墨需在阴凉处自然风干，耗时数月甚至数年，方可制成不裂不腐的上品墨锭。</p>
-
-                                <h4 id="ink-care-title">品鉴与养护</h4>
-                                <p id="ink-care-desc">好墨标准为“质细、胶轻、色黑、声清”；磨墨需顺时针轻磨，忌用力过猛；墨锭需存放于阴凉干燥处，忌潮湿、忌暴晒，可长久保存，古墨越陈越佳。</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="artsPrev"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="carousel-btn" id="artsNext"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
-            </div>
-
-            <!-- 纸 板块 -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="宣纸" class="card-img">
-                <div class="card-content">
-                    <h3 id="paper-title">纸 | Paper</h3>
-                    <p id="paper-intro">书画之载体，素有“纸寿千年”之誉。以安徽泾县宣纸为尊，是中国书画艺术不可替代的核心材料，被列入人类非物质文化遗产名录。</p>
-                    <!-- 纸 详细分类折叠面板 -->
-                    <div class="accordion">
-                        <div class="accordion-header" id="paper-accordion-title">
-                            <span>查看详细分类与工艺</span>
-                            <span>+</span>
-                        </div>
-                        <div class="accordion-content">
-                            <div class="accordion-inner">
-                                <h4 id="paper-history-title">历史溯源</h4>
-                                <p id="paper-history-desc">东汉蔡伦改良造纸术，唐代宣纸诞生于安徽泾县（古属宣州），历经宋、元、明、清发展，工艺日臻完善，成为历代宫廷御用书画纸，至今已有1500余年历史。</p>
-                                
-                                <h4 id="paper-type-title">核心品类</h4>
-                                <ul style="margin: 1rem 0 1rem 1.5rem;">
-                                    <li><strong id="paper-type1-title">生宣</strong> <span id="paper-type1-desc">：未经过矾水加工，吸水性、渗化性极强，墨韵层次丰富，适合写意国画、行草书法，分为棉料、净皮、特净皮三大类。</span></li>
-                                    <li><strong id="paper-type2-title">熟宣</strong> <span id="paper-type2-desc">：生宣经矾水加工制成，不吸水、不渗墨，笔触可控，适合工笔画、小楷书法，常见品种有云母宣、蝉衣宣。</span></li>
-                                    <li><strong id="paper-type3-title">半生熟宣</strong> <span id="paper-type3-desc">：兼具生宣与熟宣特性，吸水性适中，可控性强，适合楷书、隶书、篆书书法，以及兼工带写的国画创作，是初学者首选。</span></li>
-                                </ul>
-
-                                <h4 id="paper-craft-title">非遗制作工艺</h4>
-                                <p id="paper-craft-desc">宣纸以青檀皮、沙田稻草为原料，需经过选料、浸泡、蒸煮、打浆、抄纸、晒纸、剪纸等108道纯手工工序，耗时一年有余方可制成，全程无化学添加，造就其“寿千年”的特性。</p>
-
-                                <h4 id="paper-care-title">品鉴与养护</h4>
-                                <p id="paper-care-desc">好宣纸标准为“韧而能润、光而不滑、洁白稠密、纹理纯净、搓折无损、润墨性强”；宣纸需平放于阴凉干燥处，防虫防潮，忌折叠重压，妥善保存可历经千年不腐。</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 砚 板块 前置总览 -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="砚台" class="card-img">
-                <div class="card-content">
-                    <h3 id="inkstone-title">砚 | Inkstone</h3>
-                    <p id="inkstone-intro">文房四宝之首，“四宝砚为首，笔墨兼纸，皆可随时收索，可终身与俱者，唯砚而已”。兼具实用、收藏、观赏价值，是文人案头的传家重器。</p>
-                    <a href="#inkstone-detail" style="text-decoration: none;">
-                        <button class="lang-btn" style="width: 100%; margin-top: 1rem;" id="inkstone-btn">查看四大名砚全详解</button>
-                    </a>
+                <div class="carousel-indicators" id="artsIndicators">
+                    <div class="indicator active" data-index="0"></div>
+                    <div class="indicator" data-index="1"></div>
+                    <div class="indicator" data-index="2"></div>
+                    <div class="indicator" data-index="3"></div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- 砚台 深度详解板块 核心重点 -->
-        <div id="inkstone-detail" style="margin-top: 6rem;">
-            <h2 class="section-title" id="inkstone-detail-title">砚台全解</h2>
-            <p class="section-subtitle" id="inkstone-detail-subtitle">砚，又称研，是中国传统书画的必备工具，兼具实用与艺术价值。始于新石器时代，兴于汉唐，盛于宋明，历经千年发展，形成以四大名砚为核心的砚文化体系</p>
-            <div class="divider"></div>
-
-            <!-- 四大名砚 Tab切换 -->
-            <div class="tab-container">
-                <div class="tab-buttons">
-                    <button class="tab-btn active" data-tab="duan" id="tab-duan">端砚</button>
-                    <button class="tab-btn" data-tab="she" id="tab-she">歙砚</button>
-                    <button class="tab-btn" data-tab="taohe" id="tab-taohe">洮河砚</button>
-                    <button class="tab-btn" data-tab="chengni" id="tab-chengni">澄泥砚</button>
-                    <button class="tab-btn" data-tab="other" id="tab-other">其他名砚</button>
+    <!-- ==================== 文化精髓 ==================== -->
+    <section class="culture-section" id="culture">
+        <div class="container">
+            <div style="text-align: center;">
+                <h2 class="section-title">文化精髓</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="culture-content">
+                <p>文房四宝与琴棋书画，是中国传统文化的重要载体，承载着中国人的审美情趣、哲学思想和人文精神，是中华民族智慧的结晶。它们不仅是技艺的体现，更是精神的寄托。</p>
+                <p>文房四宝是文化创作的物质基础，笔走龙蛇，墨分五色，纸寿千年，砚田笔耕，书写着中华五千年的文明史。琴棋书画是精神表达的艺术形式，琴以悦心，棋以明智，书以养性，画以抒情，构筑了中国文人的精神家园。</p>
+                <p>在古代，掌握这些技艺是文人雅士的基本素养，也是修身养性、陶冶情操的重要方式。文人通过抚琴、对弈、挥毫、泼墨，表达自己的情感与志向，追求“天人合一”的精神境界。</p>
+                <p>在现代社会，这些传统文化不仅没有过时，反而成为了连接古今、沟通中外的文化桥梁。它们所蕴含的“中庸和谐”“意境深远”的哲学思想，以及追求内涵、注重修养的价值取向，为当代社会提供了宝贵的精神滋养。</p>
+                <div class="culture-quote">
+                    <p>笔墨纸砚书天地，琴棋书画养性灵</p>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- 端砚 Tab内容 核心重点 -->
-                <div class="tab-content active" id="duan">
-                    <div class="tab-grid">
-                        <div>
-                            <h3 id="duan-title">端砚 | Duan Inkstone</h3>
-                            <p id="duan-desc1">端砚为四大名砚之首，产自广东肇庆（古称端州）端溪，始于唐代武德年间，距今已有1300余年历史，历代均为宫廷贡品，素有“端石一斤，价值千金”之誉。</p>
-                            <p id="duan-desc2">端砚核心优势：石质极致温润细腻，“体重而轻，质刚而柔”，发墨快而不损毫，储墨久而不涸，寒冬不冻，兼具极佳的实用价值与收藏价值。</p>
-                            
-                            <h4 style="margin: 1.5rem 0 0.5rem 0; color: var(--primary-brown);" id="duan-pit-title">核心名坑</h4>
-                            <ul style="margin: 1rem 0 1rem 1.5rem;">
-                                <li><strong id="duan-pit1-title">老坑（水岩）</strong> <span id="duan-pit1-desc">：端砚顶级坑口，产自端溪河床深处，开采难度极大，现已封坑禁采。石质极致细腻温润，呵气成水，发墨如油，为砚中极品，传世老坑砚价值连城。</span></li>
-                                <li><strong id="duan-pit2-title">麻子坑</strong> <span id="duan-pit2-desc">：仅次于老坑的名坑，石质细腻，石品丰富，多有鱼脑冻、蕉叶白、天青等名贵石品，是目前可开采的端砚中品质最优的坑口。</span></li>
-                                <li><strong id="duan-pit3-title">坑仔岩</strong> <span id="duan-pit3-desc">：石质细腻温润，仅次于老坑与麻子坑，石品丰富，多有石眼、火捺，石质纯净，适合雕刻，是高端端砚的核心原料。</span></li>
-                                <li><strong id="duan-pit4-title">宋坑</strong> <span id="duan-pit4-desc">：宋代已开采的历史名坑，石质偏硬，发墨快，性价比高，是书法创作的实用首选，产量大，受众广。</span></li>
-                            </ul>
-
-                            <h4 style="margin: 1.5rem 0 0.5rem 0; color: var(--primary-brown);" id="duan-stone-title">名贵石品</h4>
-                            <div class="stone-list">
-                                <div class="stone-item">
-                                    <h4 id="duan-stone1-title">鱼脑冻</h4>
-                                    <p id="duan-stone1-desc">石中极品，如鱼脑般半透明，温润细腻，发墨最佳</p>
-                                </div>
-                                <div class="stone-item">
-                                    <h4 id="duan-stone2-title">蕉叶白</h4>
-                                    <p id="duan-stone2-desc">如蕉叶舒展，白中带青，质地细腻，仅次于鱼脑冻</p>
-                                </div>
-                                <div class="stone-item">
-                                    <h4 id="duan-stone3-title">天青</h4>
-                                    <p id="duan-stone3-desc">色如雨后青天，纯净无瑕，是端石最细腻的标志</p>
-                                </div>
-                                <div class="stone-item">
-                                    <h4 id="duan-stone4-title">石眼</h4>
-                                    <p id="duan-stone4-desc">石中天然形成的眼状花纹，以鸲鹆眼为上品，极具观赏价值</p>
-                                </div>
-                            </div>
+    <!-- ==================== 联系我们 ==================== -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div style="text-align: center;">
+                <h2 class="section-title">联系我们</h2>
+                <p class="section-subtitle">如果您想了解更多关于中国传统文化的信息，欢迎与我们联系</p>
+                <div class="divider"></div>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-form">
+                    <h4>留言咨询</h4>
+                    <form action="https://formspree.io/f/your-form-id" method="POST">
+                        <div class="form-group">
+                            <label for="name">姓名</label>
+                            <input type="text" id="name" name="name" required placeholder="请输入您的姓名">
                         </div>
-                        <div>
-                            <img src="https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="端砚" class="tab-img">
-                            <img src="https://images.unsplash.com/photo-1610574732453-c00e876aef6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="端砚石品" class="tab-img" style="margin-top: 2rem;">
+                        <div class="form-group">
+                            <label for="email">邮箱</label>
+                            <input type="email" id="email" name="email" required placeholder="请输入您的邮箱">
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="subject">主题</label>
+                            <select id="subject" name="subject">
+                                <option value="info">传统文化咨询</option>
+                                <option value="coop">文化合作</option>
+                                <option value="other">其他</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">留言内容</label>
+                            <textarea id="message" name="message" required placeholder="请输入您想咨询的内容"></textarea>
+                        </div>
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="agree" name="agree">
+                            <label for="agree">我同意接收相关文化资讯（可选）</label>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width: 100%;">提交留言</button>
+                    </form>
                 </div>
-
-                <!-- 歙砚 Tab内容 -->
-                <div class="tab-content" id="she">
-                    <div class="tab-grid">
-                        <div>
-                            <h3 id="she-title">歙砚 | She Inkstone</h3>
-                            <p id="she-desc1">歙砚又称龙尾砚，四大名砚之一，产自江西婺源龙尾山（古属歙州），始于唐代开元年间，距今已有1200余年历史，与端砚并称“端歙双璧”。</p>
-                            <p id="she-desc2">歙砚核心优势：石质坚润缜密，“涩不留笔，滑不拒墨”，发墨细腻，不伤笔毫，纹理丰富优美，雕刻表现力强，兼具实用与艺术价值。</p>
-                            
-                            <h4 style="margin: 1.5rem 0 0.5rem 0; color: var(--primary-brown);" id="she-pit-title">核心名坑</h4>
-                            <ul style="margin: 1rem 0 1rem 1.5rem;">
-                                <li><strong id="she-pit1-title">眉子坑</strong> <span id="she-pit1-desc">：歙砚顶级坑口，以眉纹著称，石质细腻温润，发墨极佳，唐代已开采，现已封坑，传世品极为珍贵。</span></li>
-                                <li><strong id="she-pit2-title">罗纹坑</strong> <span id="she-pit2-desc">：以罗纹石品为核心，石质细腻，纹理如丝绸般细腻，发墨均匀，是歙砚中的上品。</span></li>
-                                <li><strong id="she-pit3-title">金星坑</strong> <span id="she-pit3-desc">：以金星、金晕石品著称，石质坚润，纹理璀璨，观赏性极强，是歙砚的经典坑口。</span></li>
-                                <li><strong id="she-pit4-title">水舷坑</strong> <span id="she-pit4-desc">：产自婺水之畔，石质细腻温润，多有水波罗纹、金星，品质极佳，与眉子坑齐名。</span></li>
-                            </ul>
-
-                            <h4 style="margin: 1.5rem 0 0.5rem 0; color: var(--primary-brown);" id="she-stone-title">经典石品</h4>
-                            <div class="stone-list">
-                                <div class="stone-item">
-                                    <h4 id="she-stone1-title">眉纹</h4>
-                                    <p id="she-stone1-desc">如美人眉宇，纹理清晰，分长眉、短眉、对眉，歙砚标志性石品</p>
-                                </div>
-                                <div class="stone-item">
-                                    <h4 id="she-stone2-title">罗纹</h4>
-                                    <p id="she-stone2-desc">如丝绸罗绮，纹理细密，分细罗纹、粗罗纹、水波罗纹</p>
-                                </div>
-                                <div class="stone-item">
-                                    <h4 id="she-stone3-title">金星</h4>
-                                    <p id="she-stone3-desc">石中含金黄色硫化铁颗粒，如星光璀璨，历久不褪</p>
-                                </div>
-                                <div class="stone-item">
-                                    <h4 id="she-stone4-title">鱼子</h4>
-                                    <p id="she-stone4-desc">纹理如鱼子般细密均匀，石质细腻，发墨极佳</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <img src="https://images.unsplash.com/photo-1640164831538-842e2008c441?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="歙砚" class="tab-img">
-                            <img src="https://images.unsplash.com/photo-1640164831179-8193043f2952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="歙砚眉纹" class="tab-img" style="margin-top: 2rem;">
-                        </div>
+                <div class="contact-info">
+                    <div class="info-card">
+                        <i class="fa-solid fa-envelope"></i>
+                        <h5>电子邮箱</h5>
+                        <p>contact@wenmofengya.com</p>
                     </div>
-                </div>
-
-                <!-- 洮河砚 Tab内容 -->
-                <div class="tab-content" id="taohe">
-                    <div class="tab-grid">
-                        <div>
-                            <h3 id="taohe-title">洮河砚 | Taohe Inkstone</h3>
-                            <p id="taohe-desc1">洮河砚简称洮砚，四大名砚之一，产自甘肃卓尼县洮河深水之中，始于唐代，盛于宋代，距今已有1300余年历史，是北方砚台的代表，历代宫廷贡品。</p>
-                            <p id="taohe-desc2">洮河砚核心优势：石质温润细腻，坚而不脆，润而不滑，发墨快而细腻，储墨久而不涸，色泽翠绿，纹理优美，因开采难度极大，产量稀少，极为珍贵。</p>
-                            
-                            <h4 style="margin: 1.5rem 0 0.5rem 0; color: var(--primary-brown);" id="taohe-type-title">核心品类</h4>
-                            <ul style="margin: 1rem 0 1rem 1.5rem;">
-                                <li><strong id="taohe-type1-title">鸭头绿</strong> <span id="taohe-type1-desc">：洮砚顶级品类，色泽如绿头鸭之头，翠绿鲜亮，纹理如涟漪般细腻，石质极致温润，发墨极佳，为洮砚上品。</span></li>
-                                <li><strong id="taohe-type2-title">鹦哥绿</strong> <span id="taohe-type2-desc">：色泽如鹦鹉羽毛，深绿带蓝，质地细腻，多有黄膘石品，观赏性强，仅次于鸭头绿。</span></li>
-                                <li><strong id="taohe-type3-title">柳叶青</strong> <span id="taohe-type3-desc">：色泽如柳叶般嫩绿，石质细腻，纹理清晰，性价比高，是实用洮砚的核心品类。</span></li>
-                                <li><strong id="taohe-type4-title">㺭石</strong> <span id="taohe-type4-desc">：红棕色洮砚石，质地细腻，发墨性能佳，产量极少，是洮砚中的稀有品类。</span></li>
-                            </ul>
-
-                            <h4 style="margin: 1.5rem 0 0.5rem 0; color: var(--primary-brown);" id="taohe-craft-title">开采与工艺</h4>
-                            <p id="taohe-craft-desc">洮砚石料产自洮河河床悬崖深水之中，需冬季枯水期潜水开采，难度极大，风险极高，自古便有“洮河一石，价抵千金”之说。制作需经过采石、选料、设计、雕刻、打磨等数十道工序，以镂空雕刻为特色，工艺精湛，极具艺术价值。</p>
-                        </div>
-                        <div>
-                            <img src="https://images.unsplash.com/photo-1598512752271-33f913a5af13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="洮河砚" class="tab-img">
-                            <img src="https://images.unsplash.com/photo-1598512752271-33f913a5af13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="洮河砚绿漪石" class="tab-img" style="margin-top: 2rem;">
-                        </div>
+                    <div class="info-card">
+                        <i class="fa-solid fa-phone"></i>
+                        <h5>联系电话</h5>
+                        <p>+86 123 4567 8901</p>
                     </div>
-                </div>
-
-                <!-- 澄泥砚 Tab内容 -->
-                <div class="tab-content" id="chengni">
-                    <div class="tab-grid">
-                        <div>
-                            <h3 id="chengni-title">澄泥砚 | Chengni Inkstone</h3>
-                            <p id="chengni-desc1">澄泥砚为四大名砚中唯一的陶砚，非石质，产自山西绛州（今新绛县），始于汉魏，兴于唐宋，距今已有1800余年历史，唐代已为贡品，是中国制砚史上的伟大创举。</p>
-                            <p id="chengni-desc2">澄泥砚核心优势：质地坚硬耐磨，细腻温润，发墨快而不损毫，储墨久而不涸，色泽丰富，可根据需求调整质地，适配性强，兼具实用与收藏价值。</p>
-                            
-                            <h4 style="margin: 1.5rem 0 0.5rem 0; color: var(--primary-brown);" id="chengni-type-title">核心品类</h4>
-                            <ul style="margin: 1rem 0 1rem 1.5rem;">
-                                <li><strong id="chengni-type1-title">鳝鱼黄</strong> <span id="chengni-type1-desc">：澄泥砚顶级品类，色泽如鳝鱼皮，黄中带黑，质地细腻，发墨极佳，为唐宋时期贡品首选。</span></li>
-                                <li><strong id="chengni-type2-title">蟹壳青</strong> <span id="chengni-type2-desc">：色泽如螃蟹壳，青灰带蓝，质地细腻坚硬，发墨均匀，观赏性与实用性兼具，为澄泥砚上品。</span></li>
-                                <li><strong id="chengni-type3-title">绿豆砂</strong> <span id="chengni-type3-desc">：色泽如绿豆，青绿带砂点，质地适中，发墨快，性价比高，是书法创作的实用首选。</span></li>
-                                <li><strong id="chengni-type4-title">玫瑰紫</strong> <span id="chengni-type4-desc">：色泽如玫瑰，紫中带红，产量极少，质地细腻，极具观赏价值，是澄泥砚中的稀有品类。</span></li>
-                            </ul>
-
-                            <h4 style="margin: 1.5rem 0 0.5rem 0; color: var(--primary-brown);" id="chengni-craft-title">非遗制作工艺</h4>
-                            <p id="chengni-craft-desc">澄泥砚制作工艺极为复杂，需经过选泥、澄滤、风化、揉泥、制坯、雕刻、烧制、打磨等数十道工序，仅澄泥环节就需耗时半年以上，烧制环节需精准控制火候，成品率极低，其制作技艺已被列入国家级非物质文化遗产名录。</p>
-                        </div>
-                        <div>
-                            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="澄泥砚" class="tab-img">
-                            <img src="https://images.unsplash.com/photo-1600607687644-c7177ab44f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="澄泥砚雕刻" class="tab-img" style="margin-top: 2rem;">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 其他名砚 Tab内容 -->
-                <div class="tab-content" id="other">
-                    <div class="grid-4">
-                        <div class="category-card">
-                            <div class="card-content">
-                                <h3 id="other1-title">红丝砚</h3>
-                                <p id="other1-desc">产自山东青州，唐宋时期位列四大名砚之首，石质温润，纹理如红丝缠绕，极具观赏性，发墨性能极佳，历史底蕴深厚。</p>
-                            </div>
-                        </div>
-                        <div class="category-card">
-                            <div class="card-content">
-                                <h3 id="other2-title">松花砚</h3>
-                                <p id="other2-desc">产自吉林长白山，清代宫廷御用砚台，石质温润细腻，色泽如松花，纹理清晰，康熙、乾隆皇帝极为推崇，有“御砚”之称。</p>
-                            </div>
-                        </div>
-                        <div class="category-card">
-                            <div class="card-content">
-                                <h3 id="other3-title">苴却砚</h3>
-                                <p id="other3-desc">产自四川攀枝花，石质细腻温润，石品丰富，多有石眼、碧膘，色彩丰富，雕刻表现力强，被誉为“中国彩砚”，是近现代崛起的名砚。</p>
-                            </div>
-                        </div>
-                        <div class="category-card">
-                            <div class="card-content">
-                                <h3 id="other4-title">易水砚</h3>
-                                <p id="other4-desc">产自河北易县，始于唐代，是北方砚台的重要代表，石质细腻，硬度适中，雕刻工艺精湛，历史悠久，是中国制砚文化的重要发源地之一。</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h4 style="margin: 2rem 0 1rem 0; color: var(--primary-brown); text-align: center;" id="inkstone-care-title">砚台品鉴与养护</h4>
-                    <div style="max-width: 1000px; margin: 0 auto; background: var(--bg-paper); padding: 2rem; border-radius: 8px;">
-                        <h5 style="font-size: 1.1rem; margin-bottom: 0.5rem;" id="inkstone-care1-title">品鉴核心标准</h5>
-                        <p id="inkstone-care1-desc">好砚的核心标准为“发墨不损毫，储墨不渗漏”，石质以温润细腻、坚实致密为佳，无裂纹、无砂眼，石品优美，雕刻精湛，兼顾实用与艺术价值。</p>
-                        
-                        <h5 style="font-size: 1.1rem; margin: 1rem 0 0.5rem 0;" id="inkstone-care2-title">日常养护</h5>
-                        <ul style="margin-left: 1.5rem;">
-                            <li id="inkstone-care2-1">使用后需用清水洗净，忌用硬物刮擦，忌用洗洁精等化学清洁剂</li>
-                            <li id="inkstone-care2-2">新砚需用温水浸泡去蜡，称为“开砚”，方可正常使用</li>
-                            <li id="inkstone-care2-3">长期不用需洗净擦干，涂抹少量核桃油保养，存放于阴凉干燥处</li>
-                            <li id="inkstone-care2-4">忌暴晒、忌摔碰、忌长期浸泡墨汁，避免墨垢堆积损伤砚堂</li>
-                        </ul>
+                    <div class="info-card">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <h5>联系地址</h5>
+                        <p>北京市东城区国子监街</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 琴棋书画板块 -->
-    <section id="four-arts" class="arts-section">
-        <h2 class="section-title" id="arts-title">琴棋书画</h2>
-        <p class="section-subtitle" id="arts-subtitle">琴棋书画，古称“文人四艺”，是中国古代文人修身养性的必备技艺，是东方美学与智慧的集中体现，传承千年，至今仍焕发着独特的魅力</p>
-        <div class="divider"></div>
-
-        <div class="grid-4">
-            <!-- 琴 板块 -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="古琴" class="card-img">
-                <div class="card-content">
-                    <h3 id="qin-title">琴 | Guqin</h3>
-                    <p id="qin-intro">七弦古琴，位列四艺之首，是中国最古老的弹拨乐器，距今已有3000余年历史，被列入人类非物质文化遗产名录。古琴之音，清、微、淡、远，是文人修身养性、通达天地的媒介。</p>
-                    <div class="accordion">
-                        <div class="accordion-header" id="qin-accordion-title">
-                            <span>查看详细介绍</span>
-                            <span>+</span>
-                        </div>
-                        <div class="accordion-content">
-                            <div class="accordion-inner">
-                                <h4 id="qin-history-title">历史溯源</h4>
-                                <p id="qin-history-desc">古琴相传为伏羲、神农所制，西周已广泛流传，唐宋时期达到鼎盛，明清时期流派纷呈，形成了广陵派、虞山派、梅庵派等众多流派。历代文人如孔子、伯牙、嵇康、苏轼皆精于琴道。</p>
-                                
-                                <h4 id="qin-structure-title">结构与文化</h4>
-                                <p id="qin-structure-desc">古琴长三尺六寸五分，象征一年三百六十五天；面圆底方，象征天圆地方；七弦，象征金木水火土五行，加文武二弦；十三徽，象征一年十二个月加闰月。每一处结构都蕴含着中国传统的天人合一思想。</p>
-
-                                <h4 id="qin-classic-title">传世名曲</h4>
-                                <p id="qin-classic-desc">《广陵散》《梅花三弄》《高山流水》《平沙落雁》《渔樵问答》《阳关三叠》等，每一首名曲都承载着千年的文化底蕴与文人情怀。</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- ==================== 详情弹窗（8个） ==================== -->
+    <!-- 笔弹窗 -->
+    <div class="modal" id="brushModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>毛笔 · 文房之首</h2>
+                <button class="modal-close" onclick="closeModal('brushModal')">&times;</button>
             </div>
-
-            <!-- 棋 板块 -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1529699211952-734e80c4d42b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="围棋" class="card-img">
-                <div class="card-content">
-                    <h3 id="chess-title">棋 | Go</h3>
-                    <p id="chess-intro">围棋，古称“弈”，是世界上最古老的棋类游戏，距今已有4000余年历史，相传为尧帝所造。围棋黑白纵横，方寸棋盘藏宇宙乾坤，是智慧的较量，更是中国传统哲学的体现。</p>
-                    <div class="accordion">
-                        <div class="accordion-header" id="chess-accordion-title">
-                            <span>查看详细介绍</span>
-                            <span>+</span>
-                        </div>
-                        <div class="accordion-content">
-                            <div class="accordion-inner">
-                                <h4 id="chess-history-title">历史溯源</h4>
-                                <p id="chess-history-desc">围棋起源于中国，春秋战国时期已广泛流传，魏晋南北朝时期兴盛，唐宋时期达到鼎盛，明清时期流派纷呈。唐代传入日本，后流传至世界各地，成为国际公认的智力竞技项目。</p>
-                                
-                                <h4 id="chess-philosophy-title">哲学与智慧</h4>
-                                <p id="chess-philosophy-desc">围棋棋盘19路，361个交叉点，象征周天360度加天元；黑白二子，象征阴阳两极；无固定棋子等级，平等相生，蕴含着中国传统的阴阳、太极、天人合一思想。围棋讲究大局观、平衡感、取舍之道，不仅是竞技，更是人生智慧的修炼。</p>
-
-                                <h4 id="chess-classic-title">经典棋局与文化</h4>
-                                <p id="chess-classic-desc">传世经典棋局有《孙策诏吕范弈棋局面》《烂柯图》《当湖十局》等；历代围棋名家辈出，如王积薪、刘仲甫、范西屏、施襄夏等，留下了丰富的围棋理论与棋谱著作。</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 书 板块 -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="书法" class="card-img">
-                <div class="card-content">
-                    <h3 id="calligraphy-title">书 | Calligraphy</h3>
-                    <p id="calligraphy-intro">中国书法，是汉字的书写艺术，是中国传统文化的核心符号，距今已有3000余年历史。以笔墨为载体，以汉字为依托，展现线条之美、气韵之美、人格之美，是无言的诗，无形的舞，无图的画，无声的乐。</p>
-                    <div class="accordion">
-                        <div class="accordion-header" id="calligraphy-accordion-title">
-                            <span>查看详细介绍</span>
-                            <span>+</span>
-                        </div>
-                        <div class="accordion-content">
-                            <div class="accordion-inner">
-                                <h4 id="calligraphy-history-title">历史溯源</h4>
-                                <p id="calligraphy-history-desc">书法始于甲骨文，历经金文、小篆、隶书、草书、楷书、行书的演变，魏晋时期达到艺术高峰，王羲之被尊为“书圣”；唐代书法鼎盛，欧阳询、颜真卿、柳公权、褚遂良等名家辈出；宋代尚意书风兴起，苏轼、黄庭坚、米芾、蔡襄“宋四家”引领潮流；元明清时期继承发展，形成了完整的书法艺术体系。</p>
-                                
-                                <h4 id="calligraphy-type-title">核心书体</h4>
-                                <ul style="margin: 1rem 0 1rem 1.5rem;">
-                                    <li><strong id="calligraphy-type1-title">篆书</strong> <span id="calligraphy-type1-desc">：分为大篆、小篆，线条均匀圆润，古朴典雅，是中国最古老的成熟书体。</span></li>
-                                    <li><strong id="calligraphy-type2-title">隶书</strong> <span id="calligraphy-type2-desc">：起源于秦，兴盛于汉，蚕头燕尾，一波三折，古朴厚重，是书法史上的重要转折。</span></li>
-                                    <li><strong id="calligraphy-type3-title">楷书</strong> <span id="calligraphy-type3-desc">：又称正楷，始于汉，成熟于唐，形体方正，笔画规整，是书法学习的基础，代表人物有欧、颜、柳、赵“楷书四大家”。</span></li>
-                                    <li><strong id="calligraphy-type4-title">行书</strong> <span id="calligraphy-type4-desc">：介于楷书与草书之间，行云流水，灵动自然，兼具实用性与艺术性，王羲之《兰亭集序》被誉为“天下第一行书”。</span></li>
-                                    <li><strong id="calligraphy-type5-title">草书</strong> <span id="calligraphy-type5-desc">：笔画简约，连绵奔放，极具抒情性，分为章草、今草、狂草，张旭、怀素被誉为“草圣”。</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 画 板块 -->
-            <div class="category-card">
-                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="中国画" class="card-img">
-                <div class="card-content">
-                    <h3 id="painting-title">画 | Traditional Chinese Painting</h3>
-                    <p id="painting-intro">中国画，简称国画，是中国传统绘画形式，以毛笔、水墨、宣纸、颜料为工具，以线条为核心，讲究“意在笔先，画尽意在”，追求天人合一的意境，是东方绘画体系的核心代表。</p>
-                    <div class="accordion">
-                        <div class="accordion-header" id="painting-accordion-title">
-                            <span>查看详细介绍</span>
-                            <span>+</span>
-                        </div>
-                        <div class="accordion-content">
-                            <div class="accordion-inner">
-                                <h4 id="painting-history-title">历史溯源</h4>
-                                <p id="painting-history-desc">国画起源于新石器时代的彩陶壁画，战国时期出现帛画，魏晋南北朝时期绘画理论成熟，顾恺之提出“以形写神”；唐代绘画鼎盛，人物画、山水画、花鸟画全面发展；五代两宋时期达到高峰，院体画与文人画并行发展；元代文人画兴盛，以黄公望、倪瓒等“元四家”为代表；明清时期流派纷呈，吴门画派、扬州八怪、海上画派等引领潮流。</p>
-                                
-                                <h4 id="painting-type-title">核心分类</h4>
-                                <ul style="margin: 1rem 0 1rem 1.5rem;">
-                                    <li><strong id="painting-type1-title">山水画</strong> <span id="painting-type1-desc">：国画第一大科，以山水风景为主体，讲究意境营造，分为水墨山水、青绿山水、浅绛山水，是中国文人精神的核心寄托。</span></li>
-                                    <li><strong id="painting-type2-title">花鸟画</strong> <span id="painting-type2-desc">：以花卉、花鸟、鱼虫为主体，讲究托物言志，借景抒情，分为工笔花鸟、写意花鸟，代表了中国人的自然审美。</span></li>
-                                    <li><strong id="painting-type3-title">人物画</strong> <span id="painting-type3-desc">：以人物为主体，注重人物神态与性格的刻画，分为工笔人物、写意人物，传世名作有顾恺之《洛神赋图》、张择端《清明上河图》等。</span></li>
-                                </ul>
-
-                                <h4 id="painting-technique-title">核心技法</h4>
-                                <p id="painting-technique-desc">国画讲究笔墨技法，笔法有勾、皴、点、染，墨法有焦、浓、重、淡、清“墨分五色”；构图讲究散点透视，留白艺术，追求“虚实相生，无画处皆成妙境”；核心审美追求“气韵生动”，强调画者的人格修养与情感表达，即“画如其人”。</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="modal-body">
+                <p>毛笔是中国传统书写绘画的核心工具，被誉为“文房四宝之首”。其历史可追溯至新石器时代的研磨工具，战国时期已出现形制完备的毛笔，秦代蒙恬改良制笔工艺，奠定了后世毛笔的基本形制。</p>
+                <h4>毛笔的分类</h4>
+                <ul>
+                    <li><strong>羊毫</strong>：以山羊毛制成，性软，吸墨量大，圆润饱满，适合行书、草书与写意国画，以浙江湖州的湖笔为上品。</li>
+                    <li><strong>狼毫</strong>：以黄鼠狼尾毛制成，性硬，弹性强劲，锋颖锐利，适合楷书、工笔画，以东北产的“辽尾”为最优。</li>
+                    <li><strong>紫毫</strong>：以野兔脊毛制成，性刚，弹性极佳，锋颖细密，适合小楷书法，以安徽宣笔为代表，有“紫毫之价如金贵”之说。</li>
+                    <li><strong>兼毫</strong>：以软硬毫搭配制成，刚柔并济，常见“七紫三羊”“五紫五羊”，适配性强，是初学者的首选。</li>
+                </ul>
+                <h4>毛笔的“四德”</h4>
+                <p>优质毛笔需具备“尖、齐、圆、健”四德：尖指笔锋尖锐，齐指笔毫铺开后平齐，圆指笔肚饱满圆润，健指笔毫有弹性，按压后能迅速恢复原状。</p>
+                <h4>毛笔的养护</h4>
+                <p>新笔需用温水浸泡开笔，使用后需用清水洗净，悬挂晾干，忌暴晒、忌久泡墨中，妥善养护可延长毛笔的使用寿命。</p>
             </div>
         </div>
-    </section>
-
-    <!-- 关于我们板块 -->
-    <section id="about">
-        <h2 class="section-title" id="about-title">关于我们</h2>
-        <div class="divider"></div>
-        <div class="about-section">
-            <p id="about-desc1">文房雅韵，是专注于中国传统文房四宝与琴棋书画文化传播的中英文双语平台，致力于让千年文脉走向世界，让东方美学被更多人看见、了解、热爱。</p>
-            <p id="about-desc2" style="margin: 1.5rem 0;">我们联合非遗传承人、文化学者、书画艺术家，打造专业、全面、深度的传统文化内容体系，通过线上展览、非遗工艺科普、教学课程、文化交流活动，搭建中国传统文化与世界沟通的桥梁。</p>
-            <p id="about-desc3">以文为脉，以雅为韵，传承千年文明，弘扬华夏精神。</p>
+    </div>
+    <!-- 墨弹窗 -->
+    <div class="modal" id="inkModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>徽墨 · 松烟凝香</h2>
+                <button class="modal-close" onclick="closeModal('inkModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>墨是中国传统书写绘画的颜料，与笔、纸、砚并称“文房四宝”。其历史悠久，新石器时代已使用天然墨，汉代出现人工制墨，唐代制墨工艺达到高峰，徽州（今安徽黄山）成为制墨中心，徽墨自此名扬天下。</p>
+                <h4>墨的分类</h4>
+                <ul>
+                    <li><strong>松烟墨</strong>：以松木烧烟制成，墨色黑而无光泽，入水易化，层次丰富，适合书法创作与人物画的写意渲染。</li>
+                    <li><strong>油烟墨</strong>：以桐油、菜籽油烧烟制成，墨色黑亮有光泽，质地细腻，发墨均匀，是国画创作的首选，适配山水、花鸟等题材。</li>
+                    <li><strong>漆烟墨</strong>：以生漆烧烟制成，墨中极品，质地极致细腻，黑亮如漆，历久不褪，适合工笔画与传世书法创作，价格昂贵。</li>
+                </ul>
+                <h4>徽墨的制作工艺</h4>
+                <p>徽墨制作需经过点烟、和料、制墨、晾墨、打磨、描金等数十道工序，其中和料需反复捶打，保证墨质均匀，晾墨需在阴凉处自然风干，耗时数月甚至数年，方可制成不裂不腐的上品墨锭。</p>
+                <h4>墨的品鉴与养护</h4>
+                <p>好墨的标准为“质细、胶轻、色黑、声清”；磨墨需顺时针轻磨，忌用力过猛；墨锭需存放于阴凉干燥处，忌潮湿、忌暴晒，可长久保存，古墨越陈越佳。</p>
+            </div>
         </div>
-    </section>
+    </div>
+    <!-- 纸弹窗 -->
+    <div class="modal" id="paperModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>宣纸 · 纸中之王</h2>
+                <button class="modal-close" onclick="closeModal('paperModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>宣纸是中国传统书画的核心载体，被誉为“纸中之王”“纸寿千年”。东汉蔡伦改进造纸术，唐代宣纸诞生于安徽泾县（古属宣州），历经宋、元、明、清发展，工艺日臻完善，成为历代宫廷御用书画纸。</p>
+                <h4>宣纸的分类</h4>
+                <ul>
+                    <li><strong>生宣</strong>：未经过矾水加工，吸水性、渗化性极强，墨韵层次丰富，适合写意国画、行草书法，分为棉料、净皮、特净皮三大类。</li>
+                    <li><strong>熟宣</strong>：生宣经矾水加工制成，不吸水、不渗墨，笔触可控，适合工笔画、小楷书法，常见品种有云母宣、蝉衣宣。</li>
+                    <li><strong>半生熟宣</strong>：兼具生宣与熟宣特性，吸水性适中，可控性强，适合楷书、隶书、篆书书法，以及兼工带写的国画创作，是初学者首选。</li>
+                </ul>
+                <h4>宣纸的制作工艺</h4>
+                <p>宣纸以青檀皮、沙田稻草为原料，需经过选料、浸泡、蒸煮、打浆、抄纸、晒纸、剪纸等108道纯手工工序，耗时一年有余方可制成，全程无化学添加，造就其“寿千年”的特性。</p>
+                <h4>宣纸的品鉴与养护</h4>
+                <p>好宣纸的标准为“韧而能润、光而不滑、洁白稠密、纹理纯净、搓折无损、润墨性强”；宣纸需平放于阴凉干燥处，防虫防潮，忌折叠重压，妥善保存可历经千年不腐。</p>
+            </div>
+        </div>
+    </div>
+    <!-- 砚弹窗 -->
+    <div class="modal" id="inkstoneModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>砚台 · 文房重器</h2>
+                <button class="modal-close" onclick="closeModal('inkstoneModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>砚台是中国传统书画的必备工具，兼具实用与艺术价值，被誉为“文房四宝之首”。其历史可追溯至新石器时代的研磨器，汉代形成形制完备的砚台，唐代端砚、歙砚、洮河砚、澄泥砚并称“四大名砚”。</p>
+                <h4>四大名砚</h4>
+                <ul>
+                    <li><strong>端砚</strong>：产自广东肇庆端溪，石质极致温润细腻，“体重而轻，质刚而柔”，发墨快而不损毫，储墨久而不涸，为砚中极品。</li>
+                    <li><strong>歙砚</strong>：产自江西婺源龙尾山，石质坚润缜密，“涩不留笔，滑不拒墨”，纹理丰富优美，雕刻表现力强，与端砚并称“端歙双璧”。</li>
+                    <li><strong>洮河砚</strong>：产自甘肃卓尼县洮河深水之中，石质温润细腻，色泽翠绿，纹理优美，因开采难度极大，产量稀少，极为珍贵。</li>
+                    <li><strong>澄泥砚</strong>：产自山西绛州，四大名砚中唯一的陶砚，以澄泥烧制而成，质地坚硬耐磨，细腻温润，发墨快而不损毫，是中国制砚史上的伟大创举。</li>
+                </ul>
+                <h4>砚台的品鉴与养护</h4>
+                <p>好砚的核心标准为“发墨不损毫，储墨不渗漏”；使用后需用清水洗净，忌用硬物刮擦；新砚需用温水浸泡去蜡，称为“开砚”；长期不用需洗净擦干，涂抹少量核桃油保养，存放于阴凉干燥处。</p>
+            </div>
+        </div>
+    </div>
+    <!-- 琴弹窗 -->
+    <div class="modal" id="qinModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>古琴 · 八音之首</h2>
+                <button class="modal-close" onclick="closeModal('qinModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>古琴是中国最古老的弹拨乐器之一，位列“琴棋书画”之首，有三千多年历史，被列入人类非物质文化遗产代表作名录。古琴之音，清、微、淡、远，是文人修身养性、通达天地的媒介。</p>
+                <h4>古琴的结构与文化</h4>
+                <p>古琴长三尺六寸五分，象征一年三百六十五天；面圆底方，象征天圆地方；七弦，象征金木水火土五行，加文武二弦；十三徽，象征一年十二个月加闰月。每一处结构都蕴含着中国传统的天人合一思想。</p>
+                <h4>古琴的流派与名曲</h4>
+                <p>古琴流派纷呈，著名的有广陵派、虞山派、梅庵派等；传世名曲有《高山流水》《广陵散》《梅花三弄》《平沙落雁》《渔樵问答》《阳关三叠》等，每一首名曲都承载着千年的文化底蕴与文人情怀。</p>
+                <h4>古琴的文化内涵</h4>
+                <p>古琴不仅是乐器，更是修身养性的工具，文人通过抚琴达到静心、悟道的境界。伯牙子期“高山流水遇知音”的故事，更赋予古琴知音相觅的文化内涵，成为中国传统文化中友谊的象征。</p>
+            </div>
+        </div>
+    </div>
+    <!-- 棋弹窗 -->
+    <div class="modal" id="qiModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>围棋 · 阴阳博弈</h2>
+                <button class="modal-close" onclick="closeModal('qiModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>围棋是世界上最古老的棋类游戏之一，古称“弈”，起源于中国，距今已有四千多年历史，相传为尧帝所造。围棋黑白纵横，方寸棋盘藏宇宙乾坤，是策略与思维的完美结合，更是中国传统哲学的体现。</p>
+                <h4>围棋的哲学思想</h4>
+                <p>围棋棋盘19路，361个交叉点，象征周天360度加天元；黑白棋子代表阴阳两极；无固定棋子等级，平等相生，蕴含着中国传统的阴阳、太极、天人合一思想。围棋讲究大局观、平衡感、取舍之道，不仅是竞技，更是人生智慧的修炼。</p>
+                <h4>围棋的发展与传播</h4>
+                <p>围棋在春秋战国时期已广泛流传，魏晋南北朝时期兴盛，唐宋时期达到鼎盛，明清时期流派纷呈。唐代传入日本，后流传至世界各地，如今已成为世界性的智力运动，是东方智慧走向世界的重要符号。</p>
+                <h4>围棋的文化内涵</h4>
+                <p>围棋不仅是智力的较量，更是心性的比拼，通过对弈可以培养大局观、辩证思维和专注力。古代文人将围棋视为修身养性的方式，追求“胜固欣然，败亦可喜”的豁达境界。</p>
+            </div>
+        </div>
+    </div>
+    <!-- 书弹窗 -->
+    <div class="modal" id="shuModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>书法 · 线条之魂</h2>
+                <button class="modal-close" onclick="closeModal('shuModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>中国书法是汉字的书写艺术，是中国传统文化的核心符号，距今已有三千多年历史。以笔墨为载体，以汉字为依托，展现线条之美、气韵之美、人格之美，是无言的诗，无形的舞，无图的画，无声的乐。</p>
+                <h4>书法的书体演变</h4>
+                <ul>
+                    <li><strong>篆书</strong>：分为大篆、小篆，线条均匀圆润，古朴典雅，是中国最古老的成熟书体。</li>
+                    <li><strong>隶书</strong>：起源于秦，兴盛于汉，蚕头燕尾，一波三折，古朴厚重，是书法史上的重要转折。</li>
+                    <li><strong>楷书</strong>：又称正楷，始于汉，成熟于唐，形体方正，笔画规整，是书法学习的基础，代表人物有欧、颜、柳、赵“楷书四大家”。</li>
+                    <li><strong>行书</strong>：介于楷书与草书之间，行云流水，灵动自然，兼具实用性与艺术性，王羲之《兰亭集序》被誉为“天下第一行书”。</li>
+                    <li><strong>草书</strong>：笔画简约，连绵奔放，极具抒情性，分为章草、今草、狂草，张旭、怀素被誉为“草圣”。</li>
+                </ul>
+                <h4>书法的文化内涵</h4>
+                <p>书法讲究“意在笔先，字居心后”，不仅要求笔法、结构、章法的完美，更要求书写者具备深厚的文化底蕴和平和的心态。笔墨的浓淡、缓急、枯润，皆能反映书写者的情绪与修为，“字如其人”是书法文化的核心内涵。</p>
+            </div>
+        </div>
+    </div>
+    <!-- 画弹窗 -->
+    <div class="modal" id="huaModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>国画 · 意境之巅</h2>
+                <button class="modal-close" onclick="closeModal('huaModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>中国画是中国传统绘画形式，以毛笔、水墨、宣纸、颜料为工具，以线条为核心，讲究“意在笔先，画尽意在”，追求天人合一的意境，是东方绘画体系的核心代表。</p>
+                <h4>国画的分类</h4>
+                <ul>
+                    <li><strong>山水画</strong>：国画第一大科，以山水风景为主体，讲究意境营造，分为水墨山水、青绿山水、浅绛山水，是中国文人精神的核心寄托。</li>
+                    <li><strong>花鸟画</strong>：以花卉、花鸟、鱼虫为主体，讲究托物言志，借景抒情，分为工笔花鸟、写意花鸟，代表了中国人的自然审美。</li>
+                    <li><strong>人物画</strong>：以人物为主体，注重人物神态与性格的刻画，分为工笔人物、写意人物，传世名作有顾恺之《洛神赋图》、张择端《清明上河图》等。</li>
+                </ul>
+                <h4>国画的技法与特色</h4>
+                <p>国画讲究笔墨技法，笔法有勾、皴、点、染，墨法有焦、浓、重、淡、清“墨分五色”；构图讲究散点透视，留白艺术，追求“虚实相生，无画处皆成妙境”；核心审美追求“气韵生动”，强调画者的人格修养与情感表达，即“画如其人”。</p>
+                <h4>诗书画印一体</h4>
+                <p>中国画常与书法、诗词、印章相结合，形成“诗书画印”一体的艺术形式，一幅好的中国画，不仅是视觉的享受，更是文化与精神的共鸣，是东方美学的极致体现。</p>
+            </div>
+        </div>
+    </div>
 
-    <!-- 页脚 -->
+    <!-- ==================== 页脚 ==================== -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-item">
-                <h3 id="footer-logo">文房雅韵</h3>
-                <p id="footer-slogan">传承千年文脉，弘扬东方美学</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-item">
+                    <h3>文墨风雅</h3>
+                    <p>承千年文脉，扬东方美学</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fa-brands fa-weixin"></i></a>
+                        <a href="#"><i class="fa-brands fa-weibo"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-item">
+                    <h3>快速导航</h3>
+                    <a href="#hero">首页</a>
+                    <a href="#four-treasures">文房四宝</a>
+                    <a href="#four-arts">琴棋书画</a>
+                    <a href="#culture">文化精髓</a>
+                </div>
+                <div class="footer-item">
+                    <h3>关于我们</h3>
+                    <a href="#">平台介绍</a>
+                    <a href="#">文化合作</a>
+                    <a href="#">加入我们</a>
+                    <a href="#contact">联系我们</a>
+                </div>
+                <div class="footer-item">
+                    <h3>联系方式</h3>
+                    <p><i class="fa-solid fa-envelope" style="margin-right: 8px;"></i>contact@wenmofengya.com</p>
+                    <p><i class="fa-solid fa-phone" style="margin-right: 8px;"></i>+86 123 4567 8901</p>
+                    <p><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i>北京市东城区国子监街</p>
+                </div>
             </div>
-            <div class="footer-item">
-                <h3 id="footer-nav-title">导航</h3>
-                <a href="#home" id="footer-nav-home">首页</a>
-                <a href="#four-treasures" id="footer-nav-treasures">文房四宝</a>
-                <a href="#four-arts" id="footer-nav-arts">琴棋书画</a>
-                <a href="#about" id="footer-nav-about">关于我们</a>
+            <div class="footer-copyright">
+                <p>&copy; 2024 文墨风雅 - 中国传统文化传播 | 保留所有权利</p>
             </div>
-            <div class="footer-item">
-                <h3 id="footer-contact-title">联系我们</h3>
-                <p id="footer-email">邮箱：contact@wenfangyayun.com</p>
-                <p id="footer-address">地址：中国·北京</p>
-            </div>
-            <div class="footer-item">
-                <h3 id="footer-follow-title">关注我们</h3>
-                <a href="#" id="footer-wechat">微信公众号</a>
-                <a href="#" id="footer-weibo">微博</a>
-                <a href="#" id="footer-facebook">Facebook</a>
-                <a href="#" id="footer-instagram">Instagram</a>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <p id="footer-copyright-text">&copy; 2024 文房雅韵 - 中国传统文化传播 | 保留所有权利</p>
         </div>
     </footer>
 
-    <!-- 回到顶部按钮 -->
-    <button class="back-to-top" id="backToTop">↑</button>
+    <!-- ==================== 回到顶部按钮 ==================== -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
 
-    <!-- JavaScript 功能实现 -->
+    <!-- ==================== 原生JavaScript（约200行） ==================== -->
     <script>
-        // 中英文双语切换完整数据
-        const translations = {
-            zh: {
-                // 导航栏
-                logo: "文房雅韵",
-                "nav-home": "首页",
-                "nav-treasures": "文房四宝",
-                "nav-arts": "琴棋书画",
-                "nav-culture": "文化内核",
-                "nav-about": "关于我们",
-                // 首屏
-                "hero-title": "墨韵书香，雅集千年",
-                "hero-desc": "以文房四宝为媒，以琴棋书画为韵，探寻中国传统文化的东方美学与精神内核，让千年文脉走向世界",
-                "hero-btn": "探索文脉",
-                // 文化内核
-                "culture-title": "文脉传承",
-                "culture-subtitle": "文房四宝与琴棋书画，不仅是文人雅士的器物与技艺，更是中国传统文化的精神载体，是东方美学的核心表达",
-                "core1-title": "以器载道",
-                "core1-desc": "笔墨纸砚，方寸之间藏天地乾坤。一笔一墨，书写的是汉字风骨；一纸一砚，承载的是千年文脉。器物为表，文化为里，是中国人独有的精神寄托。",
-                "core2-title": "以艺修身",
-                "core2-desc": "琴棋书画，古称“文人四艺”。琴以悦心，棋以明智，书以养性，画以抒情。四艺修身，是中国文人“修身齐家治国平天下”的人格养成之路。",
-                "core3-title": "以美启智",
-                "core3-desc": "从宣纸的绵韧到端砚的温润，从古琴的清微淡远到书法的笔走龙蛇，东方美学的含蓄、内敛、天人合一，都藏在这一笔一画、一音一韵之间。",
-                // 文房四宝总览
-                "treasures-title": "文房四宝",
-                "treasures-subtitle": "文房四宝，笔墨纸砚也。起于魏晋，兴于唐宋，传承千年，是中国书法与绘画艺术的核心载体，更是世界非遗宝库中的璀璨明珠",
-                // 笔板块
-                "brush-title": "笔 | Brush",
-                "brush-intro": "文房之首器，书法绘画之根本。始于秦代，盛于唐宋，以“尖、齐、圆、健”四德为上品，承载着中国文人的笔墨风骨。",
-                "brush-accordion-title": "查看详细分类与工艺",
-                "brush-history-title": "历史溯源",
-                "brush-history-desc": "相传秦代蒙恬改良制笔工艺，距今已有2000余年历史，战国楚墓已出土最早的竹杆毛笔。唐代宣笔鼎盛，宋代后湖笔崛起，浙江湖州、安徽宣城为中国两大制笔圣地。",
-                "brush-type-title": "核心品类",
-                "brush-type1-title": "羊毫",
-                "brush-type1-desc": "：山羊毛制成，性软，吸墨量大，圆润饱满，适合行书、草书与写意国画，以湖州湖笔为上品。",
-                "brush-type2-title": "狼毫",
-                "brush-type2-desc": "：黄鼠狼尾毛制成，性硬，弹性强劲，锋颖锐利，适合楷书、工笔画，东北产“辽尾”为最优。",
-                "brush-type3-title": "紫毫",
-                "brush-type3-desc": "：野兔脊毛制成，性刚，弹性极佳，锋颖细密，适合小楷书法，安徽宣笔为代表，“紫毫之价如金贵”。",
-                "brush-type4-title": "兼毫",
-                "brush-type4-desc": "：软硬毫搭配制成，刚柔并济，常见“七紫三羊”“五紫五羊”，适配性强，是初学者首选。",
-                "brush-craft-title": "非遗制作工艺",
-                "brush-craft-desc": "一支好笔需经过选料、水盆、结头、装套、修笔、刻字等120余道纯手工工序，其中“修笔”为核心，需匠人凭经验逐根梳理，保证四德兼备，方可成器。",
-                "brush-care-title": "品鉴与养护",
-                "brush-care-desc": "选笔以“尖、齐、圆、健”为核心标准；新笔需温水开笔，使用后清水洗净，悬挂晾干，忌暴晒、忌久泡墨中，可延长使用寿命。",
-                // 墨板块
-                "ink-title": "墨 | Ink Stick",
-                "ink-intro": "书画之血脉，墨分五色，焦、浓、重、淡、清，方寸之间见万千气象。徽墨为冠，传承千年非遗工艺，是文人雅士的案头珍宝。",
-                "ink-accordion-title": "查看详细分类与工艺",
-                "ink-history-title": "历史溯源",
-                "ink-history-desc": "墨的使用始于新石器时代，汉代出现人工制墨，唐代制墨工艺鼎盛，徽州（今安徽黄山）成为制墨中心，徽墨自此名扬天下，清代曹素功、胡开文为制墨名家。",
-                "ink-type-title": "核心品类",
-                "ink-type1-title": "松烟墨",
-                "ink-type1-desc": "：松木烧烟制成，墨色黑而无光泽，入水易化，层次丰富，适合书法创作与人物画的写意渲染。",
-                "ink-type2-title": "油烟墨",
-                "ink-type2-desc": "：桐油、菜籽油烧烟制成，墨色黑亮有光泽，质地细腻，发墨均匀，是国画创作的首选，适配山水、花鸟等题材。",
-                "ink-type3-title": "漆烟墨",
-                "ink-type3-desc": "：生漆烧烟制成，墨中极品，质地极致细腻，黑亮如漆，历久不褪，适合工笔画与传世书法创作，价格昂贵。",
-                "ink-craft-title": "非遗制作工艺",
-                "ink-craft-desc": "徽墨制作需经过点烟、和料、制墨、晾墨、打磨、描金等数十道工序，其中和料需反复捶打，保证墨质均匀，晾墨需在阴凉处自然风干，耗时数月甚至数年，方可制成不裂不腐的上品墨锭。",
-                "ink-care-title": "品鉴与养护",
-                "ink-care-desc": "好墨标准为“质细、胶轻、色黑、声清”；磨墨需顺时针轻磨，忌用力过猛；墨锭需存放于阴凉干燥处，忌潮湿、忌暴晒，可长久保存，古墨越陈越佳。",
-                // 纸板块
-                "paper-title": "纸 | Paper",
-                "paper-intro": "书画之载体，素有“纸寿千年”之誉。以安徽泾县宣纸为尊，是中国书画艺术不可替代的核心材料，被列入人类非物质文化遗产名录。",
-                "paper-accordion-title": "查看详细分类与工艺",
-                "paper-history-title": "历史溯源",
-                "paper-history-desc": "东汉蔡伦改良造纸术，唐代宣纸诞生于安徽泾县（古属宣州），历经宋、元、明、清发展，工艺日臻完善，成为历代宫廷御用书画纸，至今已有1500余年历史。",
-                "paper-type-title": "核心品类",
-                "paper-type1-title": "生宣",
-                "paper-type1-desc": "：未经过矾水加工，吸水性、渗化性极强，墨韵层次丰富，适合写意国画、行草书法，分为棉料、净皮、特净皮三大类。",
-                "paper-type2-title": "熟宣",
-                "paper-type2-desc": "：生宣经矾水加工制成，不吸水、不渗墨，笔触可控，适合工笔画、小楷书法，常见品种有云母宣、蝉衣宣。",
-                "paper-type3-title": "半生熟宣",
-                "paper-type3-desc": "：兼具生宣与熟宣特性，吸水性适中，可控性强，适合楷书、隶书、篆书书法，以及兼工带写的国画创作，是初学者首选。",
-                "paper-craft-title": "非遗制作工艺",
-                "paper-craft-desc": "宣纸以青檀皮、沙田稻草为原料，需经过选料、浸泡、蒸煮、打浆、抄纸、晒纸、剪纸等108道纯手工工序，耗时一年有余方可制成，全程无化学添加，造就其“寿千年”的特性。",
-                "paper-care-title": "品鉴与养护",
-                "paper-care-desc": "好宣纸标准为“韧而能润、光而不滑、洁白稠密、纹理纯净、搓折无损、润墨性强”；宣纸需平放于阴凉干燥处，防虫防潮，忌折叠重压，妥善保存可历经千年不腐。",
-                // 砚台总览
-                "inkstone-title": "砚 | Inkstone",
-                "inkstone-intro": "文房四宝之首，“四宝砚为首，笔墨兼纸，皆可随时收索，可终身与俱者，唯砚而已”。兼具实用、收藏、观赏价值，是文人案头的传家重器。",
-                "inkstone-btn": "查看四大名砚全详解",
-                // 砚台深度详解
-                "inkstone-detail-title": "砚台全解",
-                "inkstone-detail-subtitle": "砚，又称研，是中国传统书画的必备工具，兼具实用与艺术价值。始于新石器时代，兴于汉唐，盛于宋明，历经千年发展，形成以四大名砚为核心的砚文化体系",
-                "tab-duan": "端砚",
-                "tab-she": "歙砚",
-                "tab-taohe": "洮河砚",
-                "tab-chengni": "澄泥砚",
-                "tab-other": "其他名砚",
-                // 端砚
-                "duan-title": "端砚 | Duan Inkstone",
-                "duan-desc1": "端砚为四大名砚之首，产自广东肇庆（古称端州）端溪，始于唐代武德年间，距今已有1300余年历史，历代均为宫廷贡品，素有“端石一斤，价值千金”之誉。",
-                "duan-desc2": "端砚核心优势：石质极致温润细腻，“体重而轻，质刚而柔”，发墨快而不损毫，储墨久而不涸，寒冬不冻，兼具极佳的实用价值与收藏价值。",
-                "duan-pit-title": "核心名坑",
-                "duan-pit1-title": "老坑（水岩）",
-                "duan-pit1-desc": "：端砚顶级坑口，产自端溪河床深处，开采难度极大，现已封坑禁采。石质极致细腻温润，呵气成水，发墨如油，为砚中极品，传世老坑砚价值连城。",
-                "duan-pit2-title": "麻子坑",
-                "duan-pit2-desc": "：仅次于老坑的名坑，石质细腻，石品丰富，多有鱼脑冻、蕉叶白、天青等名贵石品，是目前可开采的端砚中品质最优的坑口。",
-                "duan-pit3-title": "坑仔岩",
-                "duan-pit3-desc": "：石质细腻温润，仅次于老坑与麻子坑，石品丰富，多有石眼、火捺，石质纯净，适合雕刻，是高端端砚的核心原料。",
-                "duan-pit4-title": "宋坑",
-                "duan-pit4-desc": "：宋代已开采的历史名坑，石质偏硬，发墨快，性价比高，是书法创作的实用首选，产量大，受众广。",
-                "duan-stone-title": "名贵石品",
-                "duan-stone1-title": "鱼脑冻",
-                "duan-stone1-desc": "石中极品，如鱼脑般半透明，温润细腻，发墨最佳",
-                "duan-stone2-title": "蕉叶白",
-                "duan-stone2-desc": "如蕉叶舒展，白中带青，质地细腻，仅次于鱼脑冻",
-                "duan-stone3-title": "天青",
-                "duan-stone3-desc": "色如雨后青天，纯净无瑕，是端石最细腻的标志",
-                "duan-stone4-title": "石眼",
-                "duan-stone4-desc": "石中天然形成的眼状花纹，以鸲鹆眼为上品，极具观赏价值",
-                // 歙砚
-                "she-title": "歙砚 | She Inkstone",
-                "she-desc1": "歙砚又称龙尾砚，四大名砚之一，产自江西婺源龙尾山（古属歙州），始于唐代开元年间，距今已有1200余年历史，与端砚并称“端歙双璧”。",
-                "she-desc2": "歙砚核心优势：石质坚润缜密，“涩不留笔，滑不拒墨”，发墨细腻，不伤笔毫，纹理丰富优美，雕刻表现力强，兼具实用与艺术价值。",
-                "she-pit-title": "核心名坑",
-                "she-pit1-title": "眉子坑",
-                "she-pit1-desc": "：歙砚顶级坑口，以眉纹著称，石质细腻温润，发墨极佳，唐代已开采，现已封坑，传世品极为珍贵。",
-                "she-pit2-title": "罗纹坑",
-                "she-pit2-desc": "：以罗纹石品为核心，石质细腻，纹理如丝绸般细腻，发墨均匀，是歙砚中的上品。",
-                "she-pit3-title": "金星坑",
-                "she-pit3-desc": "：以金星、金晕石品著称，石质坚润，纹理璀璨，观赏性极强，是歙砚的经典坑口。",
-                "she-pit4-title": "水舷坑",
-                "she-pit4-desc": "：产自婺水之畔，石质细腻温润，多有水波罗纹、金星，品质极佳，与眉子坑齐名。",
-                "she-stone-title": "经典石品",
-                "she-stone1-title": "眉纹",
-                "she-stone1-desc": "如美人眉宇，纹理清晰，分长眉、短眉、对眉，歙砚标志性石品",
-                "she-stone2-title": "罗纹",
-                "she-stone2-desc": "如丝绸罗绮，纹理细密，分细罗纹、粗罗纹、水波罗纹",
-                "she-stone3-title": "金星",
-                "she-stone3-desc": "石中含金黄色硫化铁颗粒，如星光璀璨，历久不褪",
-                "she-stone4-title": "鱼子",
-                "she-stone4-desc": "纹理如鱼子般细密均匀，石质细腻，发墨极佳",
-                // 洮河砚
-                "taohe-title": "洮河砚 | Taohe Inkstone",
-                "taohe-desc1": "洮河砚简称洮砚，四大名砚之一，产自甘肃卓尼县洮河深水之中，始于唐代，盛于宋代，距今已有1300余年历史，是北方砚台的代表，历代宫廷贡品。",
-                "taohe-desc2": "洮河砚核心优势：石质温润细腻，坚而不脆，润而不滑，发墨快而细腻，储墨久而不涸，色泽翠绿，纹理优美，因开采难度极大，产量稀少，极为珍贵。",
-                "taohe-type-title": "核心品类",
-                "taohe-type1-title": "鸭头绿",
-                "taohe-type1-desc": "：洮砚顶级品类，色泽如绿头鸭之头，翠绿鲜亮，纹理如涟漪般细腻，石质极致温润，发墨极佳，为洮砚上品。",
-                "taohe-type2-title": "鹦哥绿",
-                "taohe-type2-desc": "：色泽如鹦鹉羽毛，深绿带蓝，质地细腻，多有黄膘石品，观赏性强，仅次于鸭头绿。",
-                "taohe-type3-title": "柳叶青",
-                "taohe-type3-desc": "：色泽如柳叶般嫩绿，石质细腻，纹理清晰，性价比高，是实用洮砚的核心品类。",
-                "taohe-type4-title": "㺭石",
-                "taohe-type4-desc": "：红棕色洮砚石，质地细腻，发墨性能佳，产量极少，是洮砚中的稀有品类。",
-                "taohe-craft-title": "开采与工艺",
-                "taohe-craft-desc": "洮砚石料产自洮河河床悬崖深水之中，需冬季枯水期潜水开采，难度极大，风险极高，自古便有“洮河一石，价抵千金”之说。制作需经过采石、选料、设计、雕刻、打磨等数十道工序，以镂空雕刻为特色，工艺精湛，极具艺术价值。",
-                // 澄泥砚
-                "chengni-title": "澄泥砚 | Chengni Inkstone",
-                "chengni-desc1": "澄泥砚为四大名砚中唯一的陶砚，非石质，产自山西绛州（今新绛县），始于汉魏，兴于唐宋，距今已有1800余年历史，唐代已为贡品，是中国制砚史上的伟大创举。",
-                "chengni-desc2": "澄泥砚核心优势：质地坚硬耐磨，细腻温润，发墨快而不损毫，储墨久而不涸，色泽丰富，可根据需求调整质地，适配性强，兼具实用与收藏价值。",
-                "chengni-type-title": "核心品类",
-                "chengni-type1-title": "鳝鱼黄",
-                "chengni-type1-desc": "：澄泥砚顶级品类，色泽如鳝鱼皮，黄中带黑，质地细腻，发墨极佳，为唐宋时期贡品首选。",
-                "chengni-type2-title": "蟹壳青",
-                "chengni-type2-desc": "：色泽如螃蟹壳，青灰带蓝，质地细腻坚硬，发墨均匀，观赏性与实用性兼具，为澄泥砚上品。",
-                "chengni-type3-title": "绿豆砂",
-                "chengni-type3-desc": "：色泽如绿豆，青绿带砂点，质地适中，发墨快，性价比高，是书法创作的实用首选。",
-                "chengni-type4-title": "玫瑰紫",
-                "chengni-type4-desc": "：色泽如玫瑰，紫中带红，产量极少，质地细腻，极具观赏价值，是澄泥砚中的稀有品类。",
-                "chengni-craft-title": "非遗制作工艺",
-                "chengni-craft-desc": "澄泥砚制作工艺极为复杂，需经过选泥、澄滤、风化、揉泥、制坯、雕刻、烧制、打磨等数十道工序，仅澄泥环节就需耗时半年以上，烧制环节需精准控制火候，成品率极低，其制作技艺已被列入国家级非物质文化遗产名录。",
-                // 其他名砚
-                "other1-title": "红丝砚",
-                "other1-desc": "产自山东青州，唐宋时期位列四大名砚之首，石质温润，纹理如红丝缠绕，极具观赏性，发墨性能极佳，历史底蕴深厚。",
-                "other2-title": "松花砚",
-                "other2-desc": "产自吉林长白山，清代宫廷御用砚台，石质温润细腻，色泽如松花，纹理清晰，康熙、乾隆皇帝极为推崇，有“御砚”之称。",
-                "other3-title": "苴却砚",
-                "other3-desc": "产自四川攀枝花，石质细腻温润，石品丰富，多有石眼、碧膘，色彩丰富，雕刻表现力强，被誉为“中国彩砚”，是近现代崛起的名砚。",
-                "other4-title": "易水砚",
-                "other4-desc": "产自河北易县，始于唐代，是北方砚台的重要代表，石质细腻，硬度适中，雕刻工艺精湛，历史悠久，是中国制砚文化的重要发源地之一。",
-                "inkstone-care-title": "砚台品鉴与养护",
-                "inkstone-care1-title": "品鉴核心标准",
-                "inkstone-care1-desc": "好砚的核心标准为“发墨不损毫，储墨不渗漏”，石质以温润细腻、坚实致密为佳，无裂纹、无砂眼，石品优美，雕刻精湛，兼顾实用与艺术价值。",
-                "inkstone-care2-title": "日常养护",
-                "inkstone-care2-1": "使用后需用清水洗净，忌用硬物刮擦，忌用洗洁精等化学清洁剂",
-                "inkstone-care2-2": "新砚需用温水浸泡去蜡，称为“开砚”，方可正常使用",
-                "inkstone-care2-3": "长期不用需洗净擦干，涂抹少量核桃油保养，存放于阴凉干燥处",
-                "inkstone-care2-4": "忌暴晒、忌摔碰、忌长期浸泡墨汁，避免墨垢堆积损伤砚堂",
-                // 琴棋书画
-                "arts-title": "琴棋书画",
-                "arts-subtitle": "琴棋书画，古称“文人四艺”，是中国古代文人修身养性的必备技艺，是东方美学与智慧的集中体现，传承千年，至今仍焕发着独特的魅力",
-                // 琴
-                "qin-title": "琴 | Guqin",
-                "qin-intro": "七弦古琴，位列四艺之首，是中国最古老的弹拨乐器，距今已有3000余年历史，被列入人类非物质文化遗产名录。古琴之音，清、微、淡、远，是文人修身养性、通达天地的媒介。",
-                "qin-accordion-title": "查看详细介绍",
-                "qin-history-title": "历史溯源",
-                "qin-history-desc": "古琴相传为伏羲、神农所制，西周已广泛流传，唐宋时期达到鼎盛，明清时期流派纷呈，形成了广陵派、虞山派、梅庵派等众多流派。历代文人如孔子、伯牙、嵇康、苏轼皆精于琴道。",
-                "qin-structure-title": "结构与文化",
-                "qin-structure-desc": "古琴长三尺六寸五分，象征一年三百六十五天；面圆底方，象征天圆地方；七弦，象征金木水火土五行，加文武二弦；十三徽，象征一年十二个月加闰月。每一处结构都蕴含着中国传统的天人合一思想。",
-                "qin-classic-title": "传世名曲",
-                "qin-classic-desc": "《广陵散》《梅花三弄》《高山流水》《平沙落雁》《渔樵问答》《阳关三叠》等，每一首名曲都承载着千年的文化底蕴与文人情怀。",
-                // 棋
-                "chess-title": "棋 | Go",
-                "chess-intro": "围棋，古称“弈”，是世界上最古老的棋类游戏，距今已有4000余年历史，相传为尧帝所造。围棋黑白纵横，方寸棋盘藏宇宙乾坤，是智慧的较量，更是中国传统哲学的体现。",
-                "chess-accordion-title": "查看详细介绍",
-                "chess-history-title": "历史溯源",
-                "chess-history-desc": "围棋起源于中国，春秋战国时期已广泛流传，魏晋南北朝时期兴盛，唐宋时期达到鼎盛，明清时期流派纷呈。唐代传入日本，后流传至世界各地，成为国际公认的智力竞技项目。",
-                "chess-philosophy-title": "哲学与智慧",
-                "chess-philosophy-desc": "围棋棋盘19路，361个交叉点，象征周天360度加天元；黑白二子，象征阴阳两极；无固定棋子等级，平等相生，蕴含着中国传统的阴阳、太极、天人合一思想。围棋讲究大局观、平衡感、取舍之道，不仅是竞技，更是人生智慧的修炼。",
-                "chess-classic-title": "经典棋局与文化",
-                "chess-classic-desc": "传世经典棋局有《孙策诏吕范弈棋局面》《烂柯图》《当湖十局》等；历代围棋名家辈出，如王积薪、刘仲甫、范西屏、施襄夏等，留下了丰富的围棋理论与棋谱著作。",
-                // 书法
-                "calligraphy-title": "书 | Calligraphy",
-                "calligraphy-intro": "中国书法，是汉字的书写艺术，是中国传统文化的核心符号，距今已有3000余年历史。以笔墨为载体，以汉字为依托，展现线条之美、气韵之美、人格之美，是无言的诗，无形的舞，无图的画，无声的乐。",
-                "calligraphy-accordion-title": "查看详细介绍",
-                "calligraphy-history-title": "历史溯源",
-                "calligraphy-history-desc": "书法始于甲骨文，历经金文、小篆、隶书、草书、楷书、行书的演变，魏晋时期达到艺术高峰，王羲之被尊为“书圣”；唐代书法鼎盛，欧阳询、颜真卿、柳公权、褚遂良等名家辈出；宋代尚意书风兴起，苏轼、黄庭坚、米芾、蔡襄“宋四家”引领潮流；元明清时期继承发展，形成了完整的书法艺术体系。",
-                "calligraphy-type-title": "核心书体",
-                "calligraphy-type1-title": "篆书",
-                "calligraphy-type1-desc": "：分为大篆、小篆，线条均匀圆润，古朴典雅，是中国最古老的成熟书体。",
-                "calligraphy-type2-title": "隶书",
-                "calligraphy-type2-desc": "：起源于秦，兴盛于汉，蚕头燕尾，一波三折，古朴厚重，是书法史上的重要转折。",
-                "calligraphy-type3-title": "楷书",
-                "calligraphy-type3-desc": "：又称正楷，始于汉，成熟于唐，形体方正，笔画规整，是书法学习的基础，代表人物有欧、颜、柳、赵“楷书四大家”。",
-                "calligraphy-type4-title": "行书",
-                "calligraphy-type4-desc": "：介于楷书与草书之间，行云流水，灵动自然，兼具实用性与艺术性，王羲之《兰亭集序》被誉为“天下第一行书”。",
-                "calligraphy-type5-title": "草书",
-                "calligraphy-type5-desc": "：笔画简约，连绵奔放，极具抒情性，分为章草、今草、狂草，张旭、怀素被誉为“草圣”。",
-                // 国画
-                "painting-title": "画 | Traditional Chinese Painting",
-                "painting-intro": "中国画，简称国画，是中国传统绘画形式，以毛笔、水墨、宣纸、颜料为工具，以线条为核心，讲究“意在笔先，画尽意在”，追求天人合一的意境，是东方绘画体系的核心代表。",
-                "painting-accordion-title": "查看详细介绍",
-                "painting-history-title": "历史溯源",
-                "painting-history-desc": "国画起源于新石器时代的彩陶壁画，战国时期出现帛画，魏晋南北朝时期绘画理论成熟，顾恺之提出“以形写神”；唐代绘画鼎盛，人物画、山水画、花鸟画全面发展；五代两宋时期达到高峰，院体画与文人画并行发展；元代文人画兴盛，以黄公望、倪瓒等“元四家”为代表；明清时期流派纷呈，吴门画派、扬州八怪、海上画派等引领潮流。",
-                "painting-type-title": "核心分类",
-                "painting-type1-title": "山水画",
-                "painting-type1-desc": "：国画第一大科，以山水风景为主体，讲究意境营造，分为水墨山水、青绿山水、浅绛山水，是中国文人精神的核心寄托。",
-                "painting-type2-title": "花鸟画",
-                "painting-type2-desc": "：以花卉、花鸟、鱼虫为主体，讲究托物言志，借景抒情，分为工笔花鸟、写意花鸟，代表了中国人的自然审美。",
-                "painting-type3-title": "人物画",
-                "painting-type3-desc": "：以人物为主体，注重人物神态与性格的刻画，分为工笔人物、写意人物，传世名作有顾恺之《洛神赋图》、张择端《清明上河图》等。",
-                "painting-technique-title": "核心技法",
-                "painting-technique-desc": "国画讲究笔墨技法，笔法有勾、皴、点、染，墨法有焦、浓、重、淡、清“墨分五色”；构图讲究散点透视，留白艺术，追求“虚实相生，无画处皆成妙境”；核心审美追求“气韵生动”，强调画者的人格修养与情感表达，即“画如其人”。",
-                // 关于我们
-                "about-title": "关于我们",
-                "about-desc1": "文房雅韵，是专注于中国传统文房四宝与琴棋书画文化传播的中英文双语平台，致力于让千年文脉走向世界，让东方美学被更多人看见、了解、热爱。",
-                "about-desc2": "我们联合非遗传承人、文化学者、书画艺术家，打造专业、全面、深度的传统文化内容体系，通过线上展览、非遗工艺科普、教学课程、文化交流活动，搭建中国传统文化与世界沟通的桥梁。",
-                "about-desc3": "以文为脉，以雅为韵，传承千年文明，弘扬华夏精神。",
-                // 页脚
-                "footer-logo": "文房雅韵",
-                "footer-slogan": "传承千年文脉，弘扬东方美学",
-                "footer-nav-title": "导航",
-                "footer-nav-home": "首页",
-                "footer-nav-treasures": "文房四宝",
-                "footer-nav-arts": "琴棋书画",
-                "footer-nav-about": "关于我们",
-                "footer-contact-title": "联系我们",
-                "footer-email": "邮箱：contact@wenfangyayun.com",
-                "footer-address": "地址：中国·北京",
-                "footer-follow-title": "关注我们",
-                "footer-wechat": "微信公众号",
-                "footer-weibo": "微博",
-                "footer-facebook": "Facebook",
-                "footer-instagram": "Instagram",
-                "footer-copyright-text": "&copy; 2024 文房雅韵 - 中国传统文化传播 | 保留所有权利"
-            },
-            en: {
-                // 导航栏
-                logo: "Elegance of Study",
-                "nav-home": "Home",
-                "nav-treasures": "Four Treasures",
-                "nav-arts": "Four Arts",
-                "nav-culture": "Culture Core",
-                "nav-about": "About Us",
-                // 首屏
-                "hero-title": "Ink Rhythm & Scholarly Elegance",
-                "hero-desc": "With the Four Treasures of the Study as the medium, and the Four Arts as the charm, explore the Oriental aesthetics and spiritual core of Chinese traditional culture, and let the millennial cultural heritage go global",
-                "hero-btn": "Explore Culture",
-                // 文化内核
-                "culture-title": "Cultural Inheritance",
-                "culture-subtitle": "The Four Treasures of the Study and the Four Arts are not only the utensils and skills of Chinese literati, but also the spiritual carrier of Chinese traditional culture and the core expression of Oriental aesthetics",
-                "core1-title": "Tao Through Utensils",
-                "core1-desc": "Brush, ink, paper and inkstone hold the universe within a square inch. Each stroke writes the character of Chinese characters; each paper and inkstone carries a thousand years of cultural heritage. Utensils are the surface, culture is the core, which is the unique spiritual sustenance of the Chinese people.",
-                "core2-title": "Self-cultivation Through Arts",
-                "core2-desc": "Qin, chess, calligraphy and painting, known as the 'Four Arts of the Literati' in ancient China. Qin pleases the heart, chess enlightens the wisdom, calligraphy cultivates the nature, and painting expresses the emotion. The four arts are the way for Chinese literati to cultivate their personality.",
-                "core3-title": "Enlightenment Through Beauty",
-                "core3-desc": "From the flexibility of Xuan paper to the warmth of Duan inkstone, from the ethereal sound of Guqin to the dynamic strokes of calligraphy, the implicit, restrained and harmony between man and nature of Oriental aesthetics are hidden in every stroke and every rhyme.",
-                // 文房四宝总览
-                "treasures-title": "Four Treasures of the Study",
-                "treasures-subtitle": "The Four Treasures of the Study are brush, ink, paper and inkstone. Originated in the Wei and Jin Dynasties, flourished in the Tang and Song Dynasties, they are the core carrier of Chinese calligraphy and painting art, and a bright pearl in the world's intangible cultural heritage treasure house",
-                // 笔板块
-                "brush-title": "Brush",
-                "brush-intro": "The primary tool of the study, the foundation of calligraphy and painting. Originated in the Qin Dynasty, flourished in the Tang and Song Dynasties, the top-grade brush is defined by the 'Four Virtues: Sharp Tip, Even Edges, Round Belly, Sturdy Heel', carrying the literary spirit of Chinese literati.",
-                "brush-accordion-title": "View Details & Craft",
-                "brush-history-title": "History",
-                "brush-history-desc": "It is said that Meng Tian of the Qin Dynasty improved the brush-making craft, with a history of more than 2000 years. The earliest bamboo-handled brush was unearthed from the Chu tomb of the Warring States Period. Xuanbi (Xuancheng brush) flourished in the Tang Dynasty, and Hubi (Huzhou brush) rose after the Song Dynasty. Huzhou in Zhejiang and Xuancheng in Anhui are the two major brush-making holy lands in China.",
-                "brush-type-title": "Core Categories",
-                "brush-type1-title": "Goat Hair Brush",
-                "brush-type1-desc": ": Made of goat hair, soft, with large ink absorption, round and full, suitable for running script, cursive script and freehand Chinese painting. The top grade is Hubi from Huzhou.",
-                "brush-type2-title": "Weasel Hair Brush",
-                "brush-type2-desc": ": Made of weasel tail hair, hard, with strong elasticity and sharp tip, suitable for regular script and meticulous painting. The 'Liaowei' from Northeast China is the best.",
-                "brush-type3-title": "Rabbit Hair Brush",
-                "brush-type3-desc": ": Made of hare spine hair, rigid, with excellent elasticity and fine tip, suitable for small regular script. Represented by Xuanbi from Anhui, known as 'the price of rabbit hair brush is as precious as gold'.",
-                "brush-type4-title": "Mixed Hair Brush",
-                "brush-type4-desc": ": Made of mixed soft and hard hair, combining hardness and softness. Common types are '70% rabbit hair 30% goat hair' and '50% rabbit hair 50% goat hair', with strong adaptability, which is the first choice for beginners.",
-                "brush-craft-title": "Intangible Cultural Heritage Craft",
-                "brush-craft-desc": "A high-quality brush needs to go through more than 120 pure manual processes, including material selection, water basin processing, head binding, handle installation, tip trimming and lettering. Among them, 'tip trimming' is the core, which requires the craftsman to sort out each hair one by one with experience to ensure the four virtues.",
-                "brush-care-title": "Appreciation & Care",
-                "brush-care-desc": "The core standard for selecting a brush is the 'Four Virtues'; a new brush needs to be opened with warm water, washed with clean water after use, hung to dry, avoid sun exposure and long-term soaking in ink, which can extend the service life.",
-                // 墨板块
-                "ink-title": "Ink Stick",
-                "ink-intro": "The blood of calligraphy and painting. Ink is divided into five shades: scorched, thick, heavy, light and clear, showing thousands of scenes within a square inch. Huizhou ink is the top grade, inheriting thousands of years of intangible cultural heritage craft, and is a treasure on the desk of literati.",
-                "ink-accordion-title": "View Details & Craft",
-                "ink-history-title": "History",
-                "ink-history-desc": "The use of ink began in the Neolithic Age, artificial ink making appeared in the Han Dynasty, and the ink making craft flourished in the Tang Dynasty. Huizhou (now Huangshan, Anhui) became the ink making center, and Huizhou ink has been famous all over the world since then. Cao Sugong and Hu Kaiwen in the Qing Dynasty were famous ink making masters.",
-                "ink-type-title": "Core Categories",
-                "ink-type1-title": "Pine Soot Ink",
-                "ink-type1-desc": ": Made of pine wood soot, the ink color is black without luster, easy to dissolve in water, with rich layers, suitable for calligraphy creation and freehand rendering of figure painting.",
-                "ink-type2-title": "Oil Soot Ink",
-                "ink-type2-desc": ": Made of tung oil and rapeseed oil soot, the ink color is black and bright with luster, fine texture, even ink grinding, which is the first choice for traditional Chinese painting, suitable for landscape, flower and bird themes.",
-                "ink-type3-title": "Lacquer Soot Ink",
-                "ink-type3-desc": ": Made of raw lacquer soot, the top grade of ink, with extremely fine texture, black and bright as lacquer, never fading, suitable for meticulous painting and handed down calligraphy creation, with high price.",
-                "ink-craft-title": "Intangible Cultural Heritage Craft",
-                "ink-craft-desc": "Huizhou ink making needs to go through dozens of processes, including soot collection, material mixing, ink making, air drying, polishing and gold painting. Among them, material mixing needs repeated beating to ensure uniform ink quality, and air drying needs natural drying in a cool place, which takes months or even years to make high-quality ink sticks without cracking and rotting.",
-                "ink-care-title": "Appreciation & Care",
-                "ink-care-desc": "The standard for good ink is 'fine texture, light glue, black color, clear sound'; ink grinding should be gently clockwise, avoid excessive force; ink sticks should be stored in a cool and dry place, avoid moisture and sun exposure, can be preserved for a long time, and old ink is better with age.",
-                // 纸板块
-                "paper-title": "Paper",
-                "paper-intro": "The carrier of calligraphy and painting, known as 'paper can last for a thousand years'. Xuan paper from Jingxian County, Anhui is the most respected, which is an irreplaceable core material for Chinese calligraphy and painting art, and is included in the Representative List of the Intangible Cultural Heritage of Humanity.",
-                "paper-accordion-title": "View Details & Craft",
-                "paper-history-title": "History",
-                "paper-history-desc": "Cai Lun in the Eastern Han Dynasty improved papermaking technology. Xuan paper was born in Jingxian County, Anhui (ancient Xuanzhou) in the Tang Dynasty. After the development of Song, Yuan, Ming and Qing Dynasties, the craft became more and more perfect, and became the imperial calligraphy and painting paper for successive dynasties, with a history of more than 1500 years.",
-                "paper-type-title": "Core Categories",
-                "paper-type1-title": "Raw Xuan Paper",
-                "paper-type1-desc": ": Without alum processing, it has strong water absorption and ink permeability, with rich ink rhyme layers, suitable for freehand Chinese painting, running and cursive script. It is divided into three categories: cotton material, pure bark and extra pure bark.",
-                "paper-type2-title": "Ripe Xuan Paper",
-                "paper-type2-desc": ": Made of raw Xuan paper processed with alum, non absorbent and non permeable, with controllable strokes, suitable for meticulous painting and small regular script. Common varieties include mica Xuan paper and cicada wing Xuan paper.",
-                "paper-type3-title": "Half-ripe Xuan Paper",
-                "paper-type3-desc": ": Combining the characteristics of raw and ripe Xuan paper, with moderate water absorption and strong controllability, suitable for regular script, official script, seal script calligraphy, and combined meticulous and freehand Chinese painting, which is the first choice for beginners.",
-                "paper-craft-title": "Intangible Cultural Heritage Craft",
-                "paper-craft-desc": "Xuan paper is made of blue sandalwood bark and sand field straw, and needs to go through 108 pure manual processes, including material selection, soaking, cooking, pulping, paper making, drying and cutting, which takes more than a year to complete. There is no chemical addition in the whole process, creating its characteristic of 'lasting for a thousand years'.",
-                "paper-care-title": "Appreciation & Care",
-                "paper-care-desc": "The standard for good Xuan paper is 'tough and moist, bright but not slippery, white and dense, pure texture, no damage after rubbing, strong ink moistening performance'; Xuan paper should be laid flat in a cool and dry place, insect-proof and moisture-proof, avoid folding and heavy pressure, and can be preserved for thousands of years if properly stored.",
-                // 砚台总览
-                "inkstone-title": "Inkstone",
-                "inkstone-intro": "The head of the Four Treasures of the Study. 'Among the four treasures, inkstone is the most important. Brush, ink and paper can be replaced at any time, but only inkstone can accompany you for a lifetime'. It has practical, collection and ornamental value, and is a family heirloom on the literati's desk.",
-                "inkstone-btn": "View Full Details of Four Famous Inkstones",
-                // 砚台深度详解
-                "inkstone-detail-title": "Full Guide to Inkstone",
-                "inkstone-detail-subtitle": "Inkstone, also known as Yan, is an essential tool for traditional Chinese calligraphy and painting, with both practical and artistic value. It originated in the Neolithic Age, flourished in the Han and Tang Dynasties, and reached its peak in the Song and Ming Dynasties. After thousands of years of development, it has formed an inkstone culture system with the Four Famous Inkstones as the core",
-                "tab-duan": "Duan Inkstone",
-                "tab-she": "She Inkstone",
-                "tab-taohe": "Taohe Inkstone",
-                "tab-chengni": "Chengni Inkstone",
-                "tab-other": "Other Famous Inkstones",
-                // 端砚
-                "duan-title": "Duan Inkstone",
-                "duan-desc1": "Duan Inkstone is the head of the Four Famous Inkstones, produced in Duanxi, Zhaoqing, Guangdong (ancient Duanzhou). It originated in the Wude period of the Tang Dynasty, with a history of more than 1300 years. It was a royal tribute in all dynasties, known as 'a catty of Duan stone is worth a thousand gold'.",
-                "duan-desc2": "Core advantages of Duan Inkstone: the stone is extremely warm and delicate, 'heavy but light, rigid but soft', grinds ink quickly without damaging the brush, stores ink for a long time without drying up, does not freeze in cold winter, and has excellent practical and collection value.",
-                "duan-pit-title": "Core Famous Pits",
-                "duan-pit1-title": "Old Pit (Water Rock)",
-                "duan-pit1-desc": ": The top pit of Duan Inkstone, produced in the deep part of the Duanxi river bed, with extremely difficult mining, and has been closed for mining now. The stone is extremely delicate and warm, can form water with a breath, grinds ink like oil, is the top grade of inkstone, and the handed down old pit inkstone is invaluable.",
-                "duan-pit2-title": "Mazi Pit",
-                "duan-pit2-desc": ": The famous pit second only to the old pit, with delicate stone, rich stone patterns, mostly precious stone patterns such as fish brain freeze, banana leaf white and azure, which is the best quality pit in the currently exploitable Duan Inkstone.",
-                "duan-pit3-title": "Kengzai Rock",
-                "duan-pit3-desc": ": The stone is delicate and warm, second only to the old pit and Mazi pit, with rich stone patterns, mostly stone eyes and fire捺, pure stone quality, suitable for carving, and is the core raw material of high-end Duan Inkstone.",
-                "duan-pit4-title": "Song Pit",
-                "duan-pit4-desc": ": A historical famous pit mined in the Song Dynasty, with relatively hard stone, fast ink grinding, high cost performance, which is the practical first choice for calligraphy creation, with large output and wide audience.",
-                "duan-stone-title": "Precious Stone Patterns",
-                "duan-stone1-title": "Fish Brain Freeze",
-                "duan-stone1-desc": "The top grade in stone, translucent like fish brain, warm and delicate, best for ink grinding",
-                "duan-stone2-title": "Banana Leaf White",
-                "duan-stone2-desc": "Like a stretched banana leaf, white with green, delicate texture, second only to fish brain freeze",
-                "duan-stone3-title": "Azure",
-                "duan-stone3-desc": "Color like the blue sky after rain, pure and flawless, the sign of the most delicate Duan stone",
-                "duan-stone4-title": "Stone Eye",
-                "duan-stone4-desc": "Naturally formed eye-shaped pattern in the stone, the starling eye is the top grade, with high ornamental value",
-                // 歙砚
-                "she-title": "She Inkstone",
-                "she-desc1": "She Inkstone, also known as Longwei Inkstone, is one of the Four Famous Inkstones, produced in Longwei Mountain, Wuyuan, Jiangxi (ancient Shezhou). It originated in the Kaiyuan period of the Tang Dynasty, with a history of more than 1200 years, and is known as 'Duan and She Double Jades' together with Duan Inkstone.",
-                "she-desc2": "Core advantages of She Inkstone: the stone is firm, moist and dense, 'astringent without retaining the brush, smooth without rejecting the ink', grinds ink delicately, does not damage the brush tip, has rich and beautiful textures, strong carving expressiveness, and has both practical and artistic value.",
-                "she-pit-title": "Core Famous Pits",
-                "she-pit1-title": "Meizi Pit",
-                "she-pit1-desc": ": The top pit of She Inkstone, famous for eyebrow patterns, the stone is delicate and warm, excellent for ink grinding, mined in the Tang Dynasty, now closed, and the handed down products are extremely precious.",
-                "she-pit2-title": "Luowen Pit",
-                "she-pit2-desc": ": With the silk pattern as the core, the stone is delicate, the texture is as fine as silk, grinds ink evenly, and is the top grade in She Inkstone.",
-                "she-pit3-title": "Golden Star Pit",
-                "she-pit3-desc": ": Famous for golden star and golden halo patterns, the stone is firm and moist, the texture is bright, with strong ornamental value, and is a classic pit of She Inkstone.",
-                "she-pit4-title": "Shuixian Pit",
-                "she-pit4-desc": ": Produced on the bank of Wushui River, the stone is delicate and warm, mostly with water wave silk pattern and golden star, with excellent quality, as famous as Meizi Pit.",
-                "she-stone-title": "Classic Stone Patterns",
-                "she-stone1-title": "Eyebrow Pattern",
-                "she-stone1-desc": "Like the eyebrows of a beauty, with clear texture, divided into long eyebrow, short eyebrow and paired eyebrow, the iconic pattern of She Inkstone",
-                "she-stone2-title": "Silk Pattern",
-                "she-stone2-desc": "Like silk, with fine texture, divided into fine silk, coarse silk and water wave silk",
-                "she-stone3-title": "Golden Star",
-                "she-stone3-desc": "Golden yellow iron sulfide particles in the stone, like bright stars, never fading",
-                "she-stone4-title": "Roe Pattern",
-                "she-stone4-desc": "The texture is as fine and uniform as roe, the stone is delicate, excellent for ink grinding",
-                // 洮河砚
-                "taohe-title": "Taohe Inkstone",
-                "taohe-desc1": "Taohe Inkstone, referred to as Tao Inkstone, is one of the Four Famous Inkstones, produced in the deep water of Taohe River, Zhuoni County, Gansu. It originated in the Tang Dynasty, flourished in the Song Dynasty, with a history of more than 1300 years. It is the representative of northern inkstones and a royal tribute in successive dynasties.",
-                "taohe-desc2": "Core advantages of Taohe Inkstone: the stone is warm and delicate, firm but not brittle, moist but not slippery, grinds ink quickly and delicately, stores ink for a long time without drying up, with emerald green color and beautiful texture. It is extremely precious due to the great difficulty of mining and scarce output.",
-                "taohe-type-title": "Core Categories",
-                "taohe-type1-title": "Duck Head Green",
-                "taohe-type1-desc": ": The top category of Tao Inkstone, the color is bright emerald green like the head of a mallard, the texture is as delicate as ripples, the stone is extremely warm and moist, excellent for ink grinding, which is the top grade of Tao Inkstone.",
-                "taohe-type2-title": "Parrot Green",
-                "taohe-type2-desc": ": The color is dark green with blue like parrot feathers, the texture is delicate, mostly with yellow fat pattern, strong ornamental value, second only to Duck Head Green.",
-                "taohe-type3-title": "Willow Leaf Green",
-                "taohe-type3-desc": ": The color is tender green like willow leaves, the stone is delicate, the texture is clear, with high cost performance, which is the core category of practical Tao Inkstone.",
-                "taohe-type4-title": "Zi Stone",
-                "taohe-type4-desc": ": Reddish brown Tao Inkstone stone, delicate texture, excellent ink grinding performance, very rare output, which is a rare category in Tao Inkstone.",
-                "taohe-craft-title": "Mining & Craft",
-                "taohe-craft-desc": "Tao Inkstone stone is produced in the deep water of the cliff of the Taohe river bed, which needs diving mining in the dry season in winter, with great difficulty and high risk. Since ancient times, it has been said that 'a stone from Taohe is worth a thousand gold'. The production needs to go through dozens of processes, including quarrying, material selection, design, carving and polishing, characterized by hollow carving, with exquisite craftsmanship and high artistic value.",
-                // 澄泥砚
-                "chengni-title": "Chengni Inkstone",
-                "chengni-desc1": "Chengni Inkstone is the only pottery inkstone among the Four Famous Inkstones, non-stone, produced in Jiangzhou, Shanxi (now Xinjiang County). It originated in the Han and Wei Dynasties, flourished in the Tang and Song Dynasties, with a history of more than 1800 years. It was a tribute in the Tang Dynasty and a great pioneering work in the history of Chinese inkstone making.",
-                "chengni-desc2": "Core advantages of Chengni Inkstone: the texture is hard and wear-resistant, delicate and warm, grinds ink quickly without damaging the brush, stores ink for a long time without drying up, with rich colors, the texture can be adjusted according to needs, with strong adaptability, and has both practical and collection value.",
-                "chengni-type-title": "Core Categories",
-                "chengni-type1-title": "Eel Yellow",
-                "chengni-type1-desc": ": The top category of Chengni Inkstone, the color is yellow with black like eel skin, the texture is delicate, excellent for ink grinding, which was the first choice of tribute in the Tang and Song Dynasties.",
-                "chengni-type2-title": "Crab Shell Green",
-                "chengni-type2-desc": ": The color is blue gray with blue like crab shell, the texture is delicate and hard, grinds ink evenly, with both ornamental and practical value, which is the top grade of Chengni Inkstone.",
-                "chengni-type3-title": "Mung Bean Sand",
-                "chengni-type3-desc": ": The color is green with sand spots like mung beans, moderate texture, fast ink grinding, high cost performance, which is the practical first choice for calligraphy creation.",
-                "chengni-type4-title": "Rose Purple",
-                "chengni-type4-desc": ": The color is purple with red like rose, very rare output, delicate texture, high ornamental value, which is a rare category in Chengni Inkstone.",
-                "chengni-craft-title": "Intangible Cultural Heritage Craft",
-                "chengni-craft-desc": "The production process of Chengni Inkstone is extremely complex, which needs to go through dozens of processes, including mud selection, clarification, weathering, mud kneading, blank making, carving, firing and polishing. The clarification process alone takes more than half a year. The firing process needs to accurately control the fire temperature, with a very low yield. Its production technology has been included in the National Intangible Cultural Heritage List.",
-                // 其他名砚
-                "other1-title": "Red Silk Inkstone",
-                "other1-desc": "Produced in Qingzhou, Shandong, it ranked first among the Four Famous Inkstones in the Tang and Song Dynasties. The stone is warm, the texture is wrapped like red silk, with high ornamental value, excellent ink grinding performance and profound historical heritage.",
-                "other2-title": "Songhua Inkstone",
-                "other2-desc": "Produced in Changbai Mountain, Jilin, it was the imperial inkstone of the Qing Dynasty. The stone is warm and delicate, the color is like pine flower, the texture is clear, highly praised by Emperor Kangxi and Qianlong, known as 'Imperial Inkstone'.",
-                "other3-title": "Juque Inkstone",
-                "other3-desc": "Produced in Panzhihua, Sichuan, the stone is warm and delicate, with rich stone patterns, mostly stone eyes and green fat, rich colors, strong carving expressiveness, known as 'Chinese Color Inkstone', which is a famous inkstone rising in modern times.",
-                "other4-title": "Yishui Inkstone",
-                "other4-desc": "Produced in Yi County, Hebei, originated in the Tang Dynasty, it is an important representative of northern inkstones. The stone is delicate, with moderate hardness, exquisite carving technology and long history, which is one of the important birthplaces of Chinese inkstone culture.",
-                "inkstone-care-title": "Inkstone Appreciation & Care",
-                "inkstone-care1-title": "Core Appreciation Standard",
-                "inkstone-care1-desc": "The core standard of a good inkstone is 'grinds ink well without damaging the brush, stores ink without leakage'. The best stone is warm, delicate, firm and dense, without cracks and sand holes, with beautiful stone patterns and exquisite carving, taking into account both practical and artistic value.",
-                "inkstone-care2-title": "Daily Care",
-                "inkstone-care2-1": "Wash with clean water after use, avoid scraping with hard objects, and avoid chemical detergents such as detergent",
-                "inkstone-care2-2": "A new inkstone needs to be soaked in warm water to remove wax, which is called 'opening the inkstone', before normal use",
-                "inkstone-care2-3": "If not used for a long time, wash and dry it, apply a small amount of walnut oil for maintenance, and store it in a cool and dry place",
-                "inkstone-care2-4": "Avoid sun exposure, falling, and long-term soaking in ink to prevent ink scale accumulation from damaging the ink grinding surface",
-                // 琴棋书画
-                "arts-title": "Four Arts of the Literati",
-                "arts-subtitle": "Qin, chess, calligraphy and painting, known as the 'Four Arts of the Literati' in ancient China, are essential skills for ancient Chinese literati to cultivate their morality. They are the concentrated embodiment of Oriental aesthetics and wisdom, inherited for thousands of years, and still glowing with unique charm today",
-                // 琴
-                "qin-title": "Guqin",
-                "qin-intro": "The seven-stringed Guqin, ranked first among the four arts, is the oldest plucked instrument in China, with a history of more than 3000 years, and is included in the Representative List of the Intangible Cultural Heritage of Humanity. The sound of Guqin is clear, subtle, light and distant, which is the medium for literati to cultivate their morality and understand the world.",
-                "qin-accordion-title": "View Details",
-                "qin-history-title": "History",
-                "qin-history-desc": "It is said that Guqin was made by Fuxi and Shennong. It was widely spread in the Western Zhou Dynasty, reached its peak in the Tang and Song Dynasties, and many schools were formed in the Ming and Qing Dynasties, including Guangling School, Yushan School and Mei'an School. Literati of all dynasties, such as Confucius, Bo Ya, Ji Kang and Su Shi, were proficient in Guqin.",
-                "qin-structure-title": "Structure & Culture",
-                "qin-structure-desc": "The Guqin is three feet, six inches and five minutes long, symbolizing 365 days a year; the round surface and square bottom symbolize the round sky and square earth; the seven strings symbolize the five elements of metal, wood, water, fire and earth, plus the civil and military strings; the thirteen hui symbolize twelve months a year plus the leap month. Every structure contains the traditional Chinese thought of harmony between man and nature.",
-                "qin-classic-title": "Famous Classic Pieces",
-                "qin-classic-desc": "Guangling San, Three Plum Blossom Melodies, High Mountain and Flowing Water, Wild Geese Landing on the Sandbank, Dialogue Between Fisherman and Woodcutter, Three Variations of Yangguan, etc. Each famous piece carries a thousand years of cultural heritage and literati feelings.",
-                // 棋
-                "chess-title": "Go",
-                "chess-intro": "Go, known as 'Yi' in ancient times, is the oldest board game in the world, with a history of more than 4000 years. It is said that it was made by Emperor Yao. Go has black and white pieces on a square board, hiding the universe within a square inch. It is not only a contest of wisdom, but also an embodiment of traditional Chinese philosophy.",
-                "chess-accordion-title": "View Details",
-                "chess-history-title": "History",
-                "chess-history-desc": "Go originated in China, was widely spread in the Spring and Autumn Period and the Warring States Period, flourished in the Wei, Jin, Southern and Northern Dynasties, reached its peak in the Tang and Song Dynasties, and many schools were formed in the Ming and Qing Dynasties. It was introduced to Japan in the Tang Dynasty, and then spread all over the world, becoming an internationally recognized intellectual competitive event.",
-                "chess-philosophy-title": "Philosophy & Wisdom",
-                "chess-philosophy-desc": "The Go board has 19 lines and 361 intersections, symbolizing 360 degrees of the celestial circle plus the Tianyuan; the black and white pieces symbolize the two poles of Yin and Yang; there is no fixed piece level, and all pieces are equal, containing the traditional Chinese thoughts of Yin and Yang, Tai Chi, and harmony between man and nature. Go emphasizes the overall view, sense of balance, and the way of choice, which is not only a competition, but also a cultivation of life wisdom.",
-                "chess-classic-title": "Classic Games & Culture",
-                "chess-classic-desc": "The handed down classic games include 'Sun Ce vs Lv Fan Game', 'Rotten Axe Game', 'Danghu Ten Games', etc. There are many famous Go masters in all dynasties, such as Wang Jixin, Liu Zhongfu, Fan Xiping and Shi Xiangxia, who left rich Go theories and game records.",
-                // 书法
-                "calligraphy-title": "Calligraphy",
-                "calligraphy-intro": "Chinese calligraphy is the art of Chinese character writing, the core symbol of Chinese traditional culture, with a history of more than 3000 years. With brush and ink as the carrier and Chinese characters as the support, it shows the beauty of lines, charm and personality. It is a wordless poem, an invisible dance, a pictureless painting, and a soundless music.",
-                "calligraphy-accordion-title": "View Details",
-                "calligraphy-history-title": "History",
-                "calligraphy-history-desc": "Calligraphy began with oracle bone inscriptions, and went through the evolution of bronze inscriptions, small seal script, official script, cursive script, regular script and running script. It reached the artistic peak in the Wei and Jin Dynasties, and Wang Xizhi was honored as the 'Sage of Calligraphy'. Calligraphy flourished in the Tang Dynasty, with many famous masters such as Ouyang Xun, Yan Zhenqing, Liu Gongquan and Chu Suiliang. The freehand calligraphy style rose in the Song Dynasty, led by the 'Four Masters of the Song Dynasty': Su Shi, Huang Tingjian, Mi Fu and Cai Xiang. It was inherited and developed in the Yuan, Ming and Qing Dynasties, forming a complete calligraphy art system.",
-                "calligraphy-type-title": "Core Scripts",
-                "calligraphy-type1-title": "Seal Script",
-                "calligraphy-type1-desc": ": Divided into large seal script and small seal script, with uniform and round lines, simple and elegant, which is the oldest mature script in China.",
-                "calligraphy-type2-title": "Official Script",
-                "calligraphy-type2-desc": ": Originated in the Qin Dynasty, flourished in the Han Dynasty, with silkworm head and swallow tail, one wave and three folds, simple and thick, which is an important turning point in the history of calligraphy.",
-                "calligraphy-type3-title": "Regular Script",
-                "calligraphy-type3-desc": ": Also known as standard script, originated in the Han Dynasty, matured in the Tang Dynasty, with square shape and regular strokes, which is the foundation of calligraphy learning. The representative figures are the 'Four Great Masters of Regular Script': Ouyang Xun, Yan Zhenqing, Liu Gongquan and Zhao Mengfu.",
-                "calligraphy-type4-title": "Running Script",
-                "calligraphy-type4-desc": ": Between regular script and cursive script, flowing and natural, with both practicality and artistry. Wang Xizhi's 'Preface to the Lanting Pavilion' is known as 'the first running script in the world'.",
-                "calligraphy-type5-title": "Cursive Script",
-                "calligraphy-type5-desc": ": With simple strokes, continuous and unrestrained, highly lyrical, divided into Zhang Cao, Jin Cao and Kuang Cao. Zhang Xu and Huai Su are honored as 'Sages of Cursive Script'.",
-                // 国画
-                "painting-title": "Traditional Chinese Painting",
-                "painting-intro": "Traditional Chinese Painting, referred to as Chinese painting, is the traditional Chinese painting form, with brush, ink, Xuan paper and pigment as tools, lines as the core, paying attention to 'conception before brush, meaning after painting', pursuing the artistic conception of harmony between man and nature, which is the core representative of the Oriental painting system.",
-                "painting-accordion-title": "View Details",
-                "painting-history-title": "History",
-                "painting-history-desc": "Chinese painting originated from the painted pottery murals of the Neolithic Age, silk paintings appeared in the Warring States Period, and the painting theory matured in the Wei, Jin, Southern and Northern Dynasties. Gu Kaizhi put forward 'depicting the spirit through the form'. Painting flourished in the Tang Dynasty, with comprehensive development of figure painting, landscape painting and flower and bird painting. It reached its peak in the Five Dynasties and the Two Song Dynasties, with the parallel development of academy painting and literati painting. Literati painting flourished in the Yuan Dynasty, represented by the 'Four Masters of the Yuan Dynasty' such as Huang Gongwang and Ni Zan. Many schools emerged in the Ming and Qing Dynasties, led by Wumen School, Eight Eccentrics of Yangzhou and Shanghai School.",
-                "painting-type-title": "Core Categories",
-                "painting-type1-title": "Landscape Painting",
-                "painting-type1-desc": ": The largest category of Chinese painting, with landscape as the main body, paying attention to artistic conception creation, divided into ink landscape, green landscape and light crimson landscape, which is the core sustenance of Chinese literati spirit.",
-                "painting-type2-title": "Flower and Bird Painting",
-                "painting-type2-desc": ": With flowers, birds, fish and insects as the main body, paying attention to expressing ambition through objects and expressing emotion through scenery, divided into meticulous flower and bird painting and freehand flower and bird painting, representing the Chinese people's natural aesthetics.",
-                "painting-type3-title": "Figure Painting",
-                "painting-type3-desc": ": With figures as the main body, focusing on the depiction of characters' expressions and personalities, divided into meticulous figure painting and freehand figure painting. The handed down famous works include Gu Kaizhi's 'Ode to the Goddess of Luo River', Zhang Zeduan's 'Along the River During the Qingming Festival', etc.",
-                "painting-technique-title": "Core Techniques",
-                "painting-technique-desc": "Chinese painting pays attention to brush and ink techniques. The brush techniques include outlining, texturing, dotting and washing. The ink techniques include five shades: scorched, thick, heavy, light and clear. The composition pays attention to scattered perspective and blank space art, pursuing 'the virtual and the real give birth to each other, and the place without painting is a wonderful realm'. The core aesthetic pursuit is 'vivid charm', emphasizing the painter's personality cultivation and emotional expression, that is, 'the painting is like the painter'.",
-                // 关于我们
-                "about-title": "About Us",
-                "about-desc1": "Elegance of Study is a Chinese-English bilingual platform focusing on the dissemination of Chinese traditional culture of the Four Treasures of the Study and the Four Arts. We are committed to letting the millennial cultural heritage go global, and letting Oriental aesthetics be seen, understood and loved by more people.",
-                "about-desc2": "We cooperate with intangible cultural heritage inheritors, cultural scholars, calligraphy and painting artists to create a professional, comprehensive and in-depth traditional culture content system. Through online exhibitions, intangible cultural heritage science popularization, teaching courses and cultural exchange activities, we build a bridge between Chinese traditional culture and the world.",
-                "about-desc3": "With culture as the vein and elegance as the rhyme, inherit the millennial civilization and promote the Chinese spirit.",
-                // 页脚
-                "footer-logo": "Elegance of Study",
-                "footer-slogan": "Inherit Millennial Culture, Promote Oriental Aesthetics",
-                "footer-nav-title": "Navigation",
-                "footer-nav-home": "Home",
-                "footer-nav-treasures": "Four Treasures",
-                "footer-nav-arts": "Four Arts",
-                "footer-nav-about": "About Us",
-                "footer-contact-title": "Contact Us",
-                "footer-email": "Email: contact@wenfangyayun.com",
-                "footer-address": "Address: Beijing, China",
-                "footer-follow-title": "Follow Us",
-                "footer-wechat": "WeChat Official Account",
-                "footer-weibo": "Weibo",
-                "footer-facebook": "Facebook",
-                "footer-instagram": "Instagram",
-                "footer-copyright-text": "&copy; 2024 Elegance of Study - Chinese Traditional Culture | All Rights Reserved"
+        // 1. 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
             }
-        };
+        });
 
-        // 语言切换逻辑
-        let currentLang = 'zh';
-        const langBtn = document.getElementById('langBtn');
+        // 2. 移动端菜单
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        // 点击菜单链接关闭移动端菜单
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
 
-        function switchLanguage() {
-            currentLang = currentLang === 'zh' ? 'en' : 'zh';
-            langBtn.textContent = currentLang === 'zh' ? 'EN' : '中文';
-            
-            // 遍历所有文本ID，更新内容
-            for (const [id, text] of Object.entries(translations[currentLang])) {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.innerHTML = text;
-                }
-            }
+        // 3. 文房四宝轮播
+        let treasuresIndex = 0;
+        const treasuresItems = document.querySelectorAll('#treasuresCarousel .carousel-item');
+        const treasuresPrev = document.getElementById('treasuresPrev');
+        const treasuresNext = document.getElementById('treasuresNext');
+        const treasuresIndicators = document.querySelectorAll('#treasuresIndicators .indicator');
+
+        function showTreasures(index) {
+            treasuresItems.forEach(item => item.classList.remove('active'));
+            treasuresIndicators.forEach(ind => ind.classList.remove('active'));
+            treasuresItems[index].classList.add('active');
+            treasuresIndicators[index].classList.add('active');
+            treasuresIndex = index;
         }
 
-        langBtn.addEventListener('click', switchLanguage);
+        treasuresPrev.addEventListener('click', () => {
+            treasuresIndex = (treasuresIndex - 1 + treasuresItems.length) % treasuresItems.length;
+            showTreasures(treasuresIndex);
+        });
 
-        // 手风琴折叠面板逻辑
-        const accordionHeaders = document.querySelectorAll('.accordion-header');
-        accordionHeaders.forEach(header => {
-            header.addEventListener('click', () => {
-                const content = header.nextElementSibling;
-                header.classList.toggle('active');
-                content.classList.toggle('active');
-                header.querySelector('span:last-child').textContent = header.classList.contains('active') ? '-' : '+';
+        treasuresNext.addEventListener('click', () => {
+            treasuresIndex = (treasuresIndex + 1) % treasuresItems.length;
+            showTreasures(treasuresIndex);
+        });
+
+        treasuresIndicators.forEach((ind, index) => {
+            ind.addEventListener('click', () => {
+                showTreasures(index);
             });
         });
 
-        // Tab切换逻辑
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
+        // 自动轮播（3秒切换）
+        setInterval(() => {
+            treasuresIndex = (treasuresIndex + 1) % treasuresItems.length;
+            showTreasures(treasuresIndex);
+        }, 3000);
 
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // 移除所有active类
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-                
-                // 给当前点击的添加active类
-                btn.classList.add('active');
-                const tabId = btn.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
+        // 4. 琴棋书画轮播
+        let artsIndex = 0;
+        const artsItems = document.querySelectorAll('#artsCarousel .carousel-item');
+        const artsPrev = document.getElementById('artsPrev');
+        const artsNext = document.getElementById('artsNext');
+        const artsIndicators = document.querySelectorAll('#artsIndicators .indicator');
+
+        function showArts(index) {
+            artsItems.forEach(item => item.classList.remove('active'));
+            artsIndicators.forEach(ind => ind.classList.remove('active'));
+            artsItems[index].classList.add('active');
+            artsIndicators[index].classList.add('active');
+            artsIndex = index;
+        }
+
+        artsPrev.addEventListener('click', () => {
+            artsIndex = (artsIndex - 1 + artsItems.length) % artsItems.length;
+            showArts(artsIndex);
+        });
+
+        artsNext.addEventListener('click', () => {
+            artsIndex = (artsIndex + 1) % artsItems.length;
+            showArts(artsIndex);
+        });
+
+        artsIndicators.forEach((ind, index) => {
+            ind.addEventListener('click', () => {
+                showArts(index);
             });
         });
 
-        // 移动端汉堡菜单逻辑
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
+        // 自动轮播（3秒切换）
+        setInterval(() => {
+            artsIndex = (artsIndex + 1) % artsItems.length;
+            showArts(artsIndex);
+        }, 3000);
 
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        // 5. 弹窗控制
+        function openModal(id) {
+            document.getElementById(id).classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 点击弹窗外部关闭
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal(modal.id);
+                }
+            });
         });
 
-        // 回到顶部按钮逻辑
-        const backToTopBtn = document.getElementById('backToTop');
+        // 6. 语言切换（简单演示）
+        const langSwitch = document.getElementById('langSwitch');
+        langSwitch.addEventListener('click', () => {
+            alert('已切换语言模式（可自行扩展英文内容）');
+        });
 
+        // 7. 回到顶部
+        const backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopBtn.classList.add('show');
+            if (window.scrollY > 400) {
+                backToTop.classList.add('show');
             } else {
-                backToTopBtn.classList.remove('show');
+                backToTop.classList.remove('show');
             }
         });
 
-        backToTopBtn.addEventListener('click', () => {
+        backToTop.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
-            });
-        });
-
-        // 导航栏点击关闭移动端菜单
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
             });
         });
     </script>
