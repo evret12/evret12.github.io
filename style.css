@@ -1,0 +1,732 @@
+/* ==================== 全局重置与国风变量 ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cinnabar: #9E2A2B;    /* 朱砂红（国风主色） */
+    --ink-black: #212529;    /* 墨黑 */
+    --rice-paper: #F8F4E9;   /* 宣纸白 */
+    --bamboo-green: #7A9362; /* 竹青 */
+    --light-gray: #E8E3D8;   /* 浅灰 */
+    --shadow-ink: 0 4px 20px rgba(158, 42, 43, 0.12); /* 水墨阴影 */
+    --chinese-font: 'Noto Serif SC', serif;
+    --calligraphy-font: 'Ma Shan Zheng', cursive;
+    --english-font: 'Playfair Display', serif;
+    --transition-smooth: all 0.3s ease;
+    --transition-slow: all 0.6s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--chinese-font);
+    background-color: var(--rice-paper);
+    background-image: url('https://images.unsplash.com/photo-1569924509142-54d72c3599e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
+    background-size: cover;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+    color: var(--ink-black);
+    line-height: 1.8;
+    overflow-x: hidden;
+}
+
+body.en {
+    font-family: var(--english-font), var(--chinese-font);
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--light-gray);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--cinnabar);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #7A2021;
+}
+
+/* 通用工具类 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.section-title {
+    text-align: center;
+    font-family: var(--calligraphy-font);
+    font-size: 2.8rem;
+    color: var(--cinnabar);
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+.section-title::after {
+    content: "雅";
+    position: absolute;
+    right: -28px;
+    top: -12px;
+    width: 32px;
+    height: 32px;
+    background-color: var(--cinnabar);
+    color: white;
+    border-radius: 2px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(12deg);
+}
+.en .section-title::after {
+    content: "Y";
+    font-family: var(--calligraphy-font);
+}
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--bamboo-green);
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.divider {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--cinnabar), transparent);
+    margin: 0 auto 4rem auto;
+}
+.btn-primary {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background-color: var(--cinnabar);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+}
+.btn-primary:hover {
+    background-color: #7A2021;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-ink);
+}
+.btn-secondary {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    background-color: transparent;
+    color: var(--cinnabar);
+    border: 1px solid var(--cinnabar);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+}
+.btn-secondary:hover {
+    background-color: var(--cinnabar);
+    color: white;
+}
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.page-header {
+    margin-top: 80px;
+    padding: 6rem 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    color: white;
+    text-align: center;
+}
+.page-header h1 {
+    font-family: var(--calligraphy-font);
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+}
+.page-content {
+    padding: 5rem 0;
+}
+.content-card {
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 12px;
+    box-shadow: var(--shadow-ink);
+    padding: 3rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(158, 42, 43, 0.1);
+}
+.content-card h2 {
+    font-family: var(--calligraphy-font);
+    font-size: 2rem;
+    color: var(--cinnabar);
+    margin-bottom: 1.5rem;
+}
+.content-card h3 {
+    font-size: 1.4rem;
+    color: var(--cinnabar);
+    margin: 2rem 0 1rem 0;
+}
+.content-card p {
+    margin-bottom: 1.2rem;
+    text-align: justify;
+}
+.content-card ul {
+    margin-left: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+.content-card li {
+    margin-bottom: 0.8rem;
+}
+.content-img {
+    width: 100%;
+    border-radius: 8px;
+    margin: 2rem 0;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 3rem;
+    margin: 2rem 0;
+}
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+/* ==================== 导航栏样式 ==================== */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(248, 244, 233, 0.96);
+    backdrop-filter: blur(6px);
+    padding: 1rem 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-ink);
+    transition: var(--transition-smooth);
+}
+nav.scrolled {
+    padding: 0.6rem 0;
+}
+.nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+.nav-logo i {
+    font-size: 1.8rem;
+    color: var(--cinnabar);
+}
+.nav-logo-text {
+    font-family: var(--calligraphy-font);
+    font-size: 1.8rem;
+    color: var(--cinnabar);
+}
+.en .nav-logo-text {
+    font-family: var(--english-font);
+    font-style: italic;
+}
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+}
+.nav-links a {
+    text-decoration: none;
+    color: var(--ink-black);
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--cinnabar);
+    transition: var(--transition-smooth);
+}
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--cinnabar);
+}
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+.lang-switch {
+    display: flex;
+    gap: 0.5rem;
+}
+.lang-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--cinnabar);
+    background-color: transparent;
+    color: var(--cinnabar);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+}
+.lang-btn.active,
+.lang-btn:hover {
+    background-color: var(--cinnabar);
+    color: white;
+}
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 5px;
+}
+.mobile-menu-btn span {
+    width: 28px;
+    height: 3px;
+    background-color: var(--cinnabar);
+    border-radius: 2px;
+    transition: var(--transition-smooth);
+}
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(248, 244, 233, 0.98);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-ink);
+    z-index: 999;
+}
+.mobile-menu.active {
+    display: block;
+}
+.mobile-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+.mobile-menu a {
+    text-decoration: none;
+    color: var(--ink-black);
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+    display: block;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+/* ==================== 轮播组件样式 ==================== */
+.carousel-container {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 12px;
+    box-shadow: var(--shadow-ink);
+    overflow: hidden;
+    border: 1px solid rgba(158, 42, 43, 0.1);
+}
+.carousel {
+    position: relative;
+    height: 520px;
+    overflow: hidden;
+}
+.carousel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 1s ease, transform 1s ease;
+    transform: translateX(60px);
+}
+.carousel-item.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+.carousel-item-inner {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.carousel-img {
+    width: 50%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+.carousel-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+.carousel-item:hover .carousel-img img {
+    transform: scale(1.05);
+}
+.carousel-content {
+    width: 50%;
+    text-align: left;
+}
+.carousel-content h3 {
+    font-family: var(--calligraphy-font);
+    font-size: 2.5rem;
+    color: var(--cinnabar);
+    margin-bottom: 1.2rem;
+}
+.en .carousel-content h3 {
+    font-family: var(--english-font);
+}
+.carousel-content p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin-bottom: 1.8rem;
+    color: var(--ink-black);
+}
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    pointer-events: none;
+}
+.carousel-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    color: var(--cinnabar);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    pointer-events: all;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.carousel-btn:hover {
+    background-color: var(--cinnabar);
+    color: white;
+    transform: scale(1.1);
+}
+.carousel-indicators {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(158, 42, 43, 0.3);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+.indicator.active {
+    background-color: var(--cinnabar);
+    transform: scale(1.2);
+}
+.indicator:hover {
+    background-color: rgba(158, 42, 43, 0.6);
+}
+
+/* ==================== 联系表单样式 ==================== */
+.contact-form {
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-ink);
+    border: 1px solid rgba(158, 42, 43, 0.1);
+}
+.contact-form h4 {
+    font-size: 1.5rem;
+    color: var(--cinnabar);
+    margin-bottom: 1.5rem;
+    font-family: var(--calligraphy-font);
+}
+.en .contact-form h4 {
+    font-family: var(--english-font);
+}
+.form-group {
+    margin-bottom: 1.5rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--ink-black);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(158, 42, 43, 0.2);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: rgba(248, 244, 233, 0.5);
+    transition: var(--transition-smooth);
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--cinnabar);
+    box-shadow: 0 0 0 3px rgba(158, 42, 43, 0.1);
+}
+.form-group textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+.form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+.form-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--cinnabar);
+}
+.form-checkbox label {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.info-card {
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-ink);
+    border: 1px solid rgba(158, 42, 43, 0.1);
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+.info-card:hover {
+    transform: translateY(-5px);
+}
+.info-card i {
+    font-size: 2rem;
+    color: var(--cinnabar);
+    margin-bottom: 1rem;
+}
+.info-card h5 {
+    font-size: 1.2rem;
+    color: var(--cinnabar);
+    margin-bottom: 0.8rem;
+}
+.info-card p {
+    color: var(--ink-black);
+    font-size: 1rem;
+}
+
+/* ==================== 页脚样式 ==================== */
+footer {
+    background-color: var(--cinnabar);
+    color: white;
+    padding: 3rem 0 1.5rem 0;
+    margin-top: 4rem;
+}
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+.footer-item h3 {
+    font-family: var(--calligraphy-font);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.en .footer-item h3 {
+    font-family: var(--english-font);
+}
+.footer-item p,
+.footer-item a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.8rem;
+    transition: var(--transition-smooth);
+}
+.footer-item a:hover {
+    color: white;
+    padding-left: 5px;
+}
+.footer-social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.footer-social a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+.footer-social a:hover {
+    background-color: white;
+    color: var(--cinnabar);
+    transform: translateY(-3px);
+}
+.footer-copyright {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+}
+
+/* ==================== 回到顶部按钮 ==================== */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--cinnabar);
+    color: white;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-smooth);
+    z-index: 1500;
+}
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+.back-to-top:hover {
+    background-color: #7A2021;
+    transform: translateY(-5px);
+}
+
+/* ==================== 响应式样式 ==================== */
+@media (max-width: 1024px) {
+    .carousel-item-inner {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .carousel-img,
+    .carousel-content {
+        width: 100%;
+    }
+    .carousel-img {
+        height: 280px;
+    }
+    .carousel {
+        height: auto;
+        min-height: 600px;
+    }
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    .mobile-menu-btn {
+        display: flex;
+    }
+    .page-header h1 {
+        font-size: 2.5rem;
+    }
+    .section-title {
+        font-size: 2.2rem;
+    }
+    .carousel-item {
+        padding: 2rem;
+    }
+    .carousel-content h3 {
+        font-size: 2rem;
+    }
+    .content-card {
+        padding: 2rem;
+    }
+    .contact-form {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+    .page-header {
+        padding: 4rem 0;
+    }
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    .carousel-img {
+        height: 220px;
+    }
+    .carousel {
+        min-height: 550px;
+    }
+}
