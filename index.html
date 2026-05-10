@@ -1,861 +1,36 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>文墨风雅 - 中国传统文房四宝与琴棋书画</title>
-    <!-- Font Awesome 图标（仅用于图标，无动画库） -->
+    <meta name="description" content="Elegance of Culture - Professional platform for Chinese traditional Four Treasures of the Study and Four Arts, introducing history, craftsmanship and cultural connotation">
+    <meta name="keywords" content="Four Treasures of the Study, brush, ink, paper, inkstone, Duan inkstone, Xuan paper, Hui ink, Guqin, Go, calligraphy, Chinese painting, traditional Chinese culture">
+    <title>Elegance of Culture - Chinese Traditional Culture Platform</title>
+    <!-- 外部资源 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- 国风字体 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* ==================== 全局重置与变量（约300行） ==================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            /* 国风配色 */
-            --cinnabar: #9E2A2B;    /* 朱砂红 */
-            --ink-black: #212529;    /* 墨黑 */
-            --rice-paper: #F8F4E9;   /* 宣纸白 */
-            --bamboo-green: #7A9362; /* 竹青 */
-            --light-gray: #E8E3D8;   /* 浅灰 */
-            --shadow-ink: 0 4px 20px rgba(158, 42, 43, 0.12); /* 水墨阴影 */
-            /* 字体 */
-            --chinese-font: 'Noto Serif SC', serif;
-            --calligraphy-font: 'Ma Shan Zheng', cursive;
-            /* 过渡 */
-            --transition-smooth: all 0.3s ease;
-            --transition-slow: all 0.6s ease;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
-        body {
-            font-family: var(--chinese-font);
-            background-color: var(--rice-paper);
-            background-image: url('https://images.unsplash.com/photo-1569924509142-54d72c3599e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
-            background-size: cover;
-            background-attachment: fixed;
-            background-blend-mode: overlay;
-            color: var(--ink-black);
-            line-height: 1.8;
-            overflow-x: hidden;
-        }
-
-        /* 滚动条美化 */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--light-gray);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--cinnabar);
-            border-radius: 5px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #7A2021;
-        }
-
-        /* 通用工具类 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .section-title {
-            text-align: center;
-            font-family: var(--calligraphy-font);
-            font-size: 2.8rem;
-            color: var(--cinnabar);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-        .section-title::after {
-            content: "雅";
-            position: absolute;
-            right: -28px;
-            top: -12px;
-            width: 32px;
-            height: 32px;
-            background-color: var(--cinnabar);
-            color: white;
-            border-radius: 2px;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: rotate(12deg);
-        }
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.1rem;
-            color: var(--bamboo-green);
-            margin-bottom: 3rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .divider {
-            width: 120px;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--cinnabar), transparent);
-            margin: 0 auto 4rem auto;
-        }
-        .btn-primary {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background-color: var(--cinnabar);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-family: var(--chinese-font);
-            font-size: 1rem;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-            text-decoration: none;
-        }
-        .btn-primary:hover {
-            background-color: #7A2021;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-ink);
-        }
-        .text-shadow {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        /* ==================== 导航栏样式（约200行） ==================== */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: rgba(248, 244, 233, 0.96);
-            backdrop-filter: blur(6px);
-            padding: 1rem 0;
-            z-index: 1000;
-            box-shadow: var(--shadow-ink);
-            transition: var(--transition-smooth);
-        }
-        nav.scrolled {
-            padding: 0.6rem 0;
-        }
-        .nav-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-        .nav-logo i {
-            font-size: 1.8rem;
-            color: var(--cinnabar);
-        }
-        .nav-logo-text {
-            font-family: var(--calligraphy-font);
-            font-size: 1.8rem;
-            color: var(--cinnabar);
-        }
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-            align-items: center;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--ink-black);
-            font-size: 1rem;
-            font-weight: 500;
-            transition: var(--transition-smooth);
-            position: relative;
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--cinnabar);
-            transition: var(--transition-smooth);
-        }
-        .nav-links a:hover {
-            color: var(--cinnabar);
-        }
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        .lang-switch {
-            padding: 0.5rem 1.2rem;
-            border: 1px solid var(--cinnabar);
-            background-color: transparent;
-            color: var(--cinnabar);
-            border-radius: 4px;
-            font-family: var(--chinese-font);
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-        }
-        .lang-switch:hover {
-            background-color: var(--cinnabar);
-            color: white;
-        }
-        .mobile-menu-btn {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 5px;
-        }
-        .mobile-menu-btn span {
-            width: 28px;
-            height: 3px;
-            background-color: var(--cinnabar);
-            border-radius: 2px;
-            transition: var(--transition-smooth);
-        }
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 70px;
-            left: 0;
-            width: 100%;
-            background-color: rgba(248, 244, 233, 0.98);
-            padding: 1.5rem;
-            box-shadow: var(--shadow-ink);
-            z-index: 999;
-        }
-        .mobile-menu.active {
-            display: block;
-        }
-        .mobile-menu ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-        .mobile-menu a {
-            text-decoration: none;
-            color: var(--ink-black);
-            font-size: 1.1rem;
-            padding: 0.5rem 0;
-            display: block;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        /* ==================== Hero区域样式（约150行） ==================== */
-        .hero {
-            margin-top: 80px;
-            padding: 8rem 0;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                        url('https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-            color: white;
-            text-align: center;
-        }
-        .hero h1 {
-            font-family: var(--calligraphy-font);
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
-            letter-spacing: 4px;
-            animation: fadeInUp 1s ease;
-        }
-        .hero p {
-            font-size: 1.3rem;
-            max-width: 800px;
-            margin: 0 auto 2.5rem auto;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            animation: fadeInUp 1.2s ease;
-        }
-        .hero-btn {
-            animation: fadeInUp 1.5s ease;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ==================== 轮播组件样式（约300行） ==================== */
-        .carousel-section {
-            padding: 6rem 0;
-        }
-        .carousel-section.alt {
-            background-color: rgba(33, 37, 41, 0.05);
-        }
-        .carousel-container {
-            position: relative;
-            max-width: 1100px;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.92);
-            border-radius: 12px;
-            box-shadow: var(--shadow-ink);
-            overflow: hidden;
-            border: 1px solid rgba(158, 42, 43, 0.1);
-        }
-        .carousel {
-            position: relative;
-            height: 520px;
-            overflow: hidden;
-        }
-        .carousel-item {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            padding: 3rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 1s ease, transform 1s ease;
-            transform: translateX(60px);
-        }
-        .carousel-item.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        .carousel-item-inner {
-            display: flex;
-            flex-direction: row;
-            gap: 3rem;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-        }
-        .carousel-img {
-            width: 50%;
-            height: 100%;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-        }
-        .carousel-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s ease;
-        }
-        .carousel-item:hover .carousel-img img {
-            transform: scale(1.05);
-        }
-        .carousel-content {
-            width: 50%;
-            text-align: left;
-        }
-        .carousel-content h3 {
-            font-family: var(--calligraphy-font);
-            font-size: 2.5rem;
-            color: var(--cinnabar);
-            margin-bottom: 1.2rem;
-        }
-        .carousel-content p {
-            font-size: 1.05rem;
-            line-height: 1.9;
-            margin-bottom: 1.8rem;
-            color: var(--ink-black);
-        }
-        .carousel-controls {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 1.5rem;
-            pointer-events: none;
-        }
-        .carousel-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.9);
-            border: none;
-            color: var(--cinnabar);
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-            pointer-events: all;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-        .carousel-btn:hover {
-            background-color: var(--cinnabar);
-            color: white;
-            transform: scale(1.1);
-        }
-        .carousel-indicators {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
-        .indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: rgba(158, 42, 43, 0.3);
-            cursor: pointer;
-            transition: var(--transition-smooth);
-        }
-        .indicator.active {
-            background-color: var(--cinnabar);
-            transform: scale(1.2);
-        }
-        .indicator:hover {
-            background-color: rgba(158, 42, 43, 0.6);
-        }
-
-        /* ==================== 文化价值板块样式（约150行） ==================== */
-        .culture-section {
-            padding: 6rem 0;
-        }
-        .culture-content {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.92);
-            padding: 4rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-ink);
-            border: 1px solid rgba(158, 42, 43, 0.1);
-        }
-        .culture-content p {
-            font-size: 1.1rem;
-            line-height: 2;
-            margin-bottom: 1.8rem;
-            text-align: justify;
-        }
-        .culture-quote {
-            margin-top: 2.5rem;
-            padding: 2rem;
-            background-color: rgba(248, 244, 233, 0.8);
-            border-left: 4px solid var(--cinnabar);
-            border-radius: 0 8px 8px 0;
-            text-align: center;
-        }
-        .culture-quote p {
-            font-family: var(--calligraphy-font);
-            font-size: 1.8rem;
-            color: var(--cinnabar);
-            margin-bottom: 0;
-            text-align: center;
-        }
-
-        /* ==================== Contact Us板块样式（约250行） ==================== */
-        .contact-section {
-            padding: 6rem 0;
-            background-color: rgba(33, 37, 41, 0.05);
-        }
-        .contact-wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-        .contact-form {
-            background-color: rgba(255, 255, 255, 0.92);
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-ink);
-            border: 1px solid rgba(158, 42, 43, 0.1);
-        }
-        .contact-form h4 {
-            font-size: 1.5rem;
-            color: var(--cinnabar);
-            margin-bottom: 1.5rem;
-            font-family: var(--calligraphy-font);
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--ink-black);
-        }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.9rem 1rem;
-            border: 1px solid rgba(158, 42, 43, 0.2);
-            border-radius: 4px;
-            font-family: var(--chinese-font);
-            font-size: 1rem;
-            background-color: rgba(248, 244, 233, 0.5);
-            transition: var(--transition-smooth);
-        }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--cinnabar);
-            box-shadow: 0 0 0 3px rgba(158, 42, 43, 0.1);
-        }
-        .form-group textarea {
-            resize: vertical;
-            min-height: 140px;
-        }
-        .form-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 1.5rem;
-        }
-        .form-checkbox input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--cinnabar);
-        }
-        .form-checkbox label {
-            margin-bottom: 0;
-            font-size: 0.95rem;
-        }
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-        .info-card {
-            background-color: rgba(255, 255, 255, 0.92);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-ink);
-            border: 1px solid rgba(158, 42, 43, 0.1);
-            text-align: center;
-            transition: var(--transition-smooth);
-        }
-        .info-card:hover {
-            transform: translateY(-5px);
-        }
-        .info-card i {
-            font-size: 2rem;
-            color: var(--cinnabar);
-            margin-bottom: 1rem;
-        }
-        .info-card h5 {
-            font-size: 1.2rem;
-            color: var(--cinnabar);
-            margin-bottom: 0.8rem;
-        }
-        .info-card p {
-            color: var(--ink-black);
-            font-size: 1rem;
-        }
-
-        /* ==================== 详情弹窗样式（约250行） ==================== */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(33, 37, 41, 0.75);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-        .modal.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-content {
-            background-color: var(--rice-paper);
-            max-width: 900px;
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            transform: translateY(40px);
-            transition: transform 0.5s ease;
-        }
-        .modal.show .modal-content {
-            transform: translateY(0);
-        }
-        .modal-header {
-            padding: 2rem 2.5rem 1rem 2.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--light-gray);
-            position: sticky;
-            top: 0;
-            background-color: var(--rice-paper);
-            z-index: 10;
-        }
-        .modal-header h2 {
-            font-family: var(--calligraphy-font);
-            font-size: 2.2rem;
-            color: var(--cinnabar);
-        }
-        .modal-close {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: none;
-            background-color: rgba(158, 42, 43, 0.1);
-            color: var(--cinnabar);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-close:hover {
-            background-color: var(--cinnabar);
-            color: white;
-            transform: rotate(90deg);
-        }
-        .modal-body {
-            padding: 2rem 2.5rem 3rem 2.5rem;
-        }
-        .modal-body p {
-            font-size: 1.05rem;
-            line-height: 2;
-            margin-bottom: 1.5rem;
-            text-align: justify;
-        }
-        .modal-body h4 {
-            font-size: 1.3rem;
-            color: var(--cinnabar);
-            margin: 2rem 0 1rem 0;
-            font-family: var(--calligraphy-font);
-        }
-        .modal-body ul {
-            margin-left: 1.8rem;
-            margin-bottom: 1.5rem;
-        }
-        .modal-body li {
-            margin-bottom: 0.8rem;
-            line-height: 1.8;
-        }
-
-        /* ==================== 页脚样式（约100行） ==================== */
-        footer {
-            background-color: var(--cinnabar);
-            color: white;
-            padding: 3rem 0 1.5rem 0;
-            margin-top: 4rem;
-        }
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2.5rem;
-            margin-bottom: 2.5rem;
-        }
-        .footer-item h3 {
-            font-family: var(--calligraphy-font);
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .footer-item p,
-        .footer-item a {
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.8rem;
-            transition: var(--transition-smooth);
-        }
-        .footer-item a:hover {
-            color: white;
-            padding-left: 5px;
-        }
-        .footer-social {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .footer-social a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: var(--transition-smooth);
-        }
-        .footer-social a:hover {
-            background-color: white;
-            color: var(--cinnabar);
-            transform: translateY(-3px);
-        }
-        .footer-copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.95rem;
-        }
-
-        /* ==================== 回到顶部按钮样式（约80行） ==================== */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--cinnabar);
-            color: white;
-            border: none;
-            font-size: 1.3rem;
-            cursor: pointer;
-            box-shadow: var(--shadow-ink);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition-smooth);
-            z-index: 1500;
-        }
-        .back-to-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .back-to-top:hover {
-            background-color: #7A2021;
-            transform: translateY(-5px);
-        }
-
-        /* ==================== 响应式样式（约300行） ==================== */
-        @media (max-width: 1024px) {
-            .carousel-item-inner {
-                flex-direction: column;
-                gap: 2rem;
-            }
-            .carousel-img,
-            .carousel-content {
-                width: 100%;
-            }
-            .carousel-img {
-                height: 280px;
-            }
-            .carousel {
-                height: auto;
-                min-height: 600px;
-            }
-            .contact-wrapper {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .mobile-menu-btn {
-                display: flex;
-            }
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            .hero p {
-                font-size: 1.1rem;
-            }
-            .section-title {
-                font-size: 2.2rem;
-            }
-            .carousel-item {
-                padding: 2rem;
-            }
-            .carousel-content h3 {
-                font-size: 2rem;
-            }
-            .culture-content {
-                padding: 2.5rem;
-            }
-            .contact-form {
-                padding: 2rem;
-            }
-            .modal {
-                padding: 1rem;
-            }
-            .modal-header,
-            .modal-body {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            html {
-                font-size: 14px;
-            }
-            .hero {
-                padding: 5rem 0;
-            }
-            .hero h1 {
-                font-size: 2.2rem;
-                letter-spacing: 2px;
-            }
-            .carousel-img {
-                height: 220px;
-            }
-            .carousel {
-                min-height: 550px;
-            }
-            .culture-content {
-                padding: 1.8rem;
-            }
-            .culture-quote p {
-                font-size: 1.4rem;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <!-- 全局样式 -->
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body>
-    <!-- ==================== 导航栏 ==================== -->
+<body class="en">
+    <!-- 导航栏 -->
     <nav id="navbar">
         <div class="container nav-inner">
-            <a href="#" class="nav-logo">
+            <a href="index.html" class="nav-logo">
                 <i class="fa-solid fa-brush"></i>
-                <span class="nav-logo-text">文墨风雅</span>
+                <span class="nav-logo-text">Elegance of Culture</span>
             </a>
             <ul class="nav-links">
-                <li><a href="#hero">首页</a></li>
-                <li><a href="#four-treasures">文房四宝</a></li>
-                <li><a href="#four-arts">琴棋书画</a></li>
-                <li><a href="#culture">文化精髓</a></li>
-                <li><a href="#contact">联系我们</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="four-treasures.html">Four Treasures</a></li>
+                <li><a href="four-arts.html">Four Arts</a></li>
+                <li><a href="culture.html">Cultural Essence</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
             </ul>
-            <button class="lang-switch" id="langSwitch">中文 / EN</button>
+            <div class="lang-switch">
+                <a href="index.html" class="lang-btn active">EN</a>
+                <a href="../index.html" class="lang-btn">中文</a>
+            </div>
             <div class="mobile-menu-btn" id="mobileMenuBtn">
                 <span></span>
                 <span></span>
@@ -864,96 +39,96 @@
         </div>
         <div class="mobile-menu" id="mobileMenu">
             <ul>
-                <li><a href="#hero">首页</a></li>
-                <li><a href="#four-treasures">文房四宝</a></li>
-                <li><a href="#four-arts">琴棋书画</a></li>
-                <li><a href="#culture">文化精髓</a></li>
-                <li><a href="#contact">联系我们</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="four-treasures.html">Four Treasures</a></li>
+                <li><a href="four-arts.html">Four Arts</a></li>
+                <li><a href="culture.html">Cultural Essence</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- ==================== Hero区域 ==================== -->
-    <section class="hero" id="hero">
+    <!-- Hero区域 -->
+    <section class="page-header">
         <div class="container">
-            <h1 class="text-shadow">文房四宝 · 琴棋书画</h1>
-            <p class="text-shadow">承千年文脉，扬东方美学，探索中国传统文化的深邃与魅力</p>
-            <a href="#four-treasures" class="btn-primary hero-btn">探索文化之美</a>
+            <h1 class="text-shadow">Four Treasures & Four Arts of China</h1>
+            <p class="text-shadow">Inheriting millennial cultural heritage, promoting oriental aesthetics</p>
+            <a href="four-treasures.html" class="btn-primary">Explore Cultural Beauty</a>
         </div>
     </section>
 
-    <!-- ==================== 文房四宝轮播 ==================== -->
-    <section class="carousel-section" id="four-treasures">
+    <!-- 文房四宝板块 -->
+    <section class="page-content">
         <div class="container">
             <div style="text-align: center;">
-                <h2 class="section-title">文房四宝</h2>
-                <p class="section-subtitle">笔、墨、纸、砚，中国传统书写绘画的核心工具，承载千年文化精髓</p>
+                <h2 class="section-title">Four Treasures of the Study</h2>
+                <p class="section-subtitle">Brush, Ink, Paper and Inkstone, the core tools of traditional Chinese writing and painting, carrying thousands of years of cultural essence</p>
                 <div class="divider"></div>
             </div>
             <div class="carousel-container">
                 <div class="carousel" id="treasuresCarousel">
-                    <!-- 笔 -->
+                    <!-- Brush -->
                     <div class="carousel-item active">
                         <div class="carousel-item-inner">
                             <div class="carousel-img">
-                                <img src="https://images.unsplash.com/photo-1591142225331-32b675303389?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="毛笔">
+                                <img src="https://images.unsplash.com/photo-1591142225331-32b675303389?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Chinese Writing Brush Craftsmanship">
                             </div>
                             <div class="carousel-content">
-                                <h3>毛 笔</h3>
-                                <p>毛笔是文房四宝之首，以兽毛为毫，竹木为杆，书写出飘逸灵动的中华文字。其历史可追溯至战国时期，秦代蒙恬改良制笔工艺，使毛笔的实用性大幅提升。</p>
-                                <p>优质毛笔需具备“尖、齐、圆、健”四德：尖指笔锋尖锐，齐指笔毫平齐，圆指笔肚饱满，健指笔毫有弹性。</p>
-                                <button class="btn-primary" onclick="openModal('brushModal')">查看详细介绍</button>
+                                <h3>Writing Brush</h3>
+                                <p>The writing brush is the first of the Four Treasures of the Study, made of animal hair and bamboo/wood, writing elegant and vivid Chinese characters. Its history can be traced back to the Warring States Period.</p>
+                                <p>A high-quality brush must have the four virtues of "sharpness, neatness, roundness and elasticity".</p>
+                                <a href="brush.html" class="btn-primary">View Details</a>
                             </div>
                         </div>
                     </div>
-                    <!-- 墨 -->
+                    <!-- Ink -->
                     <div class="carousel-item">
                         <div class="carousel-item-inner">
                             <div class="carousel-img">
-                                <img src="https://images.unsplash.com/photo-1564890369478-c89ca6d55cde?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="徽墨">
+                                <img src="https://images.unsplash.com/photo-1564890369478-c89ca6d55cde?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hui Ink Making">
                             </div>
                             <div class="carousel-content">
-                                <h3>徽 墨</h3>
-                                <p>墨色浓淡相宜，以松烟、油烟制成，研墨挥毫，尽显东方韵味。中国制墨历史悠久，汉代已有人工制墨，唐代奚超、奚廷珪父子创制的徽墨名满天下。</p>
-                                <p>优质墨锭质地细腻，色泽黑亮，磨出的墨汁书写流畅，不滞笔，不褪色。墨锭上的雕刻、描金工艺更是集书法、绘画、雕刻于一体。</p>
-                                <button class="btn-primary" onclick="openModal('inkModal')">查看详细介绍</button>
+                                <h3>Hui Ink Stick</h3>
+                                <p>With varying shades of black, ink sticks are made from pine soot or lampblack. Grinding ink and wielding the brush reveals oriental charm. Hui ink from Anhui is world-famous.</p>
+                                <p>High-quality ink sticks have a fine texture, bright black color, and write smoothly without clogging the brush.</p>
+                                <a href="ink.html" class="btn-primary">View Details</a>
                             </div>
                         </div>
                     </div>
-                    <!-- 纸 -->
+                    <!-- Paper -->
                     <div class="carousel-item">
                         <div class="carousel-item-inner">
                             <div class="carousel-img">
-                                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="宣纸">
+                                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Xuan Paper Drying">
                             </div>
                             <div class="carousel-content">
-                                <h3>宣 纸</h3>
-                                <p>宣纸质地绵密，吸墨性佳，历经千年而不腐，是书画创作的理想载体。东汉蔡伦改进造纸术，唐代宣纸诞生于安徽宣城，被誉为“纸中之王”。</p>
-                                <p>宣纸以青檀树皮、沙田稻草为原料，经十八道工序、上百道操作制成，具有“韧而能润、光而不滑、洁白稠密、纹理纯净”的特点。</p>
-                                <button class="btn-primary" onclick="openModal('paperModal')">查看详细介绍</button>
+                                <h3>Xuan Paper</h3>
+                                <p>Xuan paper has a dense texture and excellent ink absorption, remaining intact for thousands of years, making it ideal for calligraphy and painting. It is known as the "King of Papers".</p>
+                                <p>Made from wingnut bark and sand field rice straw through 18 major processes and hundreds of operations.</p>
+                                <a href="paper.html" class="btn-primary">View Details</a>
                             </div>
                         </div>
                     </div>
-                    <!-- 砚 -->
+                    <!-- Inkstone -->
                     <div class="carousel-item">
                         <div class="carousel-item-inner">
                             <div class="carousel-img">
-                                <img src="https://images.unsplash.com/photo-1586769853422-5e96606e6c95?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="砚台">
+                                <img src="https://images.unsplash.com/photo-1586769853422-5e96606e6c95?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Duan Inkstone Carving">
                             </div>
                             <div class="carousel-content">
-                                <h3>砚 台</h3>
-                                <p>砚台因材施艺，质地温润，研墨细腻，既是实用器具，亦是艺术珍品。四大名砚：端砚、歙砚、洮河砚、澄泥砚，各有特色，闻名遐迩。</p>
-                                <p>好的砚台需具备“质细、易发墨、墨汁细润、不损毫”的特点，砚台的雕刻工艺融合了山水、人物、花鸟等元素，是文房重器。</p>
-                                <button class="btn-primary" onclick="openModal('inkstoneModal')">查看详细介绍</button>
+                                <h3>Inkstone</h3>
+                                <p>Inkstones are crafted according to the material, with a warm texture and fine ink grinding. They are both practical tools and artistic treasures. The Four Famous Inkstones are world-renowned.</p>
+                                <p>A good inkstone must have fine texture, easy ink production, and no damage to brush hair.</p>
+                                <a href="inkstone.html" class="btn-primary">View Details</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-controls">
-                    <button class="carousel-btn" id="treasuresPrev"><i class="fa-solid fa-chevron-left"></i></button>
-                    <button class="carousel-btn" id="treasuresNext"><i class="fa-solid fa-chevron-right"></i></button>
+                    <button class="carousel-btn" id="treasuresCarouselPrev"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="carousel-btn" id="treasuresCarouselNext"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
-                <div class="carousel-indicators" id="treasuresIndicators">
+                <div class="carousel-indicators" id="treasuresCarouselIndicators">
                     <div class="indicator active" data-index="0"></div>
                     <div class="indicator" data-index="1"></div>
                     <div class="indicator" data-index="2"></div>
@@ -963,78 +138,78 @@
         </div>
     </section>
 
-    <!-- ==================== 琴棋书画轮播 ==================== -->
-    <section class="carousel-section alt" id="four-arts">
+    <!-- 琴棋书画板块 -->
+    <section class="page-content" style="background-color: rgba(33, 37, 41, 0.05);">
         <div class="container">
             <div style="text-align: center;">
-                <h2 class="section-title">琴棋书画</h2>
-                <p class="section-subtitle">琴、棋、书、画，古代文人雅士必备的四种技艺，体现中国人的精神追求</p>
+                <h2 class="section-title">Four Arts of the Scholar</h2>
+                <p class="section-subtitle">Qin, Qi, Shu and Hua, the four essential arts for ancient Chinese scholars, reflecting the spiritual pursuit of the Chinese people</p>
                 <div class="divider"></div>
             </div>
             <div class="carousel-container">
                 <div class="carousel" id="artsCarousel">
-                    <!-- 琴 -->
+                    <!-- Guqin -->
                     <div class="carousel-item active">
                         <div class="carousel-item-inner">
                             <div class="carousel-img">
-                                <img src="https://images.unsplash.com/photo-1518357328699-88da80c30b52?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="古琴">
+                                <img src="https://images.unsplash.com/photo-1518357328699-88da80c30b52?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Guqin Performance">
                             </div>
                             <div class="carousel-content">
-                                <h3>古 琴</h3>
-                                <p>古琴音域宽广，音色深沉，余音悠远，是中国最古老的弹拨乐器之一，位列“琴棋书画”之首，有三千多年历史。</p>
-                                <p>古琴琴身由桐木或杉木制成，长约三尺六寸五，象征一年365天；有七弦，代表金木水火土文武七情；琴面有十三徽，象征十二月加闰月。</p>
-                                <button class="btn-primary" onclick="openModal('qinModal')">查看详细介绍</button>
+                                <h3>Guqin</h3>
+                                <p>The guqin has a wide range, deep tone, and lingering sound, being one of the oldest plucked instruments in China, with a history of over 3,000 years.</p>
+                                <p>The sound of guqin is clear, subtle, tranquil and remote, a medium for scholars to cultivate their morality.</p>
+                                <a href="qin.html" class="btn-primary">View Details</a>
                             </div>
                         </div>
                     </div>
-                    <!-- 棋 -->
+                    <!-- Go -->
                     <div class="carousel-item">
                         <div class="carousel-item-inner">
                             <div class="carousel-img">
-                                <img src="https://images.unsplash.com/photo-1571069507691-af612207b463?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="围棋">
+                                <img src="https://images.unsplash.com/photo-1571069507691-af612207b463?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Go Game">
                             </div>
                             <div class="carousel-content">
-                                <h3>围 棋</h3>
-                                <p>围棋博大精深，蕴含着东方哲学智慧，是策略与思维的完美结合。古称“弈”，起源于中国，距今已有四千多年历史。</p>
-                                <p>围棋棋盘为19×19道，共361个交叉点，象征周天360度加天元；黑白棋子代表阴阳，棋局的变化无穷，暗合道家思想。</p>
-                                <button class="btn-primary" onclick="openModal('qiModal')">查看详细介绍</button>
+                                <h3>Go (Weiqi)</h3>
+                                <p>Go is extensive and profound, containing oriental philosophical wisdom, and is a perfect combination of strategy and thinking. It originated in China over 4,000 years ago.</p>
+                                <p>Go games are not only a contest of skills but also a competition of mentality.</p>
+                                <a href="qi.html" class="btn-primary">View Details</a>
                             </div>
                         </div>
                     </div>
-                    <!-- 书 -->
+                    <!-- Calligraphy -->
                     <div class="carousel-item">
                         <div class="carousel-item-inner">
                             <div class="carousel-img">
-                                <img src="https://images.unsplash.com/photo-1620189965310-7d975a7f7f49?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="书法">
+                                <img src="https://images.unsplash.com/photo-1620189965310-7d975a7f7f49?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Calligraphy Creation">
                             </div>
                             <div class="carousel-content">
-                                <h3>书 法</h3>
-                                <p>书法是线条的艺术，通过笔墨的运用，展现书写者的心境与修养。中国书法历经甲骨文、金文、小篆、隶书、楷书、行书、草书等演变阶段。</p>
-                                <p>王羲之的《兰亭序》被誉为“天下第一行书”，颜真卿的楷书雄浑刚健，张旭、怀素的草书奔放洒脱，各领风骚。</p>
-                                <button class="btn-primary" onclick="openModal('shuModal')">查看详细介绍</button>
+                                <h3>Calligraphy</h3>
+                                <p>Calligraphy is the art of lines, showing the writer's mood and accomplishment through the use of brush and ink. It has gone through many evolutionary stages.</p>
+                                <p>Wang Xizhi's "Lanting Xu" is known as the "best running script under heaven".</p>
+                                <a href="shu.html" class="btn-primary">View Details</a>
                             </div>
                         </div>
                     </div>
-                    <!-- 画 -->
+                    <!-- Chinese Painting -->
                     <div class="carousel-item">
                         <div class="carousel-item-inner">
                             <div class="carousel-img">
-                                <img src="https://images.unsplash.com/photo-1571576481360-73a6735f46c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="国画">
+                                <img src="https://images.unsplash.com/photo-1571576481360-73a6735f46c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Chinese Painting">
                             </div>
                             <div class="carousel-content">
-                                <h3>国 画</h3>
-                                <p>中国画讲求意境，以水墨为主要表现形式，追求神形兼备的艺术境界。分为山水、花鸟、人物三大类，强调“外师造化，中得心源”。</p>
-                                <p>画面的留白是中国画的独特艺术手法，“计白当黑”，留白处给人无限的想象空间。诗书画印一体，是中国画的核心特色。</p>
-                                <button class="btn-primary" onclick="openModal('huaModal')">查看详细介绍</button>
+                                <h3>Chinese Painting</h3>
+                                <p>Chinese painting emphasizes artistic conception, uses ink wash as the main expression form, and pursues the artistic state of combining spirit and form.</p>
+                                <p>The integration of poetry, calligraphy, painting and seal is the core feature of Chinese painting.</p>
+                                <a href="hua.html" class="btn-primary">View Details</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-controls">
-                    <button class="carousel-btn" id="artsPrev"><i class="fa-solid fa-chevron-left"></i></button>
-                    <button class="carousel-btn" id="artsNext"><i class="fa-solid fa-chevron-right"></i></button>
+                    <button class="carousel-btn" id="artsCarouselPrev"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="carousel-btn" id="artsCarouselNext"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
-                <div class="carousel-indicators" id="artsIndicators">
+                <div class="carousel-indicators" id="artsCarouselIndicators">
                     <div class="indicator active" data-index="0"></div>
                     <div class="indicator" data-index="1"></div>
                     <div class="indicator" data-index="2"></div>
@@ -1044,262 +219,47 @@
         </div>
     </section>
 
-    <!-- ==================== 文化精髓 ==================== -->
-    <section class="culture-section" id="culture">
+    <!-- 文化精髓板块 -->
+    <section class="page-content">
         <div class="container">
             <div style="text-align: center;">
-                <h2 class="section-title">文化精髓</h2>
+                <h2 class="section-title">Cultural Essence</h2>
                 <div class="divider"></div>
             </div>
-            <div class="culture-content">
-                <p>文房四宝与琴棋书画，是中国传统文化的重要载体，承载着中国人的审美情趣、哲学思想和人文精神，是中华民族智慧的结晶。它们不仅是技艺的体现，更是精神的寄托。</p>
-                <p>文房四宝是文化创作的物质基础，笔走龙蛇，墨分五色，纸寿千年，砚田笔耕，书写着中华五千年的文明史。琴棋书画是精神表达的艺术形式，琴以悦心，棋以明智，书以养性，画以抒情，构筑了中国文人的精神家园。</p>
-                <p>在古代，掌握这些技艺是文人雅士的基本素养，也是修身养性、陶冶情操的重要方式。文人通过抚琴、对弈、挥毫、泼墨，表达自己的情感与志向，追求“天人合一”的精神境界。</p>
-                <p>在现代社会，这些传统文化不仅没有过时，反而成为了连接古今、沟通中外的文化桥梁。它们所蕴含的“中庸和谐”“意境深远”的哲学思想，以及追求内涵、注重修养的价值取向，为当代社会提供了宝贵的精神滋养。</p>
-                <div class="culture-quote">
-                    <p>笔墨纸砚书天地，琴棋书画养性灵</p>
+            <div class="content-card">
+                <p>The Four Treasures of the Study and the Four Arts are important carriers of traditional Chinese culture, carrying the Chinese people's aesthetic taste, philosophical thoughts and humanistic spirit.</p>
+                <p>The Four Treasures are the material foundation of cultural creation, and the Four Arts are the artistic forms of spiritual expression. They complement each other and jointly construct the spiritual world of Chinese literati.</p>
+                <div class="grid-3">
+                    <div class="info-card">
+                        <i class="fa-solid fa-yin-yang"></i>
+                        <h5>Harmony Between Man and Nature</h5>
+                        <p>The core thought of traditional Chinese culture, pursuing harmony between man and nature</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fa-solid fa-book"></i>
+                        <h5>Self-cultivation</h5>
+                        <p>Improving personal moral cultivation and spiritual realm through the practice of skills</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fa-solid fa-palette"></i>
+                        <h5>Artistic Conception</h5>
+                        <p>Pursuing implicit and profound artistic conception, emphasizing "intention before brush"</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="culture.html" class="btn-secondary">Learn More About Cultural Connotation</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ==================== 联系我们 ==================== -->
-    <section class="contact-section" id="contact">
-        <div class="container">
-            <div style="text-align: center;">
-                <h2 class="section-title">联系我们</h2>
-                <p class="section-subtitle">如果您想了解更多关于中国传统文化的信息，欢迎与我们联系</p>
-                <div class="divider"></div>
-            </div>
-            <div class="contact-wrapper">
-                <div class="contact-form">
-                    <h4>留言咨询</h4>
-                    <form action="https://formspree.io/f/your-form-id" method="POST">
-                        <div class="form-group">
-                            <label for="name">姓名</label>
-                            <input type="text" id="name" name="name" required placeholder="请输入您的姓名">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">邮箱</label>
-                            <input type="email" id="email" name="email" required placeholder="请输入您的邮箱">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">主题</label>
-                            <select id="subject" name="subject">
-                                <option value="info">传统文化咨询</option>
-                                <option value="coop">文化合作</option>
-                                <option value="other">其他</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">留言内容</label>
-                            <textarea id="message" name="message" required placeholder="请输入您想咨询的内容"></textarea>
-                        </div>
-                        <div class="form-checkbox">
-                            <input type="checkbox" id="agree" name="agree">
-                            <label for="agree">我同意接收相关文化资讯（可选）</label>
-                        </div>
-                        <button type="submit" class="btn-primary" style="width: 100%;">提交留言</button>
-                    </form>
-                </div>
-                <div class="contact-info">
-                    <div class="info-card">
-                        <i class="fa-solid fa-envelope"></i>
-                        <h5>电子邮箱</h5>
-                        <p>contact@wenmofengya.com</p>
-                    </div>
-                    <div class="info-card">
-                        <i class="fa-solid fa-phone"></i>
-                        <h5>联系电话</h5>
-                        <p>+86 123 4567 8901</p>
-                    </div>
-                    <div class="info-card">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <h5>联系地址</h5>
-                        <p>北京市东城区国子监街</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 详情弹窗（8个） ==================== -->
-    <!-- 笔弹窗 -->
-    <div class="modal" id="brushModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>毛笔 · 文房之首</h2>
-                <button class="modal-close" onclick="closeModal('brushModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>毛笔是中国传统书写绘画的核心工具，被誉为“文房四宝之首”。其历史可追溯至新石器时代的研磨工具，战国时期已出现形制完备的毛笔，秦代蒙恬改良制笔工艺，奠定了后世毛笔的基本形制。</p>
-                <h4>毛笔的分类</h4>
-                <ul>
-                    <li><strong>羊毫</strong>：以山羊毛制成，性软，吸墨量大，圆润饱满，适合行书、草书与写意国画，以浙江湖州的湖笔为上品。</li>
-                    <li><strong>狼毫</strong>：以黄鼠狼尾毛制成，性硬，弹性强劲，锋颖锐利，适合楷书、工笔画，以东北产的“辽尾”为最优。</li>
-                    <li><strong>紫毫</strong>：以野兔脊毛制成，性刚，弹性极佳，锋颖细密，适合小楷书法，以安徽宣笔为代表，有“紫毫之价如金贵”之说。</li>
-                    <li><strong>兼毫</strong>：以软硬毫搭配制成，刚柔并济，常见“七紫三羊”“五紫五羊”，适配性强，是初学者的首选。</li>
-                </ul>
-                <h4>毛笔的“四德”</h4>
-                <p>优质毛笔需具备“尖、齐、圆、健”四德：尖指笔锋尖锐，齐指笔毫铺开后平齐，圆指笔肚饱满圆润，健指笔毫有弹性，按压后能迅速恢复原状。</p>
-                <h4>毛笔的养护</h4>
-                <p>新笔需用温水浸泡开笔，使用后需用清水洗净，悬挂晾干，忌暴晒、忌久泡墨中，妥善养护可延长毛笔的使用寿命。</p>
-            </div>
-        </div>
-    </div>
-    <!-- 墨弹窗 -->
-    <div class="modal" id="inkModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>徽墨 · 松烟凝香</h2>
-                <button class="modal-close" onclick="closeModal('inkModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>墨是中国传统书写绘画的颜料，与笔、纸、砚并称“文房四宝”。其历史悠久，新石器时代已使用天然墨，汉代出现人工制墨，唐代制墨工艺达到高峰，徽州（今安徽黄山）成为制墨中心，徽墨自此名扬天下。</p>
-                <h4>墨的分类</h4>
-                <ul>
-                    <li><strong>松烟墨</strong>：以松木烧烟制成，墨色黑而无光泽，入水易化，层次丰富，适合书法创作与人物画的写意渲染。</li>
-                    <li><strong>油烟墨</strong>：以桐油、菜籽油烧烟制成，墨色黑亮有光泽，质地细腻，发墨均匀，是国画创作的首选，适配山水、花鸟等题材。</li>
-                    <li><strong>漆烟墨</strong>：以生漆烧烟制成，墨中极品，质地极致细腻，黑亮如漆，历久不褪，适合工笔画与传世书法创作，价格昂贵。</li>
-                </ul>
-                <h4>徽墨的制作工艺</h4>
-                <p>徽墨制作需经过点烟、和料、制墨、晾墨、打磨、描金等数十道工序，其中和料需反复捶打，保证墨质均匀，晾墨需在阴凉处自然风干，耗时数月甚至数年，方可制成不裂不腐的上品墨锭。</p>
-                <h4>墨的品鉴与养护</h4>
-                <p>好墨的标准为“质细、胶轻、色黑、声清”；磨墨需顺时针轻磨，忌用力过猛；墨锭需存放于阴凉干燥处，忌潮湿、忌暴晒，可长久保存，古墨越陈越佳。</p>
-            </div>
-        </div>
-    </div>
-    <!-- 纸弹窗 -->
-    <div class="modal" id="paperModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>宣纸 · 纸中之王</h2>
-                <button class="modal-close" onclick="closeModal('paperModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>宣纸是中国传统书画的核心载体，被誉为“纸中之王”“纸寿千年”。东汉蔡伦改进造纸术，唐代宣纸诞生于安徽泾县（古属宣州），历经宋、元、明、清发展，工艺日臻完善，成为历代宫廷御用书画纸。</p>
-                <h4>宣纸的分类</h4>
-                <ul>
-                    <li><strong>生宣</strong>：未经过矾水加工，吸水性、渗化性极强，墨韵层次丰富，适合写意国画、行草书法，分为棉料、净皮、特净皮三大类。</li>
-                    <li><strong>熟宣</strong>：生宣经矾水加工制成，不吸水、不渗墨，笔触可控，适合工笔画、小楷书法，常见品种有云母宣、蝉衣宣。</li>
-                    <li><strong>半生熟宣</strong>：兼具生宣与熟宣特性，吸水性适中，可控性强，适合楷书、隶书、篆书书法，以及兼工带写的国画创作，是初学者首选。</li>
-                </ul>
-                <h4>宣纸的制作工艺</h4>
-                <p>宣纸以青檀皮、沙田稻草为原料，需经过选料、浸泡、蒸煮、打浆、抄纸、晒纸、剪纸等108道纯手工工序，耗时一年有余方可制成，全程无化学添加，造就其“寿千年”的特性。</p>
-                <h4>宣纸的品鉴与养护</h4>
-                <p>好宣纸的标准为“韧而能润、光而不滑、洁白稠密、纹理纯净、搓折无损、润墨性强”；宣纸需平放于阴凉干燥处，防虫防潮，忌折叠重压，妥善保存可历经千年不腐。</p>
-            </div>
-        </div>
-    </div>
-    <!-- 砚弹窗 -->
-    <div class="modal" id="inkstoneModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>砚台 · 文房重器</h2>
-                <button class="modal-close" onclick="closeModal('inkstoneModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>砚台是中国传统书画的必备工具，兼具实用与艺术价值，被誉为“文房四宝之首”。其历史可追溯至新石器时代的研磨器，汉代形成形制完备的砚台，唐代端砚、歙砚、洮河砚、澄泥砚并称“四大名砚”。</p>
-                <h4>四大名砚</h4>
-                <ul>
-                    <li><strong>端砚</strong>：产自广东肇庆端溪，石质极致温润细腻，“体重而轻，质刚而柔”，发墨快而不损毫，储墨久而不涸，为砚中极品。</li>
-                    <li><strong>歙砚</strong>：产自江西婺源龙尾山，石质坚润缜密，“涩不留笔，滑不拒墨”，纹理丰富优美，雕刻表现力强，与端砚并称“端歙双璧”。</li>
-                    <li><strong>洮河砚</strong>：产自甘肃卓尼县洮河深水之中，石质温润细腻，色泽翠绿，纹理优美，因开采难度极大，产量稀少，极为珍贵。</li>
-                    <li><strong>澄泥砚</strong>：产自山西绛州，四大名砚中唯一的陶砚，以澄泥烧制而成，质地坚硬耐磨，细腻温润，发墨快而不损毫，是中国制砚史上的伟大创举。</li>
-                </ul>
-                <h4>砚台的品鉴与养护</h4>
-                <p>好砚的核心标准为“发墨不损毫，储墨不渗漏”；使用后需用清水洗净，忌用硬物刮擦；新砚需用温水浸泡去蜡，称为“开砚”；长期不用需洗净擦干，涂抹少量核桃油保养，存放于阴凉干燥处。</p>
-            </div>
-        </div>
-    </div>
-    <!-- 琴弹窗 -->
-    <div class="modal" id="qinModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>古琴 · 八音之首</h2>
-                <button class="modal-close" onclick="closeModal('qinModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>古琴是中国最古老的弹拨乐器之一，位列“琴棋书画”之首，有三千多年历史，被列入人类非物质文化遗产代表作名录。古琴之音，清、微、淡、远，是文人修身养性、通达天地的媒介。</p>
-                <h4>古琴的结构与文化</h4>
-                <p>古琴长三尺六寸五分，象征一年三百六十五天；面圆底方，象征天圆地方；七弦，象征金木水火土五行，加文武二弦；十三徽，象征一年十二个月加闰月。每一处结构都蕴含着中国传统的天人合一思想。</p>
-                <h4>古琴的流派与名曲</h4>
-                <p>古琴流派纷呈，著名的有广陵派、虞山派、梅庵派等；传世名曲有《高山流水》《广陵散》《梅花三弄》《平沙落雁》《渔樵问答》《阳关三叠》等，每一首名曲都承载着千年的文化底蕴与文人情怀。</p>
-                <h4>古琴的文化内涵</h4>
-                <p>古琴不仅是乐器，更是修身养性的工具，文人通过抚琴达到静心、悟道的境界。伯牙子期“高山流水遇知音”的故事，更赋予古琴知音相觅的文化内涵，成为中国传统文化中友谊的象征。</p>
-            </div>
-        </div>
-    </div>
-    <!-- 棋弹窗 -->
-    <div class="modal" id="qiModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>围棋 · 阴阳博弈</h2>
-                <button class="modal-close" onclick="closeModal('qiModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>围棋是世界上最古老的棋类游戏之一，古称“弈”，起源于中国，距今已有四千多年历史，相传为尧帝所造。围棋黑白纵横，方寸棋盘藏宇宙乾坤，是策略与思维的完美结合，更是中国传统哲学的体现。</p>
-                <h4>围棋的哲学思想</h4>
-                <p>围棋棋盘19路，361个交叉点，象征周天360度加天元；黑白棋子代表阴阳两极；无固定棋子等级，平等相生，蕴含着中国传统的阴阳、太极、天人合一思想。围棋讲究大局观、平衡感、取舍之道，不仅是竞技，更是人生智慧的修炼。</p>
-                <h4>围棋的发展与传播</h4>
-                <p>围棋在春秋战国时期已广泛流传，魏晋南北朝时期兴盛，唐宋时期达到鼎盛，明清时期流派纷呈。唐代传入日本，后流传至世界各地，如今已成为世界性的智力运动，是东方智慧走向世界的重要符号。</p>
-                <h4>围棋的文化内涵</h4>
-                <p>围棋不仅是智力的较量，更是心性的比拼，通过对弈可以培养大局观、辩证思维和专注力。古代文人将围棋视为修身养性的方式，追求“胜固欣然，败亦可喜”的豁达境界。</p>
-            </div>
-        </div>
-    </div>
-    <!-- 书弹窗 -->
-    <div class="modal" id="shuModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>书法 · 线条之魂</h2>
-                <button class="modal-close" onclick="closeModal('shuModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>中国书法是汉字的书写艺术，是中国传统文化的核心符号，距今已有三千多年历史。以笔墨为载体，以汉字为依托，展现线条之美、气韵之美、人格之美，是无言的诗，无形的舞，无图的画，无声的乐。</p>
-                <h4>书法的书体演变</h4>
-                <ul>
-                    <li><strong>篆书</strong>：分为大篆、小篆，线条均匀圆润，古朴典雅，是中国最古老的成熟书体。</li>
-                    <li><strong>隶书</strong>：起源于秦，兴盛于汉，蚕头燕尾，一波三折，古朴厚重，是书法史上的重要转折。</li>
-                    <li><strong>楷书</strong>：又称正楷，始于汉，成熟于唐，形体方正，笔画规整，是书法学习的基础，代表人物有欧、颜、柳、赵“楷书四大家”。</li>
-                    <li><strong>行书</strong>：介于楷书与草书之间，行云流水，灵动自然，兼具实用性与艺术性，王羲之《兰亭集序》被誉为“天下第一行书”。</li>
-                    <li><strong>草书</strong>：笔画简约，连绵奔放，极具抒情性，分为章草、今草、狂草，张旭、怀素被誉为“草圣”。</li>
-                </ul>
-                <h4>书法的文化内涵</h4>
-                <p>书法讲究“意在笔先，字居心后”，不仅要求笔法、结构、章法的完美，更要求书写者具备深厚的文化底蕴和平和的心态。笔墨的浓淡、缓急、枯润，皆能反映书写者的情绪与修为，“字如其人”是书法文化的核心内涵。</p>
-            </div>
-        </div>
-    </div>
-    <!-- 画弹窗 -->
-    <div class="modal" id="huaModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>国画 · 意境之巅</h2>
-                <button class="modal-close" onclick="closeModal('huaModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>中国画是中国传统绘画形式，以毛笔、水墨、宣纸、颜料为工具，以线条为核心，讲究“意在笔先，画尽意在”，追求天人合一的意境，是东方绘画体系的核心代表。</p>
-                <h4>国画的分类</h4>
-                <ul>
-                    <li><strong>山水画</strong>：国画第一大科，以山水风景为主体，讲究意境营造，分为水墨山水、青绿山水、浅绛山水，是中国文人精神的核心寄托。</li>
-                    <li><strong>花鸟画</strong>：以花卉、花鸟、鱼虫为主体，讲究托物言志，借景抒情，分为工笔花鸟、写意花鸟，代表了中国人的自然审美。</li>
-                    <li><strong>人物画</strong>：以人物为主体，注重人物神态与性格的刻画，分为工笔人物、写意人物，传世名作有顾恺之《洛神赋图》、张择端《清明上河图》等。</li>
-                </ul>
-                <h4>国画的技法与特色</h4>
-                <p>国画讲究笔墨技法，笔法有勾、皴、点、染，墨法有焦、浓、重、淡、清“墨分五色”；构图讲究散点透视，留白艺术，追求“虚实相生，无画处皆成妙境”；核心审美追求“气韵生动”，强调画者的人格修养与情感表达，即“画如其人”。</p>
-                <h4>诗书画印一体</h4>
-                <p>中国画常与书法、诗词、印章相结合，形成“诗书画印”一体的艺术形式，一幅好的中国画，不仅是视觉的享受，更是文化与精神的共鸣，是东方美学的极致体现。</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== 页脚 ==================== -->
+    <!-- 页脚 -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-item">
-                    <h3>文墨风雅</h3>
-                    <p>承千年文脉，扬东方美学</p>
+                    <h3>Elegance of Culture</h3>
+                    <p>Inheriting millennial culture, promoting oriental aesthetics</p>
                     <div class="footer-social">
                         <a href="#"><i class="fa-brands fa-weixin"></i></a>
                         <a href="#"><i class="fa-brands fa-weibo"></i></a>
@@ -1308,178 +268,38 @@
                     </div>
                 </div>
                 <div class="footer-item">
-                    <h3>快速导航</h3>
-                    <a href="#hero">首页</a>
-                    <a href="#four-treasures">文房四宝</a>
-                    <a href="#four-arts">琴棋书画</a>
-                    <a href="#culture">文化精髓</a>
+                    <h3>Quick Navigation</h3>
+                    <a href="index.html">Home</a>
+                    <a href="four-treasures.html">Four Treasures</a>
+                    <a href="four-arts.html">Four Arts</a>
+                    <a href="culture.html">Cultural Essence</a>
                 </div>
                 <div class="footer-item">
-                    <h3>关于我们</h3>
-                    <a href="#">平台介绍</a>
-                    <a href="#">文化合作</a>
-                    <a href="#">加入我们</a>
-                    <a href="#contact">联系我们</a>
+                    <h3>About Us</h3>
+                    <a href="#">Platform Introduction</a>
+                    <a href="#">Cultural Cooperation</a>
+                    <a href="#">Join Us</a>
+                    <a href="contact.html">Contact Us</a>
                 </div>
                 <div class="footer-item">
-                    <h3>联系方式</h3>
+                    <h3>Contact Us</h3>
                     <p><i class="fa-solid fa-envelope" style="margin-right: 8px;"></i>contact@wenmofengya.com</p>
                     <p><i class="fa-solid fa-phone" style="margin-right: 8px;"></i>+86 123 4567 8901</p>
-                    <p><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i>北京市东城区国子监街</p>
+                    <p><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i>Guozijian Street, Dongcheng District, Beijing</p>
                 </div>
             </div>
             <div class="footer-copyright">
-                <p>&copy; 2024 文墨风雅 - 中国传统文化传播 | 保留所有权利</p>
+                <p>&copy; 2024 Elegance of Culture - Chinese Traditional Culture Platform | All Rights Reserved</p>
             </div>
         </div>
     </footer>
 
-    <!-- ==================== 回到顶部按钮 ==================== -->
+    <!-- 回到顶部按钮 -->
     <button class="back-to-top" id="backToTop">
         <i class="fa-solid fa-chevron-up"></i>
     </button>
 
-    <!-- ==================== 原生JavaScript（约200行） ==================== -->
-    <script>
-        // 1. 导航栏滚动效果
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // 2. 移动端菜单
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
-        // 点击菜单链接关闭移动端菜单
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-            });
-        });
-
-        // 3. 文房四宝轮播
-        let treasuresIndex = 0;
-        const treasuresItems = document.querySelectorAll('#treasuresCarousel .carousel-item');
-        const treasuresPrev = document.getElementById('treasuresPrev');
-        const treasuresNext = document.getElementById('treasuresNext');
-        const treasuresIndicators = document.querySelectorAll('#treasuresIndicators .indicator');
-
-        function showTreasures(index) {
-            treasuresItems.forEach(item => item.classList.remove('active'));
-            treasuresIndicators.forEach(ind => ind.classList.remove('active'));
-            treasuresItems[index].classList.add('active');
-            treasuresIndicators[index].classList.add('active');
-            treasuresIndex = index;
-        }
-
-        treasuresPrev.addEventListener('click', () => {
-            treasuresIndex = (treasuresIndex - 1 + treasuresItems.length) % treasuresItems.length;
-            showTreasures(treasuresIndex);
-        });
-
-        treasuresNext.addEventListener('click', () => {
-            treasuresIndex = (treasuresIndex + 1) % treasuresItems.length;
-            showTreasures(treasuresIndex);
-        });
-
-        treasuresIndicators.forEach((ind, index) => {
-            ind.addEventListener('click', () => {
-                showTreasures(index);
-            });
-        });
-
-        // 自动轮播（3秒切换）
-        setInterval(() => {
-            treasuresIndex = (treasuresIndex + 1) % treasuresItems.length;
-            showTreasures(treasuresIndex);
-        }, 3000);
-
-        // 4. 琴棋书画轮播
-        let artsIndex = 0;
-        const artsItems = document.querySelectorAll('#artsCarousel .carousel-item');
-        const artsPrev = document.getElementById('artsPrev');
-        const artsNext = document.getElementById('artsNext');
-        const artsIndicators = document.querySelectorAll('#artsIndicators .indicator');
-
-        function showArts(index) {
-            artsItems.forEach(item => item.classList.remove('active'));
-            artsIndicators.forEach(ind => ind.classList.remove('active'));
-            artsItems[index].classList.add('active');
-            artsIndicators[index].classList.add('active');
-            artsIndex = index;
-        }
-
-        artsPrev.addEventListener('click', () => {
-            artsIndex = (artsIndex - 1 + artsItems.length) % artsItems.length;
-            showArts(artsIndex);
-        });
-
-        artsNext.addEventListener('click', () => {
-            artsIndex = (artsIndex + 1) % artsItems.length;
-            showArts(artsIndex);
-        });
-
-        artsIndicators.forEach((ind, index) => {
-            ind.addEventListener('click', () => {
-                showArts(index);
-            });
-        });
-
-        // 自动轮播（3秒切换）
-        setInterval(() => {
-            artsIndex = (artsIndex + 1) % artsItems.length;
-            showArts(artsIndex);
-        }, 3000);
-
-        // 5. 弹窗控制
-        function openModal(id) {
-            document.getElementById(id).classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).classList.remove('show');
-            document.body.style.overflow = 'auto';
-        }
-
-        // 点击弹窗外部关闭
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal(modal.id);
-                }
-            });
-        });
-
-        // 6. 语言切换（简单演示）
-        const langSwitch = document.getElementById('langSwitch');
-        langSwitch.addEventListener('click', () => {
-            alert('已切换语言模式（可自行扩展英文内容）');
-        });
-
-        // 7. 回到顶部
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) {
-                backToTop.classList.add('show');
-            } else {
-                backToTop.classList.remove('show');
-            }
-        });
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    </script>
+    <!-- 全局脚本 -->
+    <script src="../assets/js/main.js"></script>
 </body>
 </html>
